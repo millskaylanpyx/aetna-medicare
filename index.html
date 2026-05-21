@@ -927,17 +927,18 @@ const D = {
         dataAsOf:           "Pending — June 2026 pull",
         programMonth:       "1 of 8",
         sowEffectiveDate:   "March 31, 2026",
-        sowTerm:            "March 31, 2026 – March 31, 2028 (Master Agreement)",
-        workOrderTerm:      "May 4, 2026 – December 31, 2026 (HEDIS Pilot Work Order)",
+        sowTerm:            "March 31, 2026 – March 31, 2028 (Master Agreement · auto-renews)",
+        workOrderTerm:      "March 31, 2026 – May 3, 2027 (Work Order 1 · Program deliveries end Dec 31, 2026)",
         goLiveDate:         "May 4, 2026",
         programEndDate:     "December 31, 2026",
-        sowNumber:          "SOW #4",
-        contractRef:        "CW2618538",
-        programType:        "HEDIS Pilot",
+        woUltimateEnd:      "May 3, 2027",
+        sowNumber:          "SOW #4 · Work Order 1",
+        contractRef:        "CNRCT-26018",
+        programType:        "Chronic Condition Care Gap Closure Program (HEDIS Pilot)",
         totalEligible:      5255,
         activationTarget:   1051,
         activationTargetPct: 0.20,
-        markets:            ["44 States (Hawaii Excluded)"]
+        markets:            ["All 50 States"]
     },
 
     metrics: {
@@ -955,14 +956,14 @@ const D = {
     },
 
     kpis: [
-        { label: "States Covered",        val: 44,     ctx: "44-state national footprint, Hawaii excluded", color: "kpi-green", good: true },
-        { label: "Eligible Members",      val: 5255,   ctx: "Total CVS/Aetna Medicare eligible population" },
-        { label: "Activation Target",     val: "1,051", ctx: "20% engagement goal — minimum for 1.2:1 ROI", color: "kpi-green", good: true },
-        { label: "Members Enrolled",      val: null,   ctx: "Target: 1,051 · Enrollment opened May 4", progress: 0 },
-        { label: "Enrollment Rate",       val: null,   ctx: "Target: 20.0%" },
-        { label: "A1C Milestones (Box 7)", val: null,  ctx: "HbA1c Control gap closures confirmed via Salesforce" },
-        { label: "BP Milestones (Box 8)", val: null,   ctx: "Blood Pressure Control gap closures confirmed" },
-        { label: "Boxes Shipped (Total)", val: null,   ctx: "9,459 boxes projected at full 1,051-member engagement" }
+        { label: "States Covered",           val: 50,      ctx: "All 50 states · national footprint per Work Order 1", color: "kpi-green", good: true },
+        { label: "Eligible Members",         val: 5255,    ctx: "Total CVS/Aetna Medicare eligible population" },
+        { label: "Activation Target",        val: "1,051", ctx: "20% engagement goal — minimum for 1.2:1 ROI", color: "kpi-green", good: true },
+        { label: "Members Enrolled",         val: null,    ctx: "Target: 1,051 · Enrollment opened May 4", progress: 0 },
+        { label: "Enrollment Rate",          val: null,    ctx: "Target: 20.0%" },
+        { label: "A1c Milestones (Box 7)",   val: null,    ctx: "Member attests to completing A1c measurement" },
+        { label: "Statin Milestones (Box 8)", val: null,   ctx: "Member attests to statin adherence + mail-order pharmacy" },
+        { label: "BP Milestones (Box 9)",    val: null,    ctx: "Member attests to BP reading at outpatient visit (CBP)" }
     ],
 
     timeline: {
@@ -997,9 +998,9 @@ const D = {
         { num: 4, label: "Month 4 Box",        desc: "Fourth scheduled food box building sustained engagement", trigger: "~90 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close", trigger: "~120 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1051, actual: null, status: "pending" },
-        { num: 7, label: "A1C Milestone Box",  desc: "Earned milestone box for HbA1c Control HEDIS gap closure — confirmed via Salesforce network data", trigger: "A1C gap closed (confirmed via Salesforce / CVS clinical data)", target: 1051, actual: null, status: "pending" },
-        { num: 8, label: "BP Milestone Box",   desc: "Earned milestone box for Blood Pressure Control (CBP) HEDIS gap closure", trigger: "BP/CBP gap closed (confirmed via Salesforce / CVS clinical data)", target: 1051, actual: null, status: "pending" },
-        { num: 9, label: "Pharmacy Milestone Box", desc: "Earned milestone box for mail-order pharmacy adoption — improving PDC medication adherence scores", trigger: "Mail-order pharmacy enrollment confirmed via Salesforce", target: 1051, actual: null, status: "pending" }
+        { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1051, actual: null, status: "pending" },
+        { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1051, actual: null, status: "pending" },
+        { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1051, actual: null, status: "pending" }
     ],
 
     screenings: [
@@ -1050,20 +1051,20 @@ const D = {
             source: "CMS Medicare Advantage 2026: A1C/HbA1c Control is a high-weight HEDIS measure — closure drives Star Rating movement and quality bonus revenue at the plan level"
         },
         {
-            icon: "❤️",
-            label: "BP / CBP Gap Closure",
+            icon: "💊",
+            label: "Statin Adherence (PDC-Statin)",
             valuePerMember: 517,
             estimatePct: 1.0,
-            desc: "CMS reimbursement impact from closing Blood Pressure Control (CBP) HEDIS gaps. BP is the second primary outcome measure for this program alongside A1C.",
-            source: "CMS Medicare Advantage 2026: CBP is a high-weight HEDIS measure in the Medicare Star Rating framework — closure contributes directly to quality bonus payments"
+            desc: "CMS reimbursement impact from improving PDC-Statin scores through CVS mail-order pharmacy enrollment and statin adherence coaching. Mail-order pharmacy directly improves Proportion of Days Covered — a high-weight HEDIS adherence measure.",
+            source: "NCQA HEDIS 2026: PDC-based medication adherence measures (statins, RAS antagonists, diabetes medications) are among the highest-weighted Medicare Advantage Star measures"
         },
         {
-            icon: "💊",
-            label: "Mail-Order Pharmacy (PDC Adherence)",
+            icon: "❤️",
+            label: "BP Control (CBP) Gap Closure",
             valuePerMember: null,
             estimatePct: null,
-            desc: "Increased Proportion of Days Covered (PDC) scores through CVS mail-order pharmacy adoption — improving medication adherence HEDIS measures and reducing medication gap events.",
-            source: "NCQA HEDIS 2026: PDC-based medication adherence measures (diabetes, RAS antagonists, statins) are among the highest-weighted Medicare Advantage Star measures"
+            desc: "Value from closing Controlling Blood Pressure (CBP) HEDIS gaps. Members attest to BP readings at outpatient visits — driving care completion and supporting Star Rating quality bonus payments.",
+            source: "CMS Medicare Advantage 2026: CBP is a high-weight HEDIS measure — gap closure contributes directly to Star Rating improvement and quality bonus revenue at the plan level"
         },
         {
             icon: "⭐",
@@ -1086,17 +1087,17 @@ const D = {
             metricPending: true
         },
         {
-            clientGoal: "BP / CBP Improvement",
-            statement: "Improve Blood Pressure Control (CBP) HEDIS measure outcomes for enrolled hypertensive members",
-            action: "Targeted outreach for BP monitoring, provider visit follow-through, and care navigation — supported by Box 8 milestone reward",
-            metric: "BP Milestone Box (Box 8) triggers confirmed via Salesforce",
+            clientGoal: "Statin Adherence + Mail-Order Pharmacy",
+            statement: "Improve PDC-Statin medication adherence scores by coaching members on statin adherence and enrolling them in CVS mail-order pharmacy",
+            action: "Pharmacy navigation support, statin adherence coaching, and CVS mail-order enrollment assistance — supported by Box 8 milestone reward",
+            metric: "Statin Milestone Box (Box 8) member attestations",
             metricPending: true
         },
         {
-            clientGoal: "Mail-Order Pharmacy Adoption",
-            statement: "Increase medication adherence (PDC) through CVS mail-order pharmacy enrollment",
-            action: "CVS pharmacy navigation support, mail-order education and enrollment assistance — supported by Box 9 milestone reward",
-            metric: "Pharmacy Milestone Box (Box 9) triggers confirmed via Salesforce",
+            clientGoal: "BP / CBP Improvement",
+            statement: "Improve Blood Pressure Control (CBP) HEDIS measure outcomes by driving outpatient BP readings for enrolled hypertensive members",
+            action: "Targeted outreach for BP monitoring and outpatient visit completion — member attests to BP reading at provider visit, earning Box 9",
+            metric: "BP Milestone Box (Box 9) member attestations",
             metricPending: true
         },
         {
@@ -1136,9 +1137,9 @@ const D = {
         {
             type: "win",
             label: "Win",
-            title: "SOW #4 Signed — National HEDIS Pilot Launched",
-            desc: "SOW #4 executed March 31, 2026. 44-state footprint under a single master agreement. Implementation fee waived for all Work Orders. $70/member/month engagement fee confirmed. Program anchored on A1C, BP, and mail-order pharmacy HEDIS gap closure.",
-            action: "Use as credibility signal in executive communications — national partnership with CVS/Aetna Medicare is live and contracted through March 2028."
+            title: "Work Order 1 Executed — All 50 States Confirmed",
+            desc: "Work Order 1 signed April 10, 2026 by Anthony Marini (CVS AVP Enterprise Procurement) and Cindy Jordan (Pyx Health CEO). All 50 states contracted. Program anchored on GSD (A1c), PDC-Statin (mail-order pharmacy), and CBP (Blood Pressure) HEDIS gap closure. Ref: CNRCT-26018.",
+            action: "Use as credibility signal in executive communications — 50-state national partnership with CVS/Aetna Medicare is fully executed and live."
         },
         {
             type: "win",
@@ -1169,9 +1170,9 @@ const D = {
             timing:   "Pre-launch · Completed April 2026",
             state:    "done",
             wondering: "Can Pyx Health operationalize a national HEDIS pilot across 44 states under one unified program — and be ready to go live by May 4?",
-            answer:   "Yes — implementation is complete and on schedule. Kickoff was held with the CVS/Aetna team, call scripts are in final review, Salesforce clinical tracking is configured, and the program launched May 4, 2026 as planned. Implementation fee was waived under SOW #4.",
+            answer:   "Yes — implementation is complete and on schedule. Work Order 1 was fully executed April 10, 2026 (signed by Anthony Marini, CVS AVP Enterprise Procurement, and Cindy Jordan, Pyx Health CEO). All 50 states contracted, call scripts in final review, and the program launched May 4, 2026 as planned. Implementation fee waived under SOW #4.",
             stats: [
-                { label: "States Covered",        val: 44,               ctx: "44-state footprint, Hawaii excluded",         color: "kpi-green" },
+                { label: "States Covered",        val: 50,               ctx: "All 50 states — per Work Order 1",            color: "kpi-green" },
                 { label: "Go-Live Date",           val: "May 4, 2026",    ctx: "On schedule",                                color: "" },
                 { label: "Eligible Members",       val: 5255,             ctx: "National CVS/Aetna Medicare population",     color: "" },
                 { label: "Implementation Fee",     val: "Waived",         ctx: "SOW #4 — all Work Orders",                   color: "kpi-green" }
@@ -1195,7 +1196,7 @@ const D = {
             timing:   "Active · May – December 2026",
             state:    "here",
             wondering: "Will the food box journey sustain engagement long enough to close A1C, BP, and pharmacy HEDIS gaps before December 31?",
-            answer:   "Six scheduled boxes ship throughout the program to all enrolled members. Three milestone boxes (A1C, BP, Pharmacy) are earned when HEDIS-targeted health goals are confirmed via Salesforce. First Welcome Boxes are shipping to newly enrolled members now. Milestone box eligibility tracking begins August 2026.",
+            answer:   "Six scheduled boxes ship throughout the program to all enrolled members. Three milestone boxes are earned by member self-attestation: Box 7 (A1c measurement completed), Box 8 (statin adherence + mail-order pharmacy enrolled), Box 9 (BP reading at outpatient visit for CBP). First Welcome Boxes are shipping to newly enrolled members now. Milestone attestation tracking begins via the Pyx platform.",
             stats: null
         },
         {
@@ -1203,7 +1204,7 @@ const D = {
             timing:   "Upcoming · August – December 2026",
             state:    "upcoming",
             wondering: "Will the 1.2:1 ROI threshold be achieved — and will A1C, BP, and medication adherence HEDIS gaps close at scale across 44 states?",
-            answer:   "Outcome tracking begins August 2026. A1C, BP, and pharmacy adherence data from the CVS Salesforce network determines milestone box eligibility and confirms HEDIS gap closure. Final program wrap targets December 31, 2026. At 1,051 engaged members, projected CMS reimbursement is $1,086,734 — a 1.36:1 ROI.",
+            answer:   "Outcome tracking begins August 2026. Member attestations for A1c measurement, statin adherence + mail-order pharmacy, and BP outpatient readings determine milestone box eligibility. Final deliveries must complete by December 31, 2026 (Work Order Ultimate End Date: May 3, 2027). At 1,051 engaged members, projected CMS reimbursement is $1,086,734 — a 1.36:1 ROI.",
             stats: [
                 { label: "A1C Projected ROI",      val: "$543,367",       ctx: "CMS reimbursement — HbA1c closure",          color: "" },
                 { label: "BP Projected ROI",       val: "$543,367",       ctx: "CMS reimbursement — CBP closure",            color: "" },
@@ -1217,13 +1218,18 @@ const D = {
         date:          "TBD — Bi-weekly during enrollment",
         cadence:       "Bi-weekly (enrollment phase) · Monthly (box journey phase)",
         length:        "30 minutes",
-        pyxContact:    "Kaylan Mills · kaylan.mills@pyxhealth.com · 520-542-3519",
-        clientContact: "Melissa Arthur, PMP · melissa.piechowiak@cvshealth.com",
+        pyxContacts: [
+            "Kaylan Mills · Account Lead · kaylan.mills@pyxhealth.com · 520-542-3519",
+            "Christina Rice · President & COO · christina.rice@pyxhealth.com",
+            "Stephanie Mount · Director of Sales · stephanie.mount@pyxhealth.com"
+        ],
+        clientContact: "Melissa Arthur, PMP · Project Manager, Healthcare Quality Management · melissa.piechowiak@cvshealth.com",
+        billing:       "APCustomerCare@AETNA.com",
         agenda: [
             "Review enrollment velocity vs. 1,051 member target",
             "Confirm call script approval and distribution timeline",
-            "Review first box delivery logistics and Welcome Box shipment status",
-            "Discuss Salesforce tracking setup and monthly reporting cadence"
+            "Review Welcome Box shipment status and first delivery logistics",
+            "Confirm member attestation workflow in Pyx platform for milestone boxes"
         ]
     }
 };
