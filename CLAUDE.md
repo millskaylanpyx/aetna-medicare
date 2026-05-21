@@ -16,14 +16,19 @@ CLAUDE.md     — this file
 ---
 
 ## Program Context
-- **Program Name:** Aetna Medicare National Partnership
-- **Program Type:** TBD — pending SOW review
-- **Line of Business:** Medicare
-- **Scope:** National — multiple states under one contract
-- **Markets:** TBD — to be populated from SOW
-- **Program Start:** TBD
-- **Program End:** TBD
-- **NOT TO EXCEED:** TBD
+- **Program Name:** Aetna Medicare National Partnership — HEDIS Pilot
+- **Program Type:** HEDIS Pilot (SOW #4 · Contract Ref: CW2618538)
+- **Line of Business:** Medicare Advantage
+- **Scope:** National — 44 states (Hawaii excluded)
+- **Eligible Members:** 5,255
+- **Activation Target:** 1,051 (20% of eligible)
+- **Program Start:** May 4, 2026 (go-live)
+- **Program End:** December 31, 2026
+- **Master SOW Term:** March 31, 2026 – March 31, 2028 (auto-renews)
+- **NOT TO EXCEED:** $800,337 (this Work Order)
+- **Primary Outcomes:** A1C gap closure (Box 7), BP gap closure (Box 8), Mail-order pharmacy (Box 9)
+- **Required ROI:** 1.2:1 minimum · Projected: 1.36:1 ($1,086,734 CMS reimbursement)
+- **Key Contact (CVS):** Melissa Arthur, PMP · melissa.piechowiak@cvshealth.com
 
 ---
 
