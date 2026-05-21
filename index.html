@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetna Medicare | Pyx Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           BRAND VARIABLES — Pyx Health
+        ============================================= */
+        :root {
+            --green:       #49a601;
+            --light-green: #87d001;
+            --cool-slate:  #2e4456;
+            --blue:        #0076bf;
+            --light-blue:  #0cabec;
+            --orange:      #d6661a;
+            --teal:        #29a4a2;
+            --purple:      #5542a7;
+            --gray-1:      #d2dce8;
+            --gray-2:      #eff1f3;
+            --gray-3:      #f6f6f6;
+            --white:       #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--gray-3);
+            color: var(--cool-slate);
+            font-size: 14px;
+        }
+
+        h1, h2, h3 { font-family: 'Roboto Slab', serif; }
+
+        /* =============================================
+           TAB NAV
+        ============================================= */
+        .tab-nav {
+            background: var(--cool-slate);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        }
+
+        .nav-logo {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-right: auto;
+            padding: 16px 0;
+        }
+
+        .nav-logo span { color: var(--green); font-weight: 600; }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--gray-1);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 19px 20px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover { color: var(--white); }
+        .tab-btn.active { color: var(--light-green); border-bottom-color: var(--light-green); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* =============================================
+           LAYOUT
+        ============================================= */
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .section { padding: 48px 0; }
+        .white-bg  { background: var(--white); }
+        .alt-bg    { background: var(--gray-3); }
+        .slate-bg  { background: var(--cool-slate); }
+        .divider   { height: 1px; background: var(--gray-1); }
+
+        /* =============================================
+           SECTION HEADERS
+        ============================================= */
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .eyebrow-1 { background: rgba(73,166,1,0.12);    color: var(--green); }
+        .eyebrow-2 { background: rgba(0,118,191,0.12);   color: var(--blue); }
+        .eyebrow-3 { background: rgba(41,164,162,0.12);  color: var(--teal); }
+        .eyebrow-4 { background: rgba(85,66,167,0.12);   color: var(--purple); }
+        .eyebrow-i { background: rgba(214,102,26,0.12);  color: var(--orange); }
+
+        .section-title { font-size: 26px; font-weight: 600; color: var(--cool-slate); margin-bottom: 6px; }
+        .section-sub   { font-size: 13px; color: #6b808f; line-height: 1.6; max-width: 720px; }
+        .section-head  { margin-bottom: 32px; }
+
+        /* =============================================
+           CLIENT HEADER
+        ============================================= */
+        .client-header {
+            background: linear-gradient(135deg, var(--cool-slate) 0%, #1e3347 100%);
+            padding: 56px 40px 48px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .client-header::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 400px; height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(73,166,1,0.08));
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .header-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--light-green);
+            margin-bottom: 14px;
+        }
+
+        .client-header h1 {
+            font-size: 40px;
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .client-header h1 strong { font-weight: 700; color: var(--green); }
+
+        .header-period { font-size: 14px; color: var(--gray-1); margin-bottom: 28px; }
+
+        .market-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .mpill {
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .mpill.active {
+            border-color: var(--green);
+            color: var(--light-green);
+            background: rgba(73,166,1,0.12);
+        }
+
+        /* =============================================
+           KPI CARDS
+        ============================================= */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 16px;
+        }
+
+        .kpi {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 22px 20px;
+            border-top: 4px solid var(--green);
+            box-shadow: 0 2px 10px rgba(46,68,86,0.07);
+        }
+
+        .kpi.blue   { border-top-color: var(--blue); }
+        .kpi.teal   { border-top-color: var(--teal); }
+        .kpi.orange { border-top-color: var(--orange); }
+        .kpi.purple { border-top-color: var(--purple); }
+        .kpi.slate  { border-top-color: var(--cool-slate); }
+
+        .kpi-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 8px; }
+        .kpi-val { font-family: 'Roboto Slab', serif; font-size: 26px; font-weight: 700; color: var(--cool-slate); line-height: 1; margin-bottom: 6px; }
+        .kpi-val.pending { color: #c8d4de; font-size: 18px; padding-top: 4px; }
+        .kpi-ctx      { font-size: 11px; color: #8a9baa; }
+        .kpi-ctx.good { color: var(--green); font-weight: 700; }
+        .kpi-ctx.warn { color: var(--orange); font-weight: 700; }
+
+        /* =============================================
+           TIMELINE / GANTT
+        ============================================= */
+        .timeline-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-1);
+            padding: 28px 0 36px;
+        }
+
+        .tl-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 8px; }
+
+        .gantt-wrap { display: flex; flex-direction: column; gap: 0; }
+
+        .gantt-header-row {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 6px;
+            padding-top: 32px;
+        }
+
+        .gantt-row-label {
+            width: 155px;
+            min-width: 155px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--cool-slate);
+            text-align: right;
+            padding-right: 18px;
+            line-height: 1.3;
+        }
+
+        .gantt-row-label.dim { color: #a0b0be; }
+        .gantt-chart-col { flex: 1; position: relative; }
+
+        .gantt-ticks { position: relative; height: 18px; }
+
+        .gantt-tick {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #b0bfcc;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .gantt-now-indicator {
+            position: absolute;
+            top: -30px;
+            transform: translateX(-50%);
+        }
+
+        .gantt-now-pill {
+            background: var(--cool-slate);
+            color: var(--white);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .gantt-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .gantt-track {
+            flex: 1;
+            position: relative;
+            height: 38px;
+            background: var(--gray-2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gantt-bar {
+            position: absolute;
+            top: 0; height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .bar-green { background: var(--green); color: var(--white); }
+        .bar-slate { background: linear-gradient(90deg, var(--cool-slate) 50%, rgba(46,68,86,0.12)); color: var(--white); }
+        .bar-teal  { background: linear-gradient(90deg, var(--teal) 50%, rgba(41,164,162,0.12)); color: var(--white); }
+        .bar-blue  { background: linear-gradient(90deg, var(--blue) 50%, rgba(0,118,191,0.12)); color: var(--white); }
+        .bar-gray  { background: var(--gray-1); color: #8a9baa; }
+
+        /* =============================================
+           MILESTONE FUNNEL
+        ============================================= */
+        .milestone-funnel { display: flex; flex-direction: column; gap: 12px; }
+
+        .ms-row {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 18px 24px;
+            display: grid;
+            grid-template-columns: 48px 1fr 140px 120px;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(46,68,86,0.06);
+            border-left: 5px solid var(--gray-1);
+            transition: border-color 0.2s;
+        }
+
+        .ms-row.active  { border-left-color: var(--blue); }
+        .ms-row.done    { border-left-color: var(--green); }
+        .ms-row.pending { border-left-color: var(--gray-1); opacity: 0.7; }
+
+        .ms-box-badge {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Roboto Slab', serif;
+            font-size: 18px; font-weight: 700;
+            background: var(--gray-2); color: #8a9baa;
+            flex-shrink: 0;
+        }
+
+        .ms-row.active  .ms-box-badge { background: rgba(0,118,191,0.1);   color: var(--blue); }
+        .ms-row.done    .ms-box-badge { background: rgba(73,166,1,0.1);    color: var(--green); }
+
+        .ms-info-label { font-size: 12px; font-weight: 700; color: var(--cool-slate); margin-bottom: 3px; }
+        .ms-info-desc  { font-size: 11px; color: #8a9baa; line-height: 1.5; }
+        .ms-trigger    { font-size: 11px; font-weight: 600; color: var(--teal); margin-top: 4px; }
+
+        .ms-prog-track { height: 7px; background: var(--gray-2); border-radius: 4px; margin: 6px 0 4px; overflow: hidden; }
+        .ms-prog-fill  { height: 100%; border-radius: 4px; background: var(--green); transition: width 0.5s; }
+        .ms-prog-fill.blue { background: var(--blue); }
+        .ms-prog-fill.gray { background: var(--gray-1); }
+        .ms-prog-nums  { font-size: 11px; color: #8a9baa; display: flex; justify-content: space-between; }
+
+        .ms-status-badge {
+            font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            padding: 4px 12px; border-radius: 20px; text-align: center;
+        }
+
+        .badge-active   { background: rgba(0,118,191,0.1);   color: var(--blue); }
+        .badge-done     { background: rgba(73,166,1,0.1);    color: var(--green); }
+        .badge-pending  { background: var(--gray-2);          color: #8a9baa; }
+
+        /* =============================================
+           SCREENING CARDS
+        ============================================= */
+        .screening-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .scr-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(46,68,86,0.06);
+            border-top: 4px solid var(--teal);
+        }
+
+        .scr-icon  { font-size: 24px; margin-bottom: 10px; }
+        .scr-name  { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8a9baa; margin-bottom: 6px; }
+        .scr-val   { font-family: 'Roboto Slab', serif; font-size: 30px; font-weight: 700; color: var(--cool-slate); margin-bottom: 4px; }
+        .scr-val.pending { color: #c8d4de; font-size: 18px; padding-top: 8px; }
+        .scr-desc  { font-size: 12px; color: #8a9baa; line-height: 1.5; }
+
+        /* =============================================
+           PROGRESS BARS
+        ============================================= */
+        .prog-row    { margin-bottom: 22px; }
+        .prog-header { display: flex; justify-content: space-between; margin-bottom: 7px; }
+        .prog-name   { font-size: 13px; font-weight: 600; }
+        .prog-nums   { font-size: 12px; color: #8a9baa; }
+        .prog-track  { height: 8px; background: var(--gray-2); border-radius: 4px; position: relative; }
+        .prog-fill   { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+        .prog-fill.g { background: var(--green); }
+        .prog-fill.b { background: var(--blue); }
+        .prog-fill.t { background: var(--teal); }
+        .prog-fill.s { background: var(--gray-1); }
+        .prog-status { font-size: 11px; font-weight: 700; margin-top: 5px; }
+        .st-good { color: var(--green); }
+        .st-warn { color: var(--orange); }
+        .st-pend { color: #8a9baa; }
+
+        /* =============================================
+           SLA CARDS
+        ============================================= */
+        .sla-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+            gap: 16px;
+        }
+
+        .sla-card {
+            background: var(--white);
+            border: 2px solid var(--gray-1);
+            border-radius: 12px;
+            padding: 22px 18px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(46,68,86,0.05);
+        }
+
+        .sla-card.exceed  { border-color: var(--green); }
+        .sla-card.behind  { border-color: var(--orange); }
+        .sla-card.ramping { border-color: var(--blue); }
+
+        .sla-name   { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8a9baa; margin-bottom: 10px; }
+        .sla-actual { font-family: 'Roboto Slab', serif; font-size: 30px; font-weight: 700; color: var(--cool-slate); line-height: 1; }
+        .sla-card.exceed  .sla-actual { color: var(--green); }
+        .sla-card.ramping .sla-actual { color: var(--blue); }
+        .sla-card.pending .sla-actual { color: #c8d4de; font-size: 20px; padding-top: 6px; }
+        .sla-target { font-size: 12px; color: #8a9baa; margin-top: 6px; }
+        .sla-desc   { font-size: 11px; color: #a0b0be; margin-top: 6px; line-height: 1.4; }
+
+        .sla-badge {
+            display: inline-block;
+            font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            padding: 3px 10px; border-radius: 20px; margin-top: 10px;
+        }
+
+        .badge-exceed  { background: rgba(73,166,1,0.1);   color: var(--green); }
+        .badge-ramping { background: rgba(0,118,191,0.1);  color: var(--blue); }
+        .badge-pending { background: var(--gray-2);          color: #8a9baa; }
+        .badge-behind  { background: rgba(214,102,26,0.1);  color: var(--orange); }
+
+        /* =============================================
+           VALUE SECTION
+        ============================================= */
+        .value-section {
+            background: linear-gradient(160deg, var(--cool-slate), #1a2d3e);
+            color: var(--white);
+            padding: 56px 0;
+        }
+
+        .value-section .section-title { color: var(--white); }
+        .value-section .section-sub   { color: var(--gray-1); }
+
+        .val-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .val-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 26px;
+            display: flex; flex-direction: column;
+        }
+
+        .val-icon   { font-size: 26px; margin-bottom: 12px; }
+        .val-lbl    { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--light-green); margin-bottom: 8px; }
+        .val-amount { font-family: 'Roboto Slab', serif; font-size: 34px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+        .val-desc   { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6; flex: 1; margin-bottom: 14px; }
+        .val-source { font-size: 10px; color: rgba(255,255,255,0.35); font-style: italic; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; line-height: 1.5; }
+
+        .val-total {
+            background: var(--green);
+            border-radius: 14px;
+            padding: 28px 36px;
+            margin-top: 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 16px;
+        }
+
+        .val-total-lbl { font-size: 14px; font-weight: 700; }
+        .val-total-ctx { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+        .val-total-amt { font-family: 'Roboto Slab', serif; font-size: 42px; font-weight: 700; }
+        .val-note { font-size: 11px; color: rgba(255,255,255,0.4); font-style: italic; margin-top: 16px; line-height: 1.7; }
+
+        .val-pace {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 32px 36px;
+            margin-top: 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 24px;
+        }
+        .val-pace-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--light-green); margin-bottom: 8px; }
+        .val-pace-title { font-family: 'Roboto Slab', serif; font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+        .val-pace-sub   { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 560px; }
+        .val-pace-num   { font-family: 'Roboto Slab', serif; font-size: 52px; font-weight: 700; color: var(--light-green); line-height: 1; margin-bottom: 4px; text-align: right; }
+        .val-pace-ctx   { font-size: 11px; color: rgba(255,255,255,0.45); text-align: right; }
+
+        /* =============================================
+           GOALS MAPPING
+        ============================================= */
+        .goals-section { background: var(--cool-slate); padding: 48px 0; color: var(--white); }
+        .goals-section .section-title { color: var(--white); }
+        .goals-section .section-sub   { color: var(--gray-1); }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .goal-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .goal-client    { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-1); opacity: 0.6; margin-bottom: 6px; }
+        .goal-statement { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.5; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .goal-pyx       { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--light-green); margin-bottom: 6px; }
+        .goal-action    { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+
+        .goal-metric {
+            display: inline-block; margin-top: 10px;
+            font-size: 11px; font-weight: 700;
+            padding: 3px 10px; border-radius: 20px;
+            background: rgba(73,166,1,0.2); color: var(--light-green);
+        }
+
+        .goal-metric.pending { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+
+        /* =============================================
+           CLIENT WONDERING CALLOUT
+        ============================================= */
+        .client-q-box {
+            background: linear-gradient(135deg, rgba(73,166,1,0.08), rgba(135,208,1,0.05));
+            border-left: 4px solid var(--green);
+            border-radius: 0 8px 8px 0;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+        }
+
+        .client-q-box.future { background: rgba(210,220,232,0.25); border-left-color: var(--gray-1); }
+        .client-q-label      { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 4px; }
+        .client-q-box.future .client-q-label { color: #8a9baa; }
+        .client-q-text   { font-family: 'Roboto Slab', serif; font-size: 15px; font-weight: 600; color: var(--cool-slate); font-style: italic; margin-bottom: 6px; }
+        .client-q-answer { font-size: 12px; color: #556070; line-height: 1.6; }
+
+        /* =============================================
+           NEXT MEETING
+        ============================================= */
+        .next-meeting { background: var(--white); padding: 48px 0; }
+        .meeting-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-top: 28px; }
+        .meeting-meta { background: var(--gray-3); border-radius: 12px; padding: 24px; }
+        .meeting-meta-row     { display: flex; flex-direction: column; margin-bottom: 18px; }
+        .meeting-meta-row:last-child { margin-bottom: 0; }
+        .meeting-meta-lbl     { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 4px; }
+        .meeting-meta-val     { font-size: 13px; font-weight: 600; color: var(--cool-slate); }
+        .meeting-agenda       { background: var(--white); border: 1px solid var(--gray-1); border-radius: 12px; overflow: hidden; }
+        .agenda-item          { display: grid; grid-template-columns: 56px 1fr; border-bottom: 1px solid var(--gray-2); }
+        .agenda-item:last-child { border-bottom: none; }
+        .agenda-num {
+            background: var(--gray-3);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Roboto Slab', serif; font-size: 18px; font-weight: 700;
+            color: #c8d4de; padding: 20px 0;
+        }
+        .agenda-content { padding: 18px 20px; }
+        .agenda-title   { font-size: 14px; font-weight: 700; color: var(--cool-slate); margin-bottom: 4px; }
+        .agenda-desc    { font-size: 12px; color: #8a9baa; line-height: 1.5; }
+        .agenda-time    { font-size: 11px; font-weight: 700; color: var(--green); margin-top: 6px; }
+
+        /* =============================================
+           INTERNAL VIEW
+        ============================================= */
+        .internal-banner {
+            background: var(--orange); color: var(--white);
+            text-align: center; padding: 10px 20px;
+            font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        .int-header { background: #111b25; padding: 40px 40px 36px; color: var(--white); }
+        .int-header h1 { font-size: 30px; font-weight: 300; }
+        .int-header h1 strong { color: var(--orange); font-weight: 700; }
+        .int-header p  { font-size: 13px; color: #8a9baa; margin-top: 8px; }
+
+        .journey-status-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: rgba(255,255,255,0.08);
+            border-radius: 8px; overflow: hidden; margin-top: 24px;
+        }
+
+        .journey-status-item  { background: rgba(255,255,255,0.04); padding: 14px 18px; }
+        .journey-status-item.active { background: rgba(73,166,1,0.15); }
+        .js-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8a9baa; margin-bottom: 5px; }
+        .js-val   { font-size: 13px; font-weight: 600; color: var(--white); }
+        .js-badge { display: inline-block; font-size: 9px; font-weight: 700; background: var(--green); color: var(--white); border-radius: 3px; padding: 2px 5px; margin-left: 4px; }
+        .js-badge.muted { background: rgba(255,255,255,0.12); font-weight: 400; }
+
+        /* Revenue */
+        .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .rev-card { background: var(--white); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(46,68,86,0.06); }
+        .rev-card-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 8px; }
+        .rev-card-val { font-family: 'Roboto Slab', serif; font-size: 30px; font-weight: 700; color: var(--cool-slate); margin-bottom: 6px; }
+        .rev-card-val.pending { color: #c8d4de; font-size: 20px; padding-top: 6px; }
+        .rev-card-sub { font-size: 12px; color: #8a9baa; line-height: 1.5; }
+        .rev-progress-wrap { margin-top: 24px; background: var(--white); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(46,68,86,0.06); }
+        .rev-track { height: 14px; background: var(--gray-2); border-radius: 7px; overflow: hidden; margin: 12px 0 8px; }
+        .rev-fill  { height: 100%; background: linear-gradient(90deg, var(--green), var(--light-green)); border-radius: 7px; transition: width 0.6s; }
+        .rev-track-labels { display: flex; justify-content: space-between; font-size: 12px; color: #8a9baa; }
+
+        /* Flags */
+        .flag { background: var(--white); border-radius: 12px; padding: 20px 24px; border-left: 5px solid var(--orange); box-shadow: 0 2px 8px rgba(46,68,86,0.06); margin-bottom: 16px; }
+        .flag.win   { border-left-color: var(--green); }
+        .flag.watch { border-left-color: var(--blue); }
+        .flag-type { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+        .flag-type.risk  { background: rgba(214,102,26,0.1); color: var(--orange); }
+        .flag-type.win   { background: rgba(73,166,1,0.1);   color: var(--green); }
+        .flag-type.watch { background: rgba(0,118,191,0.1);  color: var(--blue); }
+        .flag-title  { font-size: 14px; font-weight: 700; color: var(--cool-slate); margin-bottom: 5px; }
+        .flag-desc   { font-size: 13px; color: #6b808f; line-height: 1.6; }
+        .flag-action { font-size: 12px; font-weight: 600; color: var(--cool-slate); margin-top: 10px; }
+
+        /* Cost breakdown table */
+        .cost-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(46,68,86,0.06); }
+        .cost-table th { text-align: left; padding: 12px 20px; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; border-bottom: 2px solid var(--gray-1); background: var(--gray-3); }
+        .cost-table td { padding: 14px 20px; border-bottom: 1px solid var(--gray-2); font-size: 13px; }
+        .cost-table tr:last-child td { border-bottom: none; font-weight: 700; background: rgba(73,166,1,0.04); }
+        .cost-table tr:hover td { background: var(--gray-3); }
+
+        /* =============================================
+           NET NEW UPDATES TAB
+        ============================================= */
+        .updates-hero {
+            background: linear-gradient(135deg, #1e3347 0%, var(--cool-slate) 100%);
+            padding: 48px 40px 40px;
+            color: var(--white);
+            border-bottom: 4px solid var(--teal);
+        }
+        .updates-hero .header-eyebrow { color: var(--teal); }
+        .updates-title { font-size: 36px; font-weight: 300; margin-bottom: 8px; }
+        .updates-title strong { font-weight: 700; color: var(--teal); }
+        .updates-period { font-size: 13px; color: var(--gray-1); }
+        .updates-period strong { color: var(--white); }
+
+        .change-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .change-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 22px 20px 18px;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 2px 10px rgba(46,68,86,0.07);
+        }
+        .change-card.green  { border-left-color: var(--green); }
+        .change-card.blue   { border-left-color: var(--blue); }
+        .change-card.purple { border-left-color: var(--purple); }
+        .chg-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 14px; }
+        .chg-comparison { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .chg-before { font-family: 'Roboto Slab', serif; font-size: 18px; font-weight: 400; color: #b0bec8; text-decoration: line-through; }
+        .chg-arrow  { font-size: 16px; color: #b0bec8; flex-shrink: 0; }
+        .chg-after  { font-family: 'Roboto Slab', serif; font-size: 26px; font-weight: 700; color: var(--cool-slate); }
+        .chg-delta { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(73,166,1,0.12); color: var(--green); }
+        .chg-delta.new-badge { background: rgba(41,164,162,0.12); color: var(--teal); }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        .footer {
+            background: var(--cool-slate); color: var(--gray-1);
+            padding: 24px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px; font-size: 12px;
+        }
+
+        .footer-logo { font-family: 'Roboto Slab', serif; font-weight: 300; font-size: 16px; color: var(--white); }
+        .footer-logo span { color: var(--green); font-weight: 600; }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 768px) {
+            .client-header, .int-header { padding: 32px 20px; }
+            .wrap          { padding: 0 20px; }
+            .kpi-grid      { grid-template-columns: repeat(2, 1fr); }
+            .rev-grid      { grid-template-columns: 1fr; }
+            .meeting-grid  { grid-template-columns: 1fr; }
+            .goals-grid    { grid-template-columns: 1fr; }
+            .ms-row        { grid-template-columns: 48px 1fr; }
+            .ms-row > *:nth-child(3), .ms-row > *:nth-child(4) { display: none; }
+            .client-header h1 { font-size: 28px; }
+            .timeline-bar  { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+    <div class="nav-logo">pyx <span>health</span></div>
+    <button class="tab-btn active" onclick="switchTab('client',this)">Client View</button>
+    <button class="tab-btn" onclick="switchTab('value',this)">Value View 💰</button>
+    <button class="tab-btn" onclick="switchTab('updates',this)">Net New Updates 🆕</button>
+    <button class="tab-btn" onclick="switchTab('internal',this)">Internal View ⚙</button>
+</nav>
+
+
+<!-- =============================================
+     CLIENT VIEW
+============================================= -->
+<div id="tab-client" class="tab-content active">
+
+    <div class="client-header">
+        <div class="header-eyebrow">Monthly Progress Report</div>
+        <h1>Aetna Medicare <strong>National Partnership</strong></h1>
+        <p class="header-period" id="client-period"></p>
+        <div class="market-pills" id="market-pills"></div>
+    </div>
+
+    <!-- Program at a Glance -->
+    <div class="white-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-head">
+                <span class="section-eyebrow eyebrow-1">Program at a Glance</span>
+                <div class="section-title">Early Indicators</div>
+                <div class="section-sub" id="kpi-sub"></div>
+            </div>
+            <div class="kpi-grid" id="kpi-grid"></div>
+        </div></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-bar">
+        <div class="wrap">
+            <div class="tl-label" id="tl-label"></div>
+            <div class="gantt-wrap" id="tl-track"></div>
+        </div>
+    </div>
+
+    <!-- Phase sections rendered dynamically -->
+    <div id="phase-sections"></div>
+
+    <!-- Goals Alignment -->
+    <div class="goals-section">
+        <div class="wrap">
+            <span class="section-eyebrow" style="background:rgba(255,255,255,0.08);color:var(--gray-1)">Goals Alignment</span>
+            <div class="section-title">Aetna's Goals → Pyx Activation</div>
+            <div class="section-sub" id="goals-sub"></div>
+            <div class="goals-grid" id="goals-grid"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-logo">pyx <span>health</span></div>
+        <div id="footer-meta"></div>
+    </div>
+
+</div><!-- /tab-client -->
+
+
+<!-- =============================================
+     VALUE VIEW
+============================================= -->
+<div id="tab-value" class="tab-content">
+
+    <div class="value-section" style="padding:56px 0 40px;">
+        <div class="wrap">
+            <div class="section-eyebrow" style="background:rgba(135,208,1,0.15);color:var(--light-green);margin-bottom:14px;">Value Framework</div>
+            <h1 style="font-family:'Roboto Slab',serif;font-size:36px;font-weight:300;color:var(--white);margin-bottom:12px;">Estimated Member Value <strong>Created</strong></h1>
+            <p style="color:var(--gray-1);font-size:14px;max-width:760px;line-height:1.7;margin-bottom:32px;" id="value-intro"></p>
+        </div>
+    </div>
+
+    <div class="value-section" style="padding:0 0 56px;">
+        <div class="wrap">
+            <div class="val-grid" id="val-grid"></div>
+            <div id="val-total-block"></div>
+            <p class="val-note" id="val-note"></p>
+            <div id="val-pace-block"></div>
+        </div>
+    </div>
+
+    <div class="white-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-eyebrow eyebrow-1" style="margin-bottom:14px;">Methodology</div>
+            <div class="section-title" style="margin-bottom:12px;">How We Define Value for This Program</div>
+            <div id="methodology-content"></div>
+        </div></div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-logo">pyx <span>health</span></div>
+        <div id="val-footer-meta"></div>
+    </div>
+
+</div><!-- /tab-value -->
+
+
+<!-- =============================================
+     NET NEW UPDATES TAB
+============================================= -->
+<div id="tab-updates" class="tab-content">
+
+    <div class="updates-hero">
+        <div class="wrap">
+            <div class="header-eyebrow">Net New Updates</div>
+            <h1 class="updates-title">What's Changed Since <strong>Last Session</strong></h1>
+            <p class="updates-period" id="updates-period"></p>
+        </div>
+    </div>
+
+    <div id="updates-sections"></div>
+
+    <div class="footer" style="margin-top:0;">
+        <div class="footer-logo">pyx <span>health</span></div>
+        <div id="upd-footer-meta"></div>
+    </div>
+
+</div><!-- /tab-updates -->
+
+
+<!-- =============================================
+     INTERNAL VIEW
+============================================= -->
+<div id="tab-internal" class="tab-content">
+
+    <div class="internal-banner">⚙ Internal Use Only — Not for Distribution</div>
+
+    <div class="int-header">
+        <div class="wrap">
+            <h1>Aetna Medicare — <strong>Account Operations</strong></h1>
+            <p id="int-header-sub"></p>
+            <div class="journey-status-bar" id="journey-status"></div>
+        </div>
+    </div>
+
+    <div class="alt-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-head">
+                <span class="section-eyebrow eyebrow-i">Revenue Tracking</span>
+                <div class="section-title">Program Revenue</div>
+                <div class="section-sub" id="rev-sub"></div>
+            </div>
+            <div class="rev-grid" id="rev-grid"></div>
+            <div class="rev-progress-wrap">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:13px;font-weight:700;color:var(--cool-slate);">Contract Utilization</div>
+                        <div style="font-size:12px;color:#8a9baa;margin-top:3px;" id="rev-ceiling-label"></div>
+                    </div>
+                    <div id="rev-pct-label" style="font-family:'Roboto Slab',serif;font-size:24px;font-weight:700;color:var(--cool-slate);"></div>
+                </div>
+                <div class="rev-track"><div class="rev-fill" id="rev-fill-bar"></div></div>
+                <div class="rev-track-labels"><span>$0</span><span id="rev-track-mid"></span><span id="rev-track-max"></span></div>
+            </div>
+        </div></div>
+    </div>
+
+    <div class="white-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-head">
+                <span class="section-eyebrow eyebrow-i">Fee Structure</span>
+                <div class="section-title">Cost Plan Breakdown</div>
+                <div class="section-sub" id="cost-sub"></div>
+            </div>
+            <table class="cost-table" id="cost-table"></table>
+        </div></div>
+    </div>
+
+    <div class="white-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-head">
+                <span class="section-eyebrow eyebrow-i">Contractual Performance</span>
+                <div class="section-title">SLA &amp; Performance Metrics</div>
+                <div class="section-sub" id="sla-sub"></div>
+            </div>
+            <div class="sla-grid" id="sla-grid"></div>
+        </div></div>
+    </div>
+
+    <div class="alt-bg">
+        <div class="wrap"><div class="section">
+            <div class="section-head">
+                <span class="section-eyebrow eyebrow-i">Account Health</span>
+                <div class="section-title">Flags &amp; Watch Items</div>
+                <div class="section-sub">Internal account health monitoring. For Pyx team awareness — not shared with Aetna.</div>
+            </div>
+            <div id="flags-container"></div>
+        </div></div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-logo">pyx <span>health</span></div>
+        <div id="int-footer-meta"></div>
+    </div>
+
+</div><!-- /tab-internal -->
+
+
+<!-- =============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+
+/* =============================================
+   DATA — update monthly from Pyx Tableau
+   PLACEHOLDER — will be populated once program
+   context is confirmed
+============================================= */
+const D = {
+    program: {
+        reportMonth:        "May 2026",
+        dataAsOf:           "TBD",
+        programMonth:       "TBD",
+        contractStart:      "TBD",
+        contractEnd:        "TBD",
+        sowNumber:          "TBD",
+        projectPlanId:      "TBD",
+        totalEligible:      0,
+        activationTarget:   0,
+        activationTargetPct: 0.30,
+        markets:            []   // e.g. ["Florida", "Texas", "Ohio", ...]
+    },
+
+    metrics: {
+        membersEnrolled:           null,
+        enrollmentRate:            null,
+        careBarrierAssessments:    null,
+        careBarrierMembers:        null,
+        awvAttestations:           null,
+        preventiveAttestations:    null,
+        fluVaccineAttestations:    null,
+        sdohNeedPct:               null,
+        phq4Avg:                   null,
+        ucla3Avg:                  null
+    },
+
+    milestones: [],   // populated after SOW review
+
+    screenings: [
+        { icon: "🏠", name: "PRAPARE (SDOH)",       actual: null, desc: "Members screened for social determinants of health — food, housing, transportation, economic stability" },
+        { icon: "🧠", name: "PHQ-4 (Mental Health)", actual: null, desc: "4-question anxiety and depression screen administered at opt-in" },
+        { icon: "🤝", name: "UCLA-3 (Loneliness)",   actual: null, desc: "3-item loneliness assessment — a key driver of CAHPS/HOS member experience and health perception scores" },
+        { icon: "🏥", name: "Medicare Well-Being / HOS", actual: null, desc: "HOS-related assessment covering physical and mental health status and medication adherence" }
+    ],
+
+    sla: [],   // populated after SOW review
+
+    value: [],   // populated after SOW review
+
+    goals: [],   // populated after SOW review
+
+    revenue: {
+        contractMax:       null,
+        revenueToDate:     null,
+        platformFee:       null
+    },
+
+    costPlan: [],   // populated after SOW review
+
+    flags: [
+        {
+            type: "watch",
+            label: "Watch",
+            title: "Dashboard Pending Program Context",
+            desc: "Program data and SOW details are being compiled. All sections will populate once the contract and initial metrics are confirmed.",
+            action: "Drop context files to populate the full dashboard."
+        }
+    ],
+
+    journey: [],   // populated after SOW review
+
+    nextMeeting: {
+        date:          "TBD",
+        cadence:       "Monthly",
+        length:        "30 minutes",
+        pyxContact:    "Kaylan Mills · kaylan.mills@pyxhealth.com · 520-542-3519",
+        clientContact: "TBD",
+        agenda:        []
+    }
+};
+
+
+/* =============================================
+   HELPERS
+============================================= */
+function fmt(n, prefix) {
+    if (n === null || n === undefined) return null;
+    if (prefix === '$') return '$' + n.toLocaleString();
+    if (prefix === '%') return (n * 100).toFixed(1) + '%';
+    return n.toLocaleString();
+}
+
+function pct(a, b) { return b ? Math.min(a / b, 1) : 0; }
+
+
+/* =============================================
+   TAB SWITCHING
+============================================= */
+function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+}
+
+
+/* =============================================
+   RENDER FUNCTIONS
+============================================= */
+function renderHeader() {
+    const p = D.program;
+    document.getElementById('client-period').textContent =
+        `${p.reportMonth}  ·  Program Month ${p.programMonth}  ·  Data as of ${p.dataAsOf}`;
+
+    const pills = [
+        { label: 'Aetna Medicare — National', active: true },
+        { label: p.sowNumber !== 'TBD' ? `SOW ${p.sowNumber}` : 'SOW Pending', active: false },
+        { label: `Program Month ${p.programMonth}`, active: false },
+        ...p.markets.map(m => ({ label: m, active: true }))
+    ];
+
+    document.getElementById('market-pills').innerHTML = pills.map(pill =>
+        `<span class="mpill ${pill.active ? 'active' : ''}">${pill.label}</span>`
+    ).join('');
+
+    document.getElementById('kpi-sub').textContent =
+        `Key performance indicators for the Aetna Medicare National Partnership. ${p.totalEligible ? `Targeting ${p.totalEligible.toLocaleString()} members across ${p.markets.length} markets.` : 'Member population and markets to be confirmed.'} Updated monthly from Pyx Tableau reporting.`;
+
+    document.getElementById('tl-label').textContent =
+        `Program Timeline  ·  Month ${p.programMonth}  ·  Phases run in parallel`;
+
+    document.getElementById('footer-meta').textContent =
+        `${p.reportMonth}  ·  Data as of ${p.dataAsOf}  ·  Pyx Health Confidential`;
+
+    document.getElementById('val-footer-meta').textContent =
+        `${p.reportMonth}  ·  Data as of ${p.dataAsOf}  ·  Pyx Health Confidential`;
+
+    document.getElementById('int-footer-meta').textContent =
+        `${p.reportMonth}  ·  Data as of ${p.dataAsOf}  ·  Internal Use Only`;
+
+    document.getElementById('upd-footer-meta').textContent =
+        `${p.reportMonth}  ·  Data as of ${p.dataAsOf}  ·  Pyx Health Confidential`;
+
+    document.getElementById('int-header-sub').textContent =
+        `${p.reportMonth}  ·  Month ${p.programMonth}  ·  Data as of ${p.dataAsOf}`;
+}
+
+
+function renderTimeline() {
+    if (!D.timeline) {
+        document.getElementById('tl-track').innerHTML =
+            '<div style="color:#8a9baa;font-size:12px;padding:16px 0;">Timeline will populate once program dates are confirmed.</div>';
+        return;
+    }
+    const { totalMonths, currentMonth, rows, ticks } = D.timeline;
+    const nowPct = Math.min(((currentMonth - 0.5) / totalMonths) * 100, 96).toFixed(1);
+
+    const tickHTML = ticks.map(([label, p]) =>
+        `<span class="gantt-tick" style="left:${p}%">${label}</span>`
+    ).join('');
+
+    const rowsHTML = rows.map(r => `
+        <div class="gantt-row">
+            <div class="gantt-row-label${r.color === 'bar-gray' ? ' dim' : ''}">${r.label}</div>
+            <div class="gantt-track">
+                <div class="gantt-bar ${r.color}" style="left:${r.left}%;width:${r.width}%">${r.text}</div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('tl-track').innerHTML = `
+        <div class="gantt-header-row">
+            <div class="gantt-row-label"></div>
+            <div class="gantt-chart-col">
+                <div class="gantt-now-indicator" style="left:${nowPct}%">
+                    <div class="gantt-now-pill">Now</div>
+                </div>
+                <div class="gantt-ticks">${tickHTML}</div>
+            </div>
+        </div>
+        ${rowsHTML}
+    `;
+}
+
+
+function renderKPIs() {
+    const { metrics: M, program: P } = D;
+    if (!D.kpis) {
+        document.getElementById('kpi-grid').innerHTML =
+            '<div style="color:#8a9baa;font-size:12px;padding:8px 0 24px;">KPI data will populate once program context is confirmed.</div>';
+        return;
+    }
+    document.getElementById('kpi-grid').innerHTML = D.kpis.map(c => `
+        <div class="kpi ${c.color || ''}">
+            <div class="kpi-lbl">${c.label}</div>
+            <div class="kpi-val ${c.val === null ? 'pending' : ''}">
+                ${c.val !== null ? (typeof c.val === 'number' ? c.val.toLocaleString() : c.val) : 'Pending'}
+            </div>
+            <div class="kpi-ctx ${c.good ? 'good' : ''}">${c.ctx}</div>
+            ${c.progress !== undefined && c.progress !== null ? `
+                <div class="ms-prog-track" style="margin-top:10px;">
+                    <div class="ms-prog-fill blue" style="width:${c.progress}%"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:10px;color:#8a9baa;margin-top:4px;">
+                    <span>0%</span><span>${Math.round(D.program.activationTargetPct * 100)}% goal</span>
+                </div>` : ''}
+        </div>
+    `).join('');
+}
+
+
+function renderMilestones() {
+    if (!D.milestones || !D.milestones.length) return '';
+    return D.milestones.map(m => {
+        const fillPct = m.actual !== null ? Math.round(pct(m.actual, m.target) * 100) : 0;
+        const fillClass = m.status === 'active' ? 'blue' : m.status === 'done' ? '' : 'gray';
+        const badgeClass = m.status === 'active' ? 'badge-active' : m.status === 'done' ? 'badge-done' : 'badge-pending';
+        const badgeText = m.status === 'active' ? 'In Progress' : m.status === 'done' ? 'Complete' : 'Upcoming';
+        return `
+        <div class="ms-row ${m.status}">
+            <div class="ms-box-badge">M${m.num}</div>
+            <div>
+                <div class="ms-info-label">${m.label}</div>
+                <div class="ms-info-desc">${m.desc}</div>
+                <div class="ms-trigger">↳ ${m.trigger}</div>
+            </div>
+            <div>
+                <div style="font-size:11px;color:#8a9baa;font-weight:600;">
+                    ${m.actual !== null ? m.actual.toLocaleString() : '—'} <span style="font-weight:400;">/ ${m.target ? m.target.toLocaleString() : 'TBD'}</span>
+                </div>
+                <div class="ms-prog-track">
+                    <div class="ms-prog-fill ${fillClass}" style="width:${fillPct}%"></div>
+                </div>
+                <div style="font-size:10px;color:#8a9baa;">${m.actual !== null ? fillPct + '%' : 'Awaiting data'}</div>
+            </div>
+            <div style="text-align:right;">
+                <span class="ms-status-badge ${badgeClass}">${badgeText}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+
+function renderPhaseSections() {
+    if (!D.journey || !D.journey.length) {
+        document.getElementById('phase-sections').innerHTML =
+            '<div class="white-bg"><div class="wrap"><div class="section" style="color:#8a9baa;font-size:13px;">Program phases will populate once SOW and context are confirmed.</div></div></div>';
+        return;
+    }
+    const bgClasses = ['white-bg', 'alt-bg', 'white-bg', 'alt-bg'];
+    const eyebrowClasses = ['eyebrow-1', 'eyebrow-2', 'eyebrow-3', 'eyebrow-4'];
+    document.getElementById('phase-sections').innerHTML = D.journey.map((phase, i) => {
+        const isFuture = phase.state !== 'done' && phase.state !== 'here';
+        const labelText = phase.state === 'done' ? `Phase ${i+1} · Complete ✓` :
+                          phase.state === 'here' ? `Phase ${i+1} · Active Now ▶` :
+                                                   `Phase ${i+1} · Upcoming`;
+        const milestonesHTML = (i === 2 && D.milestones && D.milestones.length) ? `
+            <div class="section-head" style="margin-top:40px;margin-bottom:20px;">
+                <span class="section-eyebrow eyebrow-3">Milestone Tracking</span>
+                <div class="section-title" style="font-size:20px;">Program Milestone Progress</div>
+            </div>
+            <div class="milestone-funnel">${renderMilestones()}</div>
+        ` : '';
+        const screeningsHTML = (i === 1) ? `
+            <div class="section-head" style="margin-bottom:20px;">
+                <span class="section-eyebrow eyebrow-3">Screenings &amp; Assessments</span>
+                <div class="section-title" style="font-size:20px;">Care Barrier &amp; Social Needs Data</div>
+                <div class="section-sub">PRAPARE, PHQ-4, and UCLA-3 administered at opt-in — surfacing barriers before they prevent care completion.</div>
+            </div>
+            <div class="screening-grid">${D.screenings.map(s => `
+                <div class="scr-card">
+                    <div class="scr-icon">${s.icon}</div>
+                    <div class="scr-name">${s.name}</div>
+                    <div class="scr-val ${s.actual === null ? 'pending' : ''}">${s.actual !== null ? s.actual.toLocaleString() : 'Pending'}</div>
+                    <div class="scr-desc">${s.desc}</div>
+                </div>
+            `).join('')}</div>
+        ` : '';
+        const statsHTML = phase.stats ? `
+            <div class="kpi-grid" style="margin-bottom:${milestonesHTML || screeningsHTML ? '40px' : '0'};">
+                ${phase.stats.map(s => `
+                    <div class="kpi ${s.color || ''}">
+                        <div class="kpi-lbl">${s.label}</div>
+                        <div class="kpi-val ${s.val === null ? 'pending' : ''}">${s.val !== null ? (typeof s.val === 'number' ? s.val.toLocaleString() : s.val) : 'Pending'}</div>
+                        <div class="kpi-ctx">${s.ctx}</div>
+                    </div>
+                `).join('')}
+            </div>` : '';
+        return `
+        <div class="${bgClasses[i] || 'white-bg'}">
+            <div class="wrap"><div class="section">
+                <div class="section-head">
+                    <span class="section-eyebrow ${eyebrowClasses[i]}">${labelText}</span>
+                    <div class="section-title">${phase.name}</div>
+                    <div class="section-sub">${phase.timing}</div>
+                </div>
+                <div class="client-q-box ${isFuture ? 'future' : ''}" style="margin-bottom:28px;">
+                    <div class="client-q-label">Phase ${i+1} · ${phase.name} · ${phase.state === 'done' ? 'Complete' : phase.state === 'here' ? 'Active Now' : 'Upcoming'} — What Aetna ${phase.state === 'done' ? 'was' : 'is'} wondering</div>
+                    <div class="client-q-text">"${phase.wondering}"</div>
+                    <div class="client-q-answer">${phase.answer}</div>
+                </div>
+                ${statsHTML}
+                ${screeningsHTML}
+                ${milestonesHTML}
+            </div></div>
+        </div>`;
+    }).join('');
+}
+
+
+function renderGoals() {
+    if (!D.goals || !D.goals.length) {
+        document.getElementById('goals-grid').innerHTML =
+            '<div style="color:rgba(255,255,255,0.4);font-size:12px;">Goals will populate once program context is confirmed.</div>';
+        document.getElementById('goals-sub').textContent = 'How Aetna\'s program goals map to Pyx Health\'s direct activity and the metrics that prove impact.';
+        return;
+    }
+    document.getElementById('goals-sub').textContent =
+        `How each of Aetna's program goals maps to Pyx Health's direct activity and the metric that will prove impact.`;
+    document.getElementById('goals-grid').innerHTML = D.goals.map(g => `
+        <div class="goal-card">
+            <div class="goal-client">${g.clientGoal}</div>
+            <div class="goal-statement">${g.statement}</div>
+            <div class="goal-pyx">Pyx Activation</div>
+            <div class="goal-action">${g.action}</div>
+            <div class="goal-metric ${g.metricPending ? 'pending' : ''}">${g.metric}</div>
+        </div>
+    `).join('');
+}
+
+
+function renderValue() {
+    document.getElementById('value-intro').textContent = D.valueIntro ||
+        'Conservative, research-backed projections of downstream health system value generated through Pyx Health\'s member activation program. Actuals replace projections as Tableau data flows monthly.';
+
+    if (!D.value || !D.value.length) {
+        document.getElementById('val-grid').innerHTML =
+            '<div style="color:rgba(255,255,255,0.4);font-size:12px;padding:24px 0;">Value estimates will populate once program context is confirmed.</div>';
+        return;
+    }
+
+    document.getElementById('val-grid').innerHTML = D.value.map(v => {
+        const activatedCount = D.program.activationTarget;
+        const estimate = v.valuePerMember && v.estimatePct ?
+            Math.round(activatedCount * v.estimatePct * v.valuePerMember) : null;
+        return `
+        <div class="val-card">
+            <div class="val-icon">${v.icon}</div>
+            <div class="val-lbl">${v.label}</div>
+            <div class="val-amount">${estimate ? '$' + estimate.toLocaleString() : 'Pending'}</div>
+            <div class="val-desc">${v.desc}</div>
+            <div class="val-source">${v.source}</div>
+        </div>`;
+    }).join('');
+
+    const totalEstimate = D.value
+        .filter(v => v.valuePerMember && v.estimatePct)
+        .reduce((sum, v) => sum + Math.round(D.program.activationTarget * v.estimatePct * v.valuePerMember), 0);
+
+    if (totalEstimate > 0) {
+        document.getElementById('val-total-block').innerHTML = `
+            <div class="val-total">
+                <div>
+                    <div class="val-total-lbl">Total Estimated Downstream Value</div>
+                    <div class="val-total-ctx">Based on ${D.program.activationTarget.toLocaleString()} activated members (${Math.round(D.program.activationTargetPct * 100)}% of eligible)</div>
+                </div>
+                <div class="val-total-amt">$${totalEstimate.toLocaleString()}</div>
+            </div>`;
+    }
+
+    document.getElementById('val-note').textContent =
+        'All estimates are conservative projections using published research benchmarks. Actuals will replace projections as outcome data is available.';
+
+    document.getElementById('methodology-content').innerHTML = `
+        <p style="font-size:13px;line-height:1.8;color:var(--cool-slate);max-width:860px;margin-bottom:24px;">ROI for this program is measured through three lenses:</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:32px;">
+            <div style="background:var(--gray-2);border-radius:12px;padding:24px;border-left:4px solid var(--green);">
+                <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Lens 1 · Clinical</div>
+                <div style="font-size:14px;font-weight:700;margin-bottom:6px;">AWV &amp; Preventive Completion</div>
+                <div style="font-size:12px;color:#5a6a7a;line-height:1.6;">Increased Annual Wellness Visits and preventive screening completions — the direct gateway to the care cascade and HEDIS measure closure.</div>
+            </div>
+            <div style="background:var(--gray-2);border-radius:12px;padding:24px;border-left:4px solid var(--teal);">
+                <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Lens 2 · Quality</div>
+                <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Star Rating &amp; CAHPS/HOS Movement</div>
+                <div style="font-size:12px;color:#5a6a7a;line-height:1.6;">Improved member experience and health perception. Even 0.5★ movement in Medicare Advantage Star Ratings translates to $2–$5 PMPM in CMS bonus payments.</div>
+            </div>
+            <div style="background:var(--gray-2);border-radius:12px;padding:24px;border-left:4px solid var(--blue);">
+                <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Lens 3 · Population</div>
+                <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Member Engagement &amp; Retention</div>
+                <div style="font-size:12px;color:#5a6a7a;line-height:1.6;">Converting disengaged Medicare members into active health plan participants — reducing churn and strengthening the member-plan relationship at scale.</div>
+            </div>
+        </div>`;
+}
+
+
+function renderRevenue() {
+    const rev = D.revenue;
+    if (!rev.contractMax) {
+        document.getElementById('rev-grid').innerHTML =
+            '<div style="color:#8a9baa;font-size:12px;">Revenue data will populate once contract is confirmed.</div>';
+        document.getElementById('rev-fill-bar').style.width = '0%';
+        document.getElementById('rev-pct-label').textContent = '—';
+        document.getElementById('rev-track-max').textContent = 'TBD';
+        document.getElementById('rev-track-mid').textContent = '';
+        document.getElementById('rev-ceiling-label').textContent = 'Contract ceiling pending';
+        document.getElementById('rev-sub').textContent = 'Contract ceiling and earned-to-date will populate once SOW is confirmed.';
+        return;
+    }
+    const earnedPct = rev.revenueToDate ? Math.min(rev.revenueToDate / rev.contractMax * 100, 100).toFixed(1) : 0;
+    document.getElementById('rev-sub').textContent = 'Contract ceiling, earned-to-date, and monthly trend. Revenue is milestone-driven.';
+    document.getElementById('rev-ceiling-label').textContent = `Revenue earned vs. contract ceiling (NOT TO EXCEED: $${rev.contractMax.toLocaleString()})`;
+    document.getElementById('rev-grid').innerHTML = [
+        { label: 'Contract Ceiling', val: fmt(rev.contractMax, '$'), sub: 'Not to exceed' },
+        { label: 'Revenue to Date',  val: fmt(rev.revenueToDate, '$') || 'Pending', sub: `As of ${D.program.dataAsOf}` },
+        { label: 'Annual Platform Fee', val: fmt(rev.platformFee, '$') || 'Pending', sub: 'Annual flat fee' }
+    ].map(c => `
+        <div class="rev-card">
+            <div class="rev-card-lbl">${c.label}</div>
+            <div class="rev-card-val ${c.val === 'Pending' ? 'pending' : ''}">${c.val}</div>
+            <div class="rev-card-sub">${c.sub}</div>
+        </div>`).join('');
+    document.getElementById('rev-fill-bar').style.width = earnedPct + '%';
+    document.getElementById('rev-pct-label').textContent = earnedPct + '%';
+    document.getElementById('rev-track-mid').textContent = '$' + Math.round(rev.contractMax / 2).toLocaleString();
+    document.getElementById('rev-track-max').textContent = '$' + rev.contractMax.toLocaleString();
+}
+
+
+function renderCostTable() {
+    if (!D.costPlan || !D.costPlan.length) {
+        document.getElementById('cost-table').innerHTML = '<tr><td style="color:#8a9baa;font-size:12px;">Cost plan will populate once SOW is confirmed.</td></tr>';
+        document.getElementById('cost-sub').textContent = 'Authorized fee schedule from SOW. Actuals will update as milestones are completed.';
+        return;
+    }
+    document.getElementById('cost-sub').textContent = `Authorized fee schedule from ${D.program.sowNumber}. Actuals will update as milestones are completed.`;
+    document.getElementById('cost-table').innerHTML = `
+        <thead><tr>
+            <th>Line Item</th><th>Rate</th><th>Units</th><th>Budget Estimate</th>
+        </tr></thead>
+        <tbody>${D.costPlan.map(r => `
+            <tr>
+                <td>${r.line}</td>
+                <td>${r.rate}</td>
+                <td>${r.units}</td>
+                <td>${r.budgetEst ? '$' + r.budgetEst.toLocaleString() : '—'}</td>
+            </tr>`).join('')}
+        </tbody>`;
+}
+
+
+function renderSLA() {
+    if (!D.sla || !D.sla.length) {
+        document.getElementById('sla-grid').innerHTML =
+            '<div style="color:#8a9baa;font-size:12px;">SLA data will populate once SOW is confirmed.</div>';
+        document.getElementById('sla-sub').textContent = 'Contractual commitments will populate once SOW is confirmed.';
+        return;
+    }
+    document.getElementById('sla-sub').textContent = `Pyx Health's contractual commitments under ${D.program.sowNumber}.`;
+    document.getElementById('sla-grid').innerHTML = D.sla.map(s => {
+        const statusClass = s.status === 'exceed' ? 'exceed' : s.status === 'behind' ? 'behind' : s.status === 'ramping' ? 'ramping' : 'pending';
+        const badgeClass = `badge-${statusClass}`;
+        const badgeText = s.status === 'exceed' ? 'Exceeding' : s.status === 'behind' ? 'Behind' : s.status === 'ramping' ? 'Ramping' : s.status === 'active' ? 'Active' : 'Pending';
+        const displayVal = s.actual !== null
+            ? (typeof s.actual === 'number' && s.actual < 1.1 && s.target <= 1
+                ? (s.actual * 100).toFixed(1) + '%'
+                : (typeof s.actual === 'number' ? s.actual.toLocaleString() : s.actual))
+            : 'Pending';
+        return `
+        <div class="sla-card ${statusClass}">
+            <div class="sla-name">${s.name}</div>
+            <div class="sla-actual">${displayVal}</div>
+            ${s.target !== null ? `<div class="sla-target">Target: ${s.target < 1.1 ? (s.target * 100).toFixed(0) + '%' : s.target}</div>` : ''}
+            <div class="sla-desc">${s.desc}</div>
+            <span class="sla-badge ${badgeClass}">${badgeText}</span>
+        </div>`;
+    }).join('');
+}
+
+
+function renderFlags() {
+    document.getElementById('flags-container').innerHTML = (D.flags || []).map(f => `
+        <div class="flag ${f.type}">
+            <span class="flag-type ${f.type}">${f.label}</span>
+            <div class="flag-title">${f.title}</div>
+            <div class="flag-desc">${f.desc}</div>
+            ${f.action ? `<div class="flag-action">→ ${f.action}</div>` : ''}
+        </div>
+    `).join('');
+}
+
+
+function renderJourneyStatus() {
+    if (!D.journey || !D.journey.length) {
+        document.getElementById('journey-status').innerHTML = '';
+        return;
+    }
+    document.getElementById('journey-status').innerHTML = D.journey.map(phase => `
+        <div class="journey-status-item ${phase.state === 'here' || phase.state === 'done' ? 'active' : ''}">
+            <div class="js-label">${phase.name}</div>
+            <div class="js-val">${phase.state === 'done' ? 'Complete' : phase.state === 'here' ? 'Active' : 'Upcoming'}
+                <span class="js-badge ${phase.state !== 'done' && phase.state !== 'here' ? 'muted' : ''}">${phase.state === 'done' ? '✓' : phase.state === 'here' ? '▶' : '—'}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+
+function renderUpdates() {
+    const p = D.program;
+    document.getElementById('updates-period').innerHTML =
+        `Program Month <strong>${p.programMonth}</strong> &nbsp;·&nbsp; Data as of <strong>${p.dataAsOf}</strong>`;
+
+    if (!D.updates || !D.updates.length) {
+        document.getElementById('updates-sections').innerHTML = `
+            <div class="alt-bg section">
+                <div class="wrap">
+                    <div style="color:#8a9baa;font-size:13px;padding:24px 0;">Net New Updates will populate each reporting period once the program is live.</div>
+                </div>
+            </div>`;
+        return;
+    }
+    document.getElementById('updates-sections').innerHTML = D.updates.map(section => `
+        <div class="alt-bg section">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="section-eyebrow eyebrow-2">${section.eyebrow}</span>
+                    <h2 class="section-title">${section.title}</h2>
+                    <p class="section-sub">${section.sub}</p>
+                </div>
+                <div class="change-grid">
+                    ${section.changes.map(c => `
+                        <div class="change-card ${c.color || ''}">
+                            <div class="chg-label">${c.label}</div>
+                            <div class="chg-comparison">
+                                ${c.before !== undefined ? `<div class="chg-before">${c.before}</div><div class="chg-arrow">→</div>` : ''}
+                                <div class="chg-after">${c.after}</div>
+                            </div>
+                            ${c.delta ? `<span class="chg-delta ${c.isNew ? 'new-badge' : ''}">${c.delta}</span>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+
+/* =============================================
+   INIT
+============================================= */
+(function init() {
+    renderHeader();
+    renderTimeline();
+    renderKPIs();
+    renderPhaseSections();
+    renderGoals();
+    renderValue();
+    renderRevenue();
+    renderCostTable();
+    renderSLA();
+    renderFlags();
+    renderJourneyStatus();
+    renderUpdates();
+})();
+
+</script>
+</body>
+</html>
