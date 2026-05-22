@@ -924,12 +924,12 @@
 const D = {
     program: {
         reportMonth:        "May 2026",
-        dataAsOf:           "Pending — June 2026 pull",
+        dataAsOf:           "May 21, 2026",
         programMonth:       "1 of 8",
         sowEffectiveDate:   "March 31, 2026",
         sowTerm:            "March 31, 2026 – March 31, 2028 (Master Agreement · auto-renews)",
         workOrderTerm:      "March 31, 2026 – May 3, 2027 (Work Order 1 · Program deliveries end Dec 31, 2026)",
-        goLiveDate:         "May 4, 2026",
+        goLiveDate:         "May 1, 2026",
         programEndDate:     "December 31, 2026",
         woUltimateEnd:      "May 3, 2027",
         sowNumber:          "SOW #4 · Work Order 1",
@@ -942,25 +942,29 @@ const D = {
     },
 
     metrics: {
-        membersEnrolled:           null,
-        enrollmentRate:            null,
-        careBarrierAssessments:    null,
-        careBarrierMembers:        null,
-        hedisGapsClosed:           null,
-        awvAttestations:           null,
-        preventiveAttestations:    null,
-        fluVaccineAttestations:    null,
-        sdohNeedPct:               null,
-        phq4Avg:                   null,
-        ucla3Avg:                  null
+        membersEnrolled:              544,
+        enrollmentRate:               0.1035,   // 544 / 5,255 eligible
+        pctToEnrollmentTarget:        0.518,    // 544 / 1,051 target
+        statesWithEnrolledMembers:    32,
+        conversionRate:               0.302,    // per Pyx Activate dashboard
+        avgMonthsEngagement:          1.0,
+        avgChargePerMember:           70,
+        memberRetentionMay:           1.0,
+        careBarrierAssessments:       null,
+        careBarrierMembers:           null,
+        hedisGapsClosed:              null,
+        awvAttestations:              null,
+        sdohNeedPct:                  null,
+        phq4Avg:                      null,
+        ucla3Avg:                     null
     },
 
     kpis: [
-        { label: "States Included on Member Eligibility File", val: 44, ctx: "44 states active in this program", color: "kpi-green", good: true },
+        { label: "States Included on Member Eligibility File", val: 44,    ctx: "44 states active in this program", color: "kpi-green", good: true },
         { label: "Eligible Members",         val: 5255,    ctx: "Total CVS/Aetna Medicare eligible population" },
         { label: "Activation Target",        val: "1,051", ctx: "20% engagement goal — minimum for 1.2:1 ROI", color: "kpi-green", good: true },
-        { label: "Members Enrolled",         val: null,    ctx: "Target: 1,051 · Enrollment opened May 4", progress: 0 },
-        { label: "Enrollment Rate",          val: null,    ctx: "Target: 20.0%" },
+        { label: "Members Enrolled",         val: 544,     ctx: "51.8% to target · 32 states have enrolled members", progress: 52, good: true },
+        { label: "Enrollment Rate",          val: "10.4%", ctx: "Target: 20.0% · 51.8% of the way there", good: true },
         { label: "A1c Milestones (Box 7)",   val: null,    ctx: "Member attests to completing A1c measurement" },
         { label: "Statin Milestones (Box 8)", val: null,   ctx: "Member attests to statin adherence + mail-order pharmacy" },
         { label: "BP Milestones (Box 9)",    val: null,    ctx: "Member attests to BP reading at outpatient visit (CBP)" }
@@ -1037,7 +1041,7 @@ const D = {
             target: null,
             actual: null,
             status: "active",
-            desc: "Urgent SDOH needs escalated to CVS per mutually agreed escalation protocol — active from program go-live May 4, 2026"
+            desc: "Urgent SDOH needs escalated to CVS per mutually agreed escalation protocol — active from program go-live May 1, 2026"
         }
     ],
 
@@ -1118,7 +1122,7 @@ const D = {
 
     revenue: {
         contractMax:       800337,
-        revenueToDate:     null,
+        revenueToDate:     38080,
         platformFeePerWO:  40000,
         engagementFee:     70,
         implementationFee: 0
@@ -1144,16 +1148,23 @@ const D = {
         {
             type: "win",
             label: "Win",
-            title: "Kickoff Complete — Program Live May 4, 2026",
-            desc: "Kickoff meeting completed on schedule. Salesforce tracking configured, standardized onboarding workflow active, and member outreach launched May 4, 2026. Program is in Month 1 of 8.",
-            action: "Track enrollment velocity bi-weekly in Salesforce. First meaningful data pull expected for June 2026 reporting cycle."
+            title: "Program Live — 544 Enrolled, $38,080 Revenue in Month 1",
+            desc: "Program launched May 1, 2026. 544 members enrolled across 32 states within the first three weeks. Welcome Engagement Service billed: $38,080 (4.8% of $800,337 ceiling). 100% member retention for May. Avg engagement: 1.0 months.",
+            action: "Continue monitoring enrollment velocity weekly. June data pull will capture full Month 1 + early Month 2 numbers."
+        },
+        {
+            type: "win",
+            label: "Win",
+            title: "544 Members Enrolled — 51.8% to Target in Month 1",
+            desc: "544 members enrolled as of May 21, 2026 — 51.8% of the 1,051 target achieved in the program's first month. Members are active in 32 of 44 eligible states. Revenue to date: $38,080 (Welcome Engagement Service). 100% May retention.",
+            action: "Maintain enrollment velocity through June. Members must enroll by ~June 30 to complete the full 6-box journey by December 31."
         },
         {
             type: "watch",
             label: "Watch",
-            title: "Enrollment Window Active — 1,051 Members Needed",
-            desc: "Members must enroll by approximately June 30, 2026 to complete the full 6-box journey before December 31 program close. Enrollment velocity in May–June is a critical early signal for ROI achievement.",
-            action: "Monitor bi-weekly enrollment data. Flag if <200 members enrolled by end of May — backward planning requires at least ~175 new enrollments per week through June."
+            title: "507 More Members Needed — June 30 Enrollment Deadline",
+            desc: "507 additional members needed to hit the 1,051 target (20%). Members enrolling after ~June 30 may not complete all 6 scheduled boxes before December 31. Enrollment velocity must stay strong in June.",
+            action: "Monitor enrollment weekly. If pace drops below ~125 new enrollments/week in June, escalate with Melissa Arthur to review outreach strategy."
         },
         {
             type: "watch",
@@ -1169,13 +1180,13 @@ const D = {
             name:     "Implementation",
             timing:   "Pre-launch · Completed April 2026",
             state:    "done",
-            wondering: "Can Pyx Health operationalize a national HEDIS pilot across 44 states under one unified program — and be ready to go live by May 4?",
-            answer:   "Yes — implementation is complete and on schedule. Work Order 1 was fully executed April 10, 2026 (signed by Anthony Marini, CVS AVP Enterprise Procurement, and Cindy Jordan, Pyx Health CEO). All 50 states contracted, call scripts in final review, and the program launched May 4, 2026 as planned. Implementation fee waived under SOW #4.",
+            wondering: "Can Pyx Health operationalize a national HEDIS pilot across 44 states under one unified program — and generate meaningful enrollment in the first month?",
+            answer:   "Yes. Work Order 1 executed April 10, 2026. Program launched May 1, 2026 — 544 members enrolled across 32 states within the first three weeks. Implementation fee waived under SOW #4. Revenue to date: $38,080.",
             stats: [
-                { label: "States on Eligibility File", val: 44,           ctx: "44 states active in this program",            color: "kpi-green" },
-                { label: "Go-Live Date",           val: "May 4, 2026",    ctx: "On schedule",                                color: "" },
-                { label: "Eligible Members",       val: 5255,             ctx: "National CVS/Aetna Medicare population",     color: "" },
-                { label: "Implementation Fee",     val: "Waived",         ctx: "SOW #4 — all Work Orders",                   color: "kpi-green" }
+                { label: "Go-Live Date",           val: "May 1, 2026",    ctx: "On schedule",                                color: "kpi-green" },
+                { label: "Members Enrolled",       val: 544,              ctx: "Month 1 · 51.8% to target",                  color: "kpi-green" },
+                { label: "States Active",          val: 32,               ctx: "32 of 44 eligible states have enrollees",    color: "" },
+                { label: "Revenue — Month 1",      val: "$38,080",        ctx: "4.8% of $800,337 ceiling",                   color: "kpi-green" }
             ]
         },
         {
@@ -1185,10 +1196,10 @@ const D = {
             wondering: "Will enough members enroll to reach the 1,051 activation target — and can we hit critical mass before the June 30 enrollment deadline to ensure full journey completion?",
             answer:   "Enrollment opened May 4. Target is 1,051 members (20% of 5,255 eligible). Members must enroll by approximately June 30 to complete all 6 scheduled boxes before December 31 program close. Bi-weekly check-ins track enrollment velocity. First data available in June reporting.",
             stats: [
-                { label: "Enrollment Target",     val: "1,051",          ctx: "20% of eligible — minimum for 1.2:1 ROI",    color: "kpi-green" },
-                { label: "Enrolled to Date",       val: null,             ctx: "Pending — first data: June 2026",            color: "" },
-                { label: "Enrollment Rate",        val: null,             ctx: "Target: 20.0%",                              color: "" },
-                { label: "Enrollment Deadline",    val: "~Jun 30, 2026",  ctx: "Last date to enroll for full 6-box journey", color: "" }
+                { label: "Enrolled to Date",       val: 544,              ctx: "Month 1 · 51.8% to 1,051 target",            color: "kpi-green" },
+                { label: "Enrollment Rate",        val: "10.4%",          ctx: "Target: 20.0% · 51.8% of the way there",     color: "kpi-green" },
+                { label: "States with Enrollees",  val: 32,               ctx: "32 of 44 eligible states active",            color: "" },
+                { label: "Enrollment Deadline",    val: "~Jun 30, 2026",  ctx: "507 more members needed to hit target",      color: "" }
             ]
         },
         {
