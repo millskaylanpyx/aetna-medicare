@@ -1224,8 +1224,7 @@ const D = {
             stats: [
                 { label: "Enrolled to Date",       val: 620,              ctx: "59.0% to 1,051 target",                      color: "kpi-green" },
                 { label: "States with Enrollees",  val: 32,               ctx: "34 of 44 eligible states active",            color: "" },
-                { label: "SDOH Need Rate",         val: "92%",            ctx: "of screened members have ≥1 SDOH need",      color: "" },
-                { label: "Avg SDOH Needs",         val: "3.1",            ctx: "needs per member · top: Economic Stability", color: "" }
+
             ]
         },
         {
@@ -1458,6 +1457,18 @@ function renderPhaseSections() {
                 <span class="section-eyebrow eyebrow-3">Screenings &amp; Assessments</span>
                 <div class="section-title" style="font-size:20px;">Care Barrier &amp; Social Needs Data</div>
                 <div class="section-sub">PRAPARE, PHQ-4, and UCLA-3 administered at opt-in — surfacing barriers before they prevent care completion.</div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:32px;">
+                <div class="kpi">
+                    <div class="kpi-lbl">SDOH Need Rate</div>
+                    <div class="kpi-val">92%</div>
+                    <div class="kpi-ctx">of screened members have ≥1 SDOH need</div>
+                </div>
+                <div class="kpi">
+                    <div class="kpi-lbl">Avg SDOH Needs</div>
+                    <div class="kpi-val">3.1</div>
+                    <div class="kpi-ctx">needs per member · top: Economic Stability</div>
+                </div>
             </div>
             <div class="screening-grid">${D.screenings.map(s => `
                 <div class="scr-card">
