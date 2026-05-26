@@ -1775,11 +1775,11 @@ function renderMap() {
             tiles += `<g>
                 <title>${st}${n > 0 ? ': ' + n + ' enrolled' : ': no enrollments yet'}</title>
                 <rect x="${x}" y="${y}" width="${s}" height="${s}" rx="3" fill="${fill}"/>
-                <text x="${x+s/2}" y="${y+(n>0?14:22)}" text-anchor="middle"
-                    font-size="8" font-weight="700" font-family="Montserrat,sans-serif"
+                <text x="${x+s/2}" y="${y+(n>0?17:27)}" text-anchor="middle"
+                    font-size="11" font-weight="700" font-family="Montserrat,sans-serif"
                     fill="${n > 0 ? tc : '#9ab'}">${st}</text>
-                ${n > 0 ? `<text x="${x+s/2}" y="${y+28}" text-anchor="middle"
-                    font-size="10" font-weight="700" font-family="Montserrat,sans-serif"
+                ${n > 0 ? `<text x="${x+s/2}" y="${y+35}" text-anchor="middle"
+                    font-size="13" font-weight="700" font-family="Montserrat,sans-serif"
                     fill="${tc}">${n}</text>` : ''}
             </g>`;
         });
