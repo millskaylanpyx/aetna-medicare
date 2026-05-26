@@ -924,7 +924,7 @@
 const D = {
     program: {
         reportMonth:        "May 2026",
-        dataAsOf:           "May 21, 2026",
+        dataAsOf:           "May 26, 2026",
         programMonth:       "1 of 8",
         sowEffectiveDate:   "March 31, 2026",
         sowTerm:            "March 31, 2026 – March 31, 2028 (Master Agreement · auto-renews)",
@@ -954,9 +954,19 @@ const D = {
         careBarrierMembers:           null,
         hedisGapsClosed:              null,
         awvAttestations:              null,
-        sdohNeedPct:                  null,
-        phq4Avg:                      null,
-        ucla3Avg:                     null
+        sdohNeedPct:                  0.92,
+        avgSdohNeedsPerMember:        3.1,
+        phq4Avg:                      2.4,
+        ucla3Avg:                     4.4,
+        sdohNeeds: [
+            { label: "Economic Stability",  pct: 0.92 },
+            { label: "Healthy Days",        pct: 0.44 },
+            { label: "Medication Adherence", pct: 0.29 },
+            { label: "Access to Care",      pct: 0.18 },
+            { label: "Health Literacy",     pct: 0.14 },
+            { label: "Safety",              pct: 0.08 },
+            { label: "Care Gap",            pct: 0.01 }
+        ]
     },
 
     kpis: [
@@ -1008,10 +1018,10 @@ const D = {
     ],
 
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",        actual: null, desc: "Members screened for social determinants of health — food, housing, transportation, economic stability" },
-        { icon: "🧠", name: "PHQ-4 (Mental Health)",  actual: null, desc: "4-question anxiety and depression screen administered at opt-in" },
-        { icon: "🤝", name: "UCLA-3 (Loneliness)",    actual: null, desc: "3-item loneliness assessment — a key driver of member experience and HEDIS-adjacent engagement" },
-        { icon: "📋", name: "Custom HEDIS Screening",  actual: null, desc: "Targets A1C, BP, and medication adherence HEDIS gaps — specific measure triggers confirmed per CVS clinical workflow" }
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 578, desc: "92% of screened members indicate at least one SDOH need · avg 3.1 needs per member. Top needs: Economic Stability (92%), Healthy Days (44%), Medication Adherence (29%), Access to Care (18%), Health Literacy (14%)." },
+        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 571, desc: "Avg score 2.4 — normal range (0–2 = normal, 3–5 = mild, 6–8 = moderate, 9–12 = severe). Questions cover anxiety, worry, feeling down, and loss of interest over the past two weeks." },
+        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 570, desc: "Avg score 4.4 — not lonely range (3–5 = not lonely, 6–9 = lonely). Measures how often members feel left out, lack companionship, or feel isolated from others." },
+        { icon: "📊", name: "MedicareWellBeing",        actual: 482, desc: "Medicare-specific wellbeing assessment completed by engaged members. Captures functional health, self-rated health status, and wellbeing indicators relevant to Medicare Advantage quality metrics." }
     ],
 
     sla: [
@@ -1196,9 +1206,9 @@ const D = {
             answer:   "Enrollment opened May 4. Target is 1,051 members (20% of 5,255 eligible). Members must enroll by approximately June 30 to complete all 6 scheduled boxes before December 31 program close. Bi-weekly check-ins track enrollment velocity. First data available in June reporting.",
             stats: [
                 { label: "Enrolled to Date",       val: 620,              ctx: "59.0% to 1,051 target",                      color: "kpi-green" },
-                { label: "Enrollment Rate",        val: "11.8%",          ctx: "Target: 20.0% · 59.0% of the way there",     color: "kpi-green" },
                 { label: "States with Enrollees",  val: 32,               ctx: "32 of 44 eligible states active",            color: "" },
-                { label: "Enrollment Deadline",    val: "~Jun 30, 2026",  ctx: "507 more members needed to hit target",      color: "" }
+                { label: "SDOH Need Rate",         val: "92%",            ctx: "of screened members have ≥1 SDOH need",      color: "" },
+                { label: "Avg SDOH Needs",         val: "3.1",            ctx: "needs per member · top: Economic Stability", color: "" }
             ]
         },
         {
