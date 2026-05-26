@@ -941,6 +941,23 @@ const D = {
         markets:            ["44 States"]
     },
 
+    mapData: {
+        // West
+        WA: 10, OR: 2,  CA: 21, ID: 1,  NV: 5,  MT: 0,  WY: 0,  UT: 0,  AZ: 0,
+        // Mountain / Plains
+        CO: 8,  NM: 1,  NE: 2,  KS: 0,  OK: 5,  TX: 17, ND: 0,  SD: 0,
+        // Midwest
+        MN: 7,  IA: 0,  WI: 8,  MI: 27, IL: 28, IN: 8,  OH: 27, MO: 2,
+        // South
+        AR: 1,  LA: 17, MS: 0,  TN: 17, AL: 34, GA: 21, FL: 29,
+        // Appalachia & Mid-Atlantic
+        KY: 11, WV: 7,  VA: 11, NC: 55, SC: 19, MD: 11, DE: 0,
+        // Northeast
+        NY: 79, PA: 81, NJ: 33, CT: 26, RI: 0,  MA: 2,  VT: 0,  NH: 0,  ME: 0,
+        // Non-contiguous
+        AK: 0,  HI: 0
+    },
+
     metrics: {
         membersEnrolled:              620,
         enrollmentRate:               0.1180,   // 620 / 5,255 eligible
@@ -1475,6 +1492,7 @@ function renderPhaseSections() {
                     <div class="client-q-answer">${phase.answer}</div>
                 </div>
                 ${statsHTML}
+                ${i === 1 && D.mapData ? renderMap() : ''}
                 ${screeningsHTML}
                 ${milestonesHTML}
             </div></div>
@@ -1717,6 +1735,71 @@ function renderUpdates() {
             </div>
         </div>
     `).join('');
+}
+
+
+/* =============================================
+   MAP
+============================================= */
+function renderMap() {
+    if (!D.mapData) return '';
+    const grid = [
+        ['AK', '',   '',   '',   '',   '',   '',   '',   '',   '',   'ME' ],
+        ['',   '',   '',   '',   '',   '',   '',   'VT', 'NH', '',   ''   ],
+        ['WA', 'MT', 'ND', 'MN', 'WI', 'MI', '',   'NY', 'MA', '',   ''   ],
+        ['OR', 'ID', 'SD', 'IA', 'IL', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI' ],
+        ['CA', 'NV', 'WY', 'NE', 'MO', 'KY', 'WV', 'VA', 'MD', 'DE', ''   ],
+        ['',   '',   'CO', 'KS', 'AR', 'TN', 'NC', 'SC', '',   '',   ''   ],
+        ['',   'AZ', 'NM', 'OK', 'LA', 'MS', 'AL', 'GA', '',   '',   ''   ],
+        ['HI', '',   '',   'TX', '',   '',   '',   'FL', '',   '',   ''   ]
+    ];
+    function getColor(n) {
+        if (!n) return '#e8edf2';
+        if (n <= 5)  return '#c8e6c4';
+        if (n <= 15) return '#8fce8a';
+        if (n <= 30) return '#49a601';
+        if (n <= 60) return '#2d7200';
+        return '#19430a';
+    }
+    function getTextColor(n) { return n > 15 ? '#fff' : '#2e4456'; }
+    const s = 36, g = 4, cols = 11, rows = 8;
+    const W = cols * s + (cols - 1) * g;
+    const H = rows * s + (rows - 1) * g;
+    let tiles = '';
+    grid.forEach((row, r) => {
+        row.forEach((st, c) => {
+            if (!st) return;
+            const x = c * (s + g), y = r * (s + g);
+            const n = D.mapData[st] || 0;
+            const fill = getColor(n), tc = getTextColor(n);
+            tiles += `<g>
+                <title>${st}${n > 0 ? ': ' + n + ' enrolled' : ': no enrollments yet'}</title>
+                <rect x="${x}" y="${y}" width="${s}" height="${s}" rx="3" fill="${fill}"/>
+                <text x="${x+s/2}" y="${y+(n>0?14:22)}" text-anchor="middle"
+                    font-size="8" font-weight="700" font-family="Montserrat,sans-serif"
+                    fill="${n > 0 ? tc : '#9ab'}">${st}</text>
+                ${n > 0 ? `<text x="${x+s/2}" y="${y+28}" text-anchor="middle"
+                    font-size="10" font-weight="700" font-family="Montserrat,sans-serif"
+                    fill="${tc}">${n}</text>` : ''}
+            </g>`;
+        });
+    });
+    const legend = [
+        ['#e8edf2','0'], ['#c8e6c4','1–5'], ['#8fce8a','6–15'],
+        ['#49a601','16–30'], ['#2d7200','31–60'], ['#19430a','61+']
+    ];
+    return `
+        <div style="margin:32px 0 40px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">Enrollment by State</div>
+            <div style="font-size:12px;color:#8a9baa;margin-bottom:16px;">32 states with enrolled members · Data as of ${D.program.dataAsOf}</div>
+            <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px;display:block;">${tiles}</svg>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:center;">
+                <span style="font-size:10px;color:#8a9baa;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Scale:</span>
+                ${legend.map(([c,l]) => `<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#5a6a7a;">
+                    <span style="width:12px;height:12px;background:${c};border-radius:2px;border:1px solid rgba(0,0,0,.08);display:inline-block;flex-shrink:0;"></span>${l}
+                </span>`).join('')}
+            </div>
+        </div>`;
 }
 
 
