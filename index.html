@@ -1058,10 +1058,26 @@ const D = {
     ],
 
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 688, desc: "91% of screened members indicate at least one SDOH need · avg 3.6 needs per member. Top needs: Income (89%), Social & Community (81%), Food (65%), Healthy Days (40%), Economic Stability (32%)." },
-        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 746, desc: "Avg score 2.3 — normal range (0–2 = normal, 3–5 = mild, 6–8 = moderate, 9–12 = severe). Questions cover anxiety, worry, feeling down, and loss of interest over the past two weeks." },
-        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 746, desc: "Avg score 4.3 — not lonely range (3–5 = not lonely, 6–9 = lonely). Measures how often members feel left out, lack companionship, or feel isolated from others." },
-        { icon: "📊", name: "MedicareWellBeing",        actual: 579, desc: "Medicare-specific wellbeing assessment completed by engaged members. Captures functional health, self-rated health status, and wellbeing indicators relevant to Medicare Advantage quality metrics." }
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 688, bullets: [
+            "91% of members have ≥1 SDOH need",
+            "Avg 3.6 needs per member",
+            "Top needs: Income (89%), Social & Community (81%), Food (65%), Healthy Days (40%), Economic Stability (32%)"
+        ]},
+        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 746, bullets: [
+            "Avg score: 2.3 — normal range",
+            "Scale: 0–2 normal · 3–5 mild · 6–8 moderate · 9–12 severe",
+            "Covers: anxiety, worry, feeling down, loss of interest"
+        ]},
+        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 746, bullets: [
+            "Avg score: 4.3 — not lonely range",
+            "Scale: 3–5 not lonely · 6–9 lonely",
+            "Measures: feeling left out, lack of companionship, isolation"
+        ]},
+        { icon: "📊", name: "MedicareWellBeing",        actual: 579, bullets: [
+            "Medicare-specific wellbeing assessment",
+            "Captures functional health & self-rated health status",
+            "Relevant to Medicare Advantage quality metrics"
+        ]}
     ],
 
     sla: [
@@ -1570,7 +1586,9 @@ function renderPhaseSections() {
                     <div class="scr-icon">${s.icon}</div>
                     <div class="scr-name">${s.name}</div>
                     <div class="scr-val ${s.actual === null ? 'pending' : ''}">${s.actual !== null ? s.actual.toLocaleString() : 'Pending'}</div>
-                    <div class="scr-desc">${s.desc}</div>
+                    <ul style="margin:8px 0 0 0; padding-left:16px; list-style:disc;">
+                        ${s.bullets.map(b => `<li style="font-size:11px; color:#8a9baa; line-height:1.6; margin-bottom:3px;">${b}</li>`).join('')}
+                    </ul>
                 </div>
             `).join('')}</div>
         ` : '';
