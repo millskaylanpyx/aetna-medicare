@@ -982,21 +982,21 @@ const D = {
         phq4Avg:                      2.3,
         ucla3Avg:                     4.3,
         sdohNeeds: [
-            { label: "Housing",              pct: 0.89 },
-            { label: "Safety",               pct: 0.81 },
-            { label: "Economic Stability",   pct: 0.65 },
-            { label: "Health Literacy",      pct: 0.40 },
-            { label: "Discrimination",       pct: 0.32 },
-            { label: "Income",               pct: 0.23 },
+            { label: "Income",               pct: 0.89 },
+            { label: "Social & Community",   pct: 0.81 },
+            { label: "Food",                 pct: 0.65 },
+            { label: "Healthy Days",         pct: 0.40 },
+            { label: "Economic Stability",   pct: 0.32 },
+            { label: "Medication Adherence", pct: 0.23 },
             { label: "Access to Care",       pct: 0.22 },
-            { label: "Food",                 pct: 0.22 },
-            { label: "Social & Community",   pct: 0.22 },
-            { label: "Healthy Days",         pct: 0.21 },
-            { label: "Medication Adherence", pct: 0.20 },
-            { label: "Mental Health",        pct: 0.10 },
+            { label: "Health Literacy",      pct: 0.22 },
+            { label: "Transportation",       pct: 0.22 },
+            { label: "Housing",              pct: 0.21 },
+            { label: "Discrimination",       pct: 0.20 },
+            { label: "Mental Health",        pct: 0.20 },
             { label: "Care Gap",             pct: 0.10 },
-            { label: "Childcare",            pct: 0.20 },
-            { label: "Transportation",       pct: 0.09 }
+            { label: "Safety",               pct: 0.10 },
+            { label: "Childcare",            pct: 0.09 }
         ]
     },
 
@@ -1049,7 +1049,7 @@ const D = {
     ],
 
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 688, desc: "91% of screened members indicate at least one SDOH need · avg 3.6 needs per member. Top needs: Housing (89%), Safety (81%), Economic Stability (65%), Health Literacy (40%), Discrimination (32%)." },
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 688, desc: "91% of screened members indicate at least one SDOH need · avg 3.6 needs per member. Top needs: Income (89%), Social & Community (81%), Food (65%), Healthy Days (40%), Economic Stability (32%)." },
         { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 746, desc: "Avg score 2.3 — normal range (0–2 = normal, 3–5 = mild, 6–8 = moderate, 9–12 = severe). Questions cover anxiety, worry, feeling down, and loss of interest over the past two weeks." },
         { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 746, desc: "Avg score 4.3 — not lonely range (3–5 = not lonely, 6–9 = lonely). Measures how often members feel left out, lack companionship, or feel isolated from others." },
         { icon: "📊", name: "MedicareWellBeing",        actual: 579, desc: "Medicare-specific wellbeing assessment completed by engaged members. Captures functional health, self-rated health status, and wellbeing indicators relevant to Medicare Advantage quality metrics." }
@@ -1304,12 +1304,12 @@ const D = {
         {
             eyebrow: "SDoH Needs Profile",
             title: "Top Needs — Updated",
-            sub: "With 110 more members screened, the full needs profile has shifted. Housing and Safety now lead.",
+            sub: "With 110 more members screened, the full needs profile has shifted. Income and Social & Community now lead.",
             changes: [
-                { label: "Housing (new #1 need)",       after: "89%",  delta: "Was not in top list", isNew: true, color: "green" },
-                { label: "Safety (new #2 need)",         after: "81%",  delta: "Was 8% — significant increase", isNew: true, color: "green" },
-                { label: "Economic Stability",           before: "92%", after: "65%", delta: "−27 pts (larger, more diverse screened pool)", color: "blue" },
-                { label: "Health Literacy",              before: "14%", after: "40%", delta: "+26 pts", color: "green" }
+                { label: "Income (#1 need)",              after: "89%", delta: "New top need", isNew: true, color: "green" },
+                { label: "Social & Community (#2 need)",  after: "81%", delta: "New #2 need",  isNew: true, color: "green" },
+                { label: "Food (#3 need)",                after: "65%", delta: "New #3 need",  isNew: true, color: "green" },
+                { label: "Economic Stability",            before: "92%", after: "32%", delta: "−60 pts (larger, more diverse screened pool)", color: "blue" }
             ]
         },
         {
@@ -1552,7 +1552,7 @@ function renderPhaseSections() {
                 <div class="kpi">
                     <div class="kpi-lbl">Avg SDOH Needs</div>
                     <div class="kpi-val">3.6</div>
-                    <div class="kpi-ctx">needs per member · top: Housing (89%)</div>
+                    <div class="kpi-ctx">needs per member · top: Income (89%)</div>
                 </div>
             </div>
             <div class="screening-grid">${D.screenings.map(s => `
