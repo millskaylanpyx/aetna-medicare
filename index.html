@@ -270,6 +270,16 @@
             white-space: nowrap;
         }
 
+        .gantt-now-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: var(--cool-slate);
+            opacity: 0.35;
+            z-index: 10;
+            pointer-events: none;
+        }
+
         .gantt-row {
             display: flex;
             align-items: center;
@@ -1013,7 +1023,7 @@ const D = {
 
     timeline: {
         totalMonths: 8,
-        currentMonth: 1,
+        currentMonth: 2,
         ticks: [
             ["May",  0],
             ["Jun",  12.5],
@@ -1440,6 +1450,7 @@ function renderTimeline() {
             <div class="gantt-row-label${r.color === 'bar-gray' ? ' dim' : ''}">${r.label}</div>
             <div class="gantt-track">
                 <div class="gantt-bar ${r.color}" style="left:${r.left}%;width:${r.width}%">${r.text}</div>
+                <div class="gantt-now-line" style="left:${nowPct}%"></div>
             </div>
         </div>
     `).join('');
