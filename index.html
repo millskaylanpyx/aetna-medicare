@@ -1017,7 +1017,7 @@ const D = {
         { label: "Members Enrolled",         val: 1018,    ctx: "96.9% to target · 33 states have enrolled members", progress: 97, good: true },
         { label: "Enrollment Rate",          val: "19.4%", ctx: "Target: 20.0% · 96.9% of the way there", good: true },
         { label: "A1c Milestones (Box 7)",   val: 375,     ctx: "A1c measurement attestations · 35.7% of 1,051 · targets GSD", color: "blue", good: true },
-        { label: "Statin Milestones (Box 8)", val: null,   ctx: "Member attests to statin adherence + mail-order pharmacy" },
+        { label: "Statin Milestones (Box 8)", val: 55,     ctx: "Mail-order pharmacy enrollments · 5.2% of 1,051 · targets PDC-Statin", color: "blue", good: true },
         { label: "BP Milestones (Box 9)",    val: null,    ctx: "Member attests to BP reading at outpatient visit (CBP)" }
     ],
 
@@ -1054,7 +1054,7 @@ const D = {
         { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close", trigger: "~120 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1051, actual: null, status: "pending" },
         { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1051, actual: 375, status: "active" },
-        { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1051, actual: null, status: "pending" },
+        { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1051, actual: 55, status: "active" },
         { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1051, actual: null, status: "pending" }
     ],
 
@@ -1161,8 +1161,8 @@ const D = {
             clientGoal: "Statin Adherence + Mail-Order Pharmacy",
             statement: "Improve PDC-Statin medication adherence scores by coaching members on statin adherence and enrolling them in CVS mail-order pharmacy",
             action: "Pharmacy navigation support, statin adherence coaching, and CVS mail-order enrollment assistance — supported by Box 8 milestone reward",
-            metric: "Statin Milestone Box (Box 8) member attestations",
-            metricPending: true
+            metric: "55 mail-order pharmacy enrollments confirmed (Box 8) · 5.2% of 1,051",
+            metricPending: false
         },
         {
             clientGoal: "BP / CBP Improvement",
