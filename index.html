@@ -1018,7 +1018,7 @@ const D = {
         { label: "Enrollment Rate",          val: "19.4%", ctx: "Target: 20.0% · 96.9% of the way there", good: true },
         { label: "A1c Milestones (Box 7)",   val: 375,     ctx: "A1c measurement attestations · 35.7% of 1,051 · targets GSD", color: "blue", good: true },
         { label: "Statin Milestones (Box 8)", val: 55,     ctx: "Mail-order pharmacy enrollments · 5.2% of 1,051 · targets PDC-Statin", color: "blue", good: true },
-        { label: "BP Milestones (Box 9)",    val: null,    ctx: "Member attests to BP reading at outpatient visit (CBP)" }
+        { label: "BP Milestones (Box 9)",    val: 74,      ctx: "BP reading attestations · 7.0% of 1,051 · targets CBP", color: "blue", good: true }
     ],
 
     timeline: {
@@ -1049,13 +1049,13 @@ const D = {
     milestones: [
         { num: 1, label: "Welcome Box",        desc: "Introductory food box — first touchpoint in the Pyx member journey", trigger: "Member enrollment confirmation", target: 1051, actual: 1018, status: "active" },
         { num: 2, label: "Month 2 Box",        desc: "Second scheduled food box continuing the member engagement journey", trigger: "~30 days post-enrollment", target: 1051, actual: 1018, status: "active" },
-        { num: 3, label: "Month 3 Box",        desc: "Third scheduled box — midpoint of the first half of the journey", trigger: "~60 days post-enrollment", target: 1051, actual: null, status: "pending" },
+        { num: 3, label: "Month 3 Box",        desc: "Third scheduled box — midpoint of the first half of the journey", trigger: "~60 days post-enrollment", target: 1051, actual: null, status: "active" },
         { num: 4, label: "Month 4 Box",        desc: "Fourth scheduled food box building sustained engagement", trigger: "~90 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close", trigger: "~120 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1051, actual: null, status: "pending" },
         { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1051, actual: 375, status: "active" },
         { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1051, actual: 55, status: "active" },
-        { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1051, actual: null, status: "pending" }
+        { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1051, actual: 74, status: "active" }
     ],
 
     screenings: [
@@ -1168,8 +1168,8 @@ const D = {
             clientGoal: "BP / CBP Improvement",
             statement: "Improve Blood Pressure Control (CBP) HEDIS measure outcomes by driving outpatient BP readings for enrolled hypertensive members",
             action: "Targeted outreach for BP monitoring and outpatient visit completion — member attests to BP reading at provider visit, earning Box 9",
-            metric: "BP Milestone Box (Box 9) member attestations",
-            metricPending: true
+            metric: "74 BP reading attestations confirmed (Box 9) · 7.0% of 1,051",
+            metricPending: false
         },
         {
             clientGoal: "1.2:1 ROI for Aetna",
@@ -1278,8 +1278,7 @@ const D = {
             stats: [
                 { label: "Members Engaged",        val: 954,              ctx: "Distinct members with ≥1 care-team call",    color: "kpi-green" },
                 { label: "Engagement Calls",       val: 18428,            ctx: "Avg 3.5 calls per member",                   color: "" },
-                { label: "SDOH Need Rate",         val: "91%",            ctx: "Of screened members · avg 2.8 needs each",   color: "" },
-                { label: "Loneliness Interventions", val: 30,             ctx: "Positive-psychology interventions delivered", color: "" }
+                { label: "SDOH Need Rate",         val: "91%",            ctx: "Of screened members · avg 2.8 needs each",   color: "" }
             ]
         },
         {
