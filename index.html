@@ -970,9 +970,9 @@ const D = {
     },
 
     metrics: {
-        membersEnrolled:              978,
-        enrollmentRate:               0.186,    // 978 / 5,255 eligible
-        pctToEnrollmentTarget:        0.930,    // 978 / 1,051 target
+        membersEnrolled:              1018,
+        enrollmentRate:               0.194,    // 1,018 / 5,255 eligible
+        pctToEnrollmentTarget:        0.969,    // 1,018 / 1,051 target
         statesWithEnrolledMembers:    33,
         conversionRate:               0.149,    // per Pyx Activate dashboard
         onboardingFromSuccessfulOutreach: 0.329,
@@ -1014,9 +1014,9 @@ const D = {
         { label: "States Included on Member Eligibility File", val: 44,    ctx: "44 states active in this program", color: "kpi-green", good: true },
         { label: "Eligible Members",         val: 5255,    ctx: "Total CVS/Aetna Medicare eligible population" },
         { label: "Activation Target",        val: "1,051", ctx: "20% engagement goal", color: "kpi-green", good: true },
-        { label: "Members Enrolled",         val: 978,     ctx: "93.0% to target · 33 states have enrolled members", progress: 93, good: true },
-        { label: "Enrollment Rate",          val: "18.6%", ctx: "Target: 20.0% · 93.0% of the way there", good: true },
-        { label: "A1c Milestones (Box 7)",   val: null,    ctx: "Member attests to completing A1c measurement" },
+        { label: "Members Enrolled",         val: 1018,    ctx: "96.9% to target · 33 states have enrolled members", progress: 97, good: true },
+        { label: "Enrollment Rate",          val: "19.4%", ctx: "Target: 20.0% · 96.9% of the way there", good: true },
+        { label: "A1c Milestones (Box 7)",   val: 375,     ctx: "A1c measurement attestations · 35.7% of 1,051 · targets GSD", color: "blue", good: true },
         { label: "Statin Milestones (Box 8)", val: null,   ctx: "Member attests to statin adherence + mail-order pharmacy" },
         { label: "BP Milestones (Box 9)",    val: null,    ctx: "Member attests to BP reading at outpatient visit (CBP)" }
     ],
@@ -1047,13 +1047,13 @@ const D = {
     },
 
     milestones: [
-        { num: 1, label: "Welcome Box",        desc: "Introductory food box — first touchpoint in the Pyx member journey", trigger: "Member enrollment confirmation", target: 1051, actual: 978, status: "active" },
-        { num: 2, label: "Month 2 Box",        desc: "Second scheduled food box continuing the member engagement journey", trigger: "~30 days post-enrollment", target: 1051, actual: 978, status: "active" },
+        { num: 1, label: "Welcome Box",        desc: "Introductory food box — first touchpoint in the Pyx member journey", trigger: "Member enrollment confirmation", target: 1051, actual: 1018, status: "active" },
+        { num: 2, label: "Month 2 Box",        desc: "Second scheduled food box continuing the member engagement journey", trigger: "~30 days post-enrollment", target: 1051, actual: 1018, status: "active" },
         { num: 3, label: "Month 3 Box",        desc: "Third scheduled box — midpoint of the first half of the journey", trigger: "~60 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 4, label: "Month 4 Box",        desc: "Fourth scheduled food box building sustained engagement", trigger: "~90 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close", trigger: "~120 days post-enrollment", target: 1051, actual: null, status: "pending" },
         { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1051, actual: null, status: "pending" },
-        { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1051, actual: null, status: "pending" },
+        { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1051, actual: 375, status: "active" },
         { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1051, actual: null, status: "pending" },
         { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1051, actual: null, status: "pending" }
     ],
@@ -1154,8 +1154,8 @@ const D = {
             clientGoal: "A1C Gap Closure",
             statement: "Close open HbA1c Control HEDIS gaps for enrolled diabetic members before December 31, 2026",
             action: "Engagement coaching, care barrier navigation, and AWV scheduling targeting A1C-related care gaps — supported by Box 7 milestone reward",
-            metric: "A1C Milestone Box (Box 7) triggers confirmed via Salesforce",
-            metricPending: true
+            metric: "375 A1c measurement attestations confirmed (Box 7) · 35.7% of 1,051",
+            metricPending: false
         },
         {
             clientGoal: "Statin Adherence + Mail-Order Pharmacy",
@@ -1181,7 +1181,7 @@ const D = {
         {
             clientGoal: "Complete Full Journey by Dec 31",
             statement: "Ensure all enrolled members complete the full 6-box journey before program close on December 31, 2026",
-            action: "With 978 members (93% of target) enrolled by early July, the bulk of the cohort is positioned to complete all 6 scheduled boxes on time. Members enrolling now get a compressed journey — monitor late-enrollee box pacing.",
+            action: "With 1,018 members (97% of target) enrolled by early July, the bulk of the cohort is positioned to complete all 6 scheduled boxes on time. Members enrolling now get a compressed journey — monitor late-enrollee box pacing.",
             metric: "Box 6 delivery rate by December 31, 2026",
             metricPending: true
         }
@@ -1209,9 +1209,9 @@ const D = {
         {
             type: "win",
             label: "Win",
-            title: "978 Members Enrolled — 93% to Target",
-            desc: "978 members enrolled as of July 6 — 93.0% of the 1,051 activation target, up from 736 (70%) at the June report. Active in 33 of 44 eligible states. 246 new enrollments in the last 30 days. Only 73 members from hitting the full 20% activation goal.",
-            action: "Push the final ~73 enrollments to reach 1,051. Note that members enrolling now will have a compressed box journey before the December 31 delivery deadline."
+            title: "1,018 Members Enrolled — 97% to Target",
+            desc: "1,018 members enrolled as of July 6 — 96.9% of the 1,051 activation target, up from 736 (70%) at the June report. Active in 33 of 44 eligible states. 246 new enrollments in the last 30 days. Only 33 members from hitting the full 20% activation goal.",
+            action: "Push the final ~33 enrollments to reach 1,051. Note that members enrolling now will have a compressed box journey before the December 31 delivery deadline."
         },
         {
             type: "win",
@@ -1231,14 +1231,14 @@ const D = {
             type: "watch",
             label: "Watch",
             title: "Eligibility File Refreshed to 3,843 — Denominator to Reconcile",
-            desc: "The most recent eligibility file (received 7/1/2026) reports 3,843 members — down from the 5,255 the program scoped against. Against 3,843, the 978 enrolled would represent a 25.4% activation rate. The dashboard holds the contractual 5,255 eligible / 1,051 target (20%) for consistency and shows 18.6% against that base.",
+            desc: "The most recent eligibility file (received 7/1/2026) reports 3,843 members — down from the 5,255 the program scoped against. Against 3,843, the 1,018 enrolled would represent a 26.5% activation rate. The dashboard holds the contractual 5,255 eligible / 1,051 target (20%) for consistency and shows 19.4% against that base.",
             action: "Confirm with Aetna/CVS which population is authoritative for reporting. If the 3,843 file supersedes 5,255, revisit the activation target and enrollment-rate denominator."
         },
         {
             type: "watch",
             label: "Watch",
             title: "Conversion Rate Down as Outreach Pool Widened",
-            desc: "Conversion rate is 14.9%, down from 25.1% in June, as unique members outreached grew from 2,406 to 5,618. Onboarding from successful outreach is 32.9%. The decline reflects a much larger, harder-to-reach outreach pool rather than a drop in enrollment volume — net enrollments still rose +242.",
+            desc: "Conversion rate is 14.9%, down from 25.1% in June, as unique members outreached grew from 2,406 to 5,618. Onboarding from successful outreach is 32.9%. The decline reflects a much larger, harder-to-reach outreach pool rather than a drop in enrollment volume — net enrollments still rose +282.",
             action: "Confirm SMS/email campaign performance and Mytonomy direct-link status with Mel; verify remaining eligible-member phone data quality (3% missing, 1% bad numbers)."
         }
     ],
@@ -1249,10 +1249,10 @@ const D = {
             timing:   "Pre-launch · Completed April 2026",
             state:    "done",
             wondering: "Can Pyx Health operationalize a national HEDIS pilot across 44 states under one unified program — and generate meaningful enrollment in the first months?",
-            answer:   "Yes. Work Order 1 executed April 10, 2026. Program launched May 1, 2026 — 978 members enrolled across 33 states through Month 3, reaching 93% of the activation target.",
+            answer:   "Yes. Work Order 1 executed April 10, 2026. Program launched May 1, 2026 — 1,018 members enrolled across 33 states through Month 3, reaching 97% of the activation target.",
             stats: [
                 { label: "Go-Live Date",           val: "May 1, 2026",    ctx: "On schedule",                                color: "kpi-green" },
-                { label: "Members Enrolled",       val: 978,              ctx: "93.0% to target",                            color: "kpi-green" },
+                { label: "Members Enrolled",       val: 1018,             ctx: "96.9% to target",                            color: "kpi-green" },
                 { label: "States Active",          val: 33,               ctx: "33 of 44 eligible states have enrollees",    color: "" }
             ]
         },
@@ -1261,9 +1261,9 @@ const D = {
             timing:   "Active · May – July 2026",
             state:    "here",
             wondering: "Will enough members enroll to reach the 1,051 activation target — and can we sustain enrollment velocity to close the final gap to the 20% goal?",
-            answer:   "978 members enrolled through July 6 — 93% of the 1,051 target, with just 73 members remaining. Outreach has reached 5,618 unique members with a 14.9% conversion rate (32.9% onboarding from successful outreach). 246 new enrollments occurred in the last 30 days as the outreach pool widened.",
+            answer:   "1,018 members enrolled through July 6 — 96.9% of the 1,051 target, with just 33 members remaining. Outreach has reached 5,618 unique members with a 14.9% conversion rate (32.9% onboarding from successful outreach). 246 new enrollments occurred in the last 30 days as the outreach pool widened.",
             stats: [
-                { label: "Enrolled to Date",       val: 978,              ctx: "93.0% to 1,051 target",                      color: "kpi-green" },
+                { label: "Enrolled to Date",       val: 1018,             ctx: "96.9% to 1,051 target",                      color: "kpi-green" },
                 { label: "States with Enrollees",  val: 33,               ctx: "33 of 44 eligible states active",            color: "" },
                 { label: "Members Outreached",     val: 5618,             ctx: "Unique members contacted for enrollment",    color: "" },
                 { label: "Conversion Rate",        val: "14.9%",          ctx: "Of outreach attempts resulting in enrollment", color: "" }
@@ -1303,9 +1303,9 @@ const D = {
             title: "Enrollment Growth",
             sub: "Changes since the June 9, 2026 report. Data as of July 6, 2026.",
             changes: [
-                { label: "Total Members Enrolled",        before: "736",    after: "978",    delta: "+242 members", color: "green" },
-                { label: "Enrollment Rate",               before: "14.0%",  after: "18.6%",  delta: "+4.6 pts",     color: "green" },
-                { label: "% to Activation Target",        before: "70.0%",  after: "93.0%",  delta: "+23 pts",      color: "green" },
+                { label: "Total Members Enrolled",        before: "736",    after: "1,018",  delta: "+282 members", color: "green" },
+                { label: "Enrollment Rate",               before: "14.0%",  after: "19.4%",  delta: "+5.4 pts",     color: "green" },
+                { label: "% to Activation Target",        before: "70.0%",  after: "96.9%",  delta: "+27 pts",      color: "green" },
                 { label: "Members Outreached to Date",    before: "2,406",  after: "5,618",  delta: "+3,212 (outreach pool more than doubled)", color: "green" },
                 { label: "Enrollments — Last 30 Days",    before: "682",    after: "246",    delta: "−436 (early surge tapering)", color: "blue" },
                 { label: "Conversion Rate",               before: "25.1%",  after: "14.9%",  delta: "−10.2 pts (larger, harder-to-reach pool)", color: "blue" }
