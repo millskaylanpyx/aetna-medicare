@@ -992,16 +992,16 @@ const D = {
         awvAttestations:              null,
         sdohNeedPct:                  0.91,
         avgSdohNeedsPerMember:        2.8,
-        phq4Avg:                      2.3,
+        phq4Avg:                      2.2,
         ucla3Avg:                     4.2,
         sdohNeeds: [
             { label: "Income",               pct: 0.88 },
-            { label: "Food",                 pct: 0.71 },
+            { label: "Food",                 pct: 0.72 },
             { label: "Healthy Days",         pct: 0.42 },
-            { label: "Access to Care",       pct: 0.26 },
+            { label: "Access to Care",       pct: 0.25 },
             { label: "Economic Stability",   pct: 0.21 },
-            { label: "Medication Adherence", pct: 0.21 },
-            { label: "Transportation",       pct: 0.18 },
+            { label: "Medication Adherence", pct: 0.20 },
+            { label: "Transportation",       pct: 0.17 },
             { label: "Housing",              pct: 0.15 },
             { label: "Health Literacy",      pct: 0.10 },
             { label: "Safety",               pct: 0.07 },
@@ -1059,22 +1059,22 @@ const D = {
     ],
 
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 831, bullets: [
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 948, bullets: [
             "91% of members have ≥1 SDOH need",
             "Avg 2.8 needs per member",
-            "Top needs: Income (88%), Food (71%), Healthy Days (42%), Access to Care (26%), Economic Stability (21%)"
+            "Top needs: Income (88%), Food (72%), Healthy Days (42%), Access to Care (25%), Economic Stability (21%)"
         ]},
-        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 977, bullets: [
-            "Avg score: 2.3 — normal range",
+        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 1119, bullets: [
+            "Avg score: 2.2 — normal range",
             "Scale: 0–2 normal · 3–5 mild · 6–8 moderate · 9–12 severe",
             "Covers: anxiety, worry, feeling down, loss of interest"
         ]},
-        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 980, bullets: [
+        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 1126, bullets: [
             "Avg score: 4.2 — not lonely range",
             "Scale: 3–5 not lonely · 6–9 lonely",
             "Measures: feeling left out, lack of companionship, isolation"
         ]},
-        { icon: "📊", name: "MedicareWellBeing",        actual: 716, bullets: [
+        { icon: "📊", name: "MedicareWellBeing",        actual: 823, bullets: [
             "Medicare-specific wellbeing assessment",
             "Captures functional health & self-rated health status",
             "Relevant to Medicare Advantage quality metrics"
@@ -1274,7 +1274,7 @@ const D = {
             timing:   "Active · May – December 2026",
             state:    "here",
             wondering: "Will the food box journey sustain engagement long enough to close A1C, BP, and pharmacy HEDIS gaps before December 31?",
-            answer:   "Engagement is scaling: 954 members have engaged the care team across 18,428 calls (avg 3.5 per member), and 91% of the 831 PRAPARE-screened members show ≥1 SDOH need. Six scheduled boxes ship throughout the program to all enrolled members; three milestone boxes are earned by member self-attestation — Box 7 (A1c measurement completed), Box 8 (statin adherence + mail-order pharmacy enrolled), and Box 9 (BP reading at outpatient visit for CBP). Milestone attestation tracking is active via the Pyx platform; outcome data begins flowing in Month 4.",
+            answer:   "Engagement is scaling: 954 members have engaged the care team across 18,428 calls (avg 3.5 per member), and 91% of the 948 PRAPARE-screened members show ≥1 SDOH need. Six scheduled boxes ship throughout the program to all enrolled members; three milestone boxes are earned by member self-attestation — Box 7 (A1c measurement completed), Box 8 (statin adherence + mail-order pharmacy enrolled), and Box 9 (BP reading at outpatient visit for CBP). Milestone attestation tracking is active via the Pyx platform; outcome data begins flowing in Month 4.",
             stats: [
                 { label: "Members Engaged",        val: 954,              ctx: "Distinct members with ≥1 care-team call",    color: "kpi-green" },
                 { label: "Engagement Calls",       val: 18428,            ctx: "Avg 3.5 calls per member",                   color: "" },
@@ -1316,10 +1316,10 @@ const D = {
             title: "Screening Volume",
             sub: "All four assessments continued to climb as engagement deepened across the growing cohort.",
             changes: [
-                { label: "PRAPARE (SDOH)",        before: "688",  after: "831",  delta: "+143 completed", color: "green" },
-                { label: "PHQ-4 (Mental Health)", before: "746",  after: "977",  delta: "+231 completed", color: "green" },
-                { label: "UCLA-3 (Loneliness)",   before: "746",  after: "980",  delta: "+234 completed", color: "green" },
-                { label: "MedicareWellBeing",     before: "579",  after: "716",  delta: "+137 completed", color: "green" }
+                { label: "PRAPARE (SDOH)",        before: "688",  after: "948",   delta: "+260 completed", color: "green" },
+                { label: "PHQ-4 (Mental Health)", before: "746",  after: "1,119", delta: "+373 completed", color: "green" },
+                { label: "UCLA-3 (Loneliness)",   before: "746",  after: "1,126", delta: "+380 completed", color: "green" },
+                { label: "MedicareWellBeing",     before: "579",  after: "823",   delta: "+244 completed", color: "green" }
             ]
         },
         {
@@ -1328,7 +1328,7 @@ const D = {
             sub: "Scores remain stable in healthy ranges; average SDOH needs per member declined as the screened pool broadened.",
             changes: [
                 { label: "UCLA-3 Avg (Loneliness)",    before: "4.3", after: "4.2", delta: "−0.1 (not lonely range)", color: "green" },
-                { label: "PHQ-4 Avg (Mental Health)",  before: "2.3", after: "2.3", delta: "No change (normal range)", color: "" },
+                { label: "PHQ-4 Avg (Mental Health)",  before: "2.3", after: "2.2", delta: "−0.1 (normal range)", color: "green" },
                 { label: "SDOH Need Rate",             before: "91%", after: "91%", delta: "No change",               color: "" },
                 { label: "Avg SDOH Needs / Member",    before: "3.6", after: "2.8", delta: "−0.8 (broader screened pool)", color: "blue" }
             ]
@@ -1339,9 +1339,9 @@ const D = {
             sub: "Income and Food remain the dominant needs; the resource-type breakdown refreshed with the latest PRAPARE data.",
             changes: [
                 { label: "Income (#1 need)",              before: "89%", after: "88%", delta: "−1 pt · still #1",   color: "" },
-                { label: "Food (#2 need)",                before: "65%", after: "71%", delta: "+6 pts · now #2",    color: "green" },
+                { label: "Food (#2 need)",                before: "65%", after: "72%", delta: "+7 pts · now #2",    color: "green" },
                 { label: "Healthy Days (#3 need)",        after: "42%",  delta: "New #3 need", isNew: true, color: "green" },
-                { label: "Access to Care",                after: "26%",  delta: "New in profile", isNew: true, color: "" }
+                { label: "Access to Care",                after: "25%",  delta: "New in profile", isNew: true, color: "" }
             ]
         },
         {
