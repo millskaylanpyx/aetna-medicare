@@ -713,6 +713,53 @@
             .client-header h1 { font-size: 28px; }
             .timeline-bar  { padding: 24px 20px; }
         }
+
+        /* =============================================
+           EXPORT-TO-PDF FLOATING BUTTON
+        ============================================= */
+        #export-pdf-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 300;
+            background: var(--green);
+            color: var(--white);
+            border: none;
+            border-radius: 24px;
+            padding: 12px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        #export-pdf-btn:hover  { background: var(--cool-slate); }
+        #export-pdf-btn:active { transform: translateY(1px); }
+
+        /* =============================================
+           PRINT / PDF EXPORT
+           exportActiveTab() injects the @page rule (portrait Letter, margin:0
+           to suppress the browser's auto URL/date footer). Only the active tab
+           prints; paginating keeps text crisp & selectable.
+        ============================================= */
+        @media print {
+            .tab-nav, #export-pdf-btn { display: none !important; }
+            .tab-content:not(.active) { display: none !important; }
+            .tab-content.active { display: block !important; }
+            html, body { background: #fff !important; }
+            .wrap { max-width: 100% !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .section { padding: 18px 0 !important; }
+            .client-header, .int-header, .updates-hero { padding: 28px 32px !important; }
+            /* Clip the gantt tick labels that sit at the timeline edges. */
+            .timeline-bar { overflow: hidden !important; }
+            /* Keep blocks intact across page breaks. */
+            .kpi, .ms-row, .scr-card, .goal-card, .val-card, .change-card,
+            .sla-card, .rev-card, .flag, .client-q-box, .agenda-item,
+            .cost-table tr, .footer { break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -725,6 +772,8 @@
     <button class="tab-btn" onclick="switchTab('updates',this)">Net New Updates 🆕</button>
     <button class="tab-btn" onclick="switchTab('internal',this)">Internal View ⚙</button>
 </nav>
+
+<button id="export-pdf-btn" onclick="exportActiveTab()" title="Export the current view to PDF">⬇ Export PDF</button>
 
 
 <!-- =============================================
@@ -1408,6 +1457,39 @@ function switchTab(name, btn) {
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     btn.classList.add('active');
+}
+
+
+/* =============================================
+   PDF EXPORT
+   Prints only the active tab (see @media print). The active view's <h1>
+   drives the PDF filename. Every Aetna view is a standard enterprise view →
+   portrait Letter, multi-page (a single continuous page for this much content
+   rasterizes into a fuzzy, non-selectable sliver). margin:0 suppresses the
+   browser's auto URL/date footer.
+============================================= */
+function exportActiveTab() {
+    const active = document.querySelector('.tab-content.active');
+    const prevTitle = document.title;
+    let name = 'Aetna Medicare';
+    if (active) {
+        const h1 = active.querySelector('h1');
+        if (h1) name = h1.textContent.replace(/\s+/g, ' ').trim();
+    }
+    document.title = `${name} — Pyx Health`;
+
+    const pageStyle = document.createElement('style');
+    pageStyle.media = 'print';
+    pageStyle.textContent = `@page { size: 8.5in 11in; margin: 0; }`;
+    document.head.appendChild(pageStyle);
+
+    const restore = () => {
+        document.title = prevTitle;
+        pageStyle.remove();
+        window.removeEventListener('afterprint', restore);
+    };
+    window.addEventListener('afterprint', restore);
+    window.print();
 }
 
 
