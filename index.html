@@ -1457,6 +1457,9 @@ function switchTab(name, btn) {
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     btn.classList.add('active');
+    // Hide the Export PDF button on the Internal View (not for distribution).
+    const exportBtn = document.getElementById('export-pdf-btn');
+    if (exportBtn) exportBtn.style.display = (name === 'internal') ? 'none' : '';
 }
 
 
