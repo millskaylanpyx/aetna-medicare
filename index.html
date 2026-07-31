@@ -1198,11 +1198,7 @@ const D = {
     ],
 
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 1041, desc: "Members screened for social determinants of health like food, housing, transportation, economic stability.", bullets: [
-            "91% of members have ≥1 SDOH need",
-            "Avg 2.8 needs per member",
-            "Top needs: Income (88%), Food (72%), Healthy Days (42%), Access to Care (25%), Economic Stability (21%)"
-        ]},
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 1041, desc: "Members screened for social determinants of health like food, housing, transportation, economic stability.", bullets: [] },
         { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 1331, desc: "4-question anxiety and depression screen administered at opt-in.", bullets: [
             "Avg score: 2.2 — normal range · 68% screen in the normal range",
             "Distribution: 68% normal · 18% mild · 8% moderate · 6% severe",
@@ -1863,9 +1859,9 @@ function renderPhaseSections() {
                     <div class="scr-name">${s.name}</div>
                     <div class="scr-val ${s.actual === null ? 'pending' : ''}">${s.actual !== null ? s.actual.toLocaleString() : 'Pending'}</div>
                     ${s.desc ? `<div class="scr-blurb">${s.desc}</div>` : ''}
-                    <ul style="margin:8px 0 0 0; padding-left:16px; list-style:disc;">
+                    ${s.bullets && s.bullets.length ? `<ul style="margin:8px 0 0 0; padding-left:16px; list-style:disc;">
                         ${s.bullets.map(b => `<li style="font-size:11px; color:#8a9baa; line-height:1.6; margin-bottom:3px;">${b}</li>`).join('')}
-                    </ul>
+                    </ul>` : ''}
                 </div>
             `).join('')}</div>
             <div class="section-head" style="margin-top:40px;margin-bottom:20px;">
