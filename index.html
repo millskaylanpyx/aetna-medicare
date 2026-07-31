@@ -392,6 +392,90 @@
         .scr-desc  { font-size: 12px; color: #8a9baa; line-height: 1.5; }
 
         /* =============================================
+           ASSESSMENT INSIGHTS
+        ============================================= */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .insight-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(46,68,86,0.06);
+        }
+        .insight-card.prapare { border-top: 4px solid var(--green); }
+        .insight-card.phq4    { border-top: 4px solid var(--purple); }
+        .insight-card.ucla3   { border-top: 4px solid var(--teal); }
+        .insight-card.hos     { border-top: 4px solid var(--blue); }
+
+        .insight-hdr {
+            display: flex; align-items: center; gap: 10px;
+            padding-bottom: 14px; margin-bottom: 16px;
+            border-bottom: 1px solid var(--gray-1);
+        }
+        .insight-icon { font-size: 20px; }
+        .insight-name { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8a9baa; }
+
+        .insight-avg {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .insight-avg-num {
+            font-family: 'Roboto Slab', serif; font-size: 26px; font-weight: 700; color: var(--cool-slate); line-height: 1; white-space: nowrap;
+        }
+        .insight-avg-meta { flex: 1; }
+        .insight-avg-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8a9baa; margin-bottom: 5px; }
+        .insight-avg-track { height: 6px; background: var(--gray-2); border-radius: 3px; }
+        .insight-avg-fill  { height: 100%; border-radius: 3px; }
+        .fill-green  { background: var(--green); }
+        .fill-purple { background: var(--purple); }
+        .fill-teal   { background: var(--teal); }
+        .fill-blue   { background: var(--blue); }
+
+        .insight-callout {
+            font-size: 12px; font-weight: 600; color: var(--cool-slate);
+            background: var(--gray-2); border-radius: 8px;
+            padding: 10px 14px; margin-bottom: 16px; line-height: 1.5;
+        }
+        .insight-callout em { font-style: normal; font-weight: 700; }
+        .insight-callout.green  em { color: var(--green); }
+        .insight-callout.purple em { color: var(--purple); }
+        .insight-callout.teal   em { color: var(--teal); }
+        .insight-callout.blue   em { color: var(--blue); }
+
+        .insight-rows-lbl {
+            font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            color: #8a9baa; margin-bottom: 10px;
+        }
+        .insight-row { margin-bottom: 9px; }
+        .insight-row-top { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .insight-row-label { font-size: 12px; color: var(--cool-slate); }
+        .insight-row-pct   { font-size: 12px; font-weight: 700; color: var(--cool-slate); }
+        .insight-row-track { height: 5px; background: var(--gray-2); border-radius: 3px; }
+        .insight-row-fill  { height: 100%; border-radius: 3px; opacity: 0.75; }
+
+        /* Rubric (scoring scale) */
+        .rubric-row {
+            display: flex; align-items: center; gap: 9px;
+            padding: 8px 10px; border-radius: 6px; margin-bottom: 5px;
+            background: var(--gray-2);
+        }
+        .rubric-row.is-avg {
+            background: rgba(85,66,167,0.07);
+            border-left: 3px solid var(--purple);
+        }
+        .rubric-dot   { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+        .rubric-range { font-family: 'Roboto Slab', serif; font-size: 11px; color: #8a9baa; min-width: 42px; }
+        .rubric-level { font-size: 13px; font-weight: 700; color: var(--cool-slate); flex: 1; }
+        .rubric-pct   { font-size: 12px; font-weight: 600; color: #8a9baa; }
+        .rubric-avg-tag {
+            font-size: 10px; font-weight: 700; color: var(--purple);
+            background: rgba(85,66,167,0.14); padding: 2px 8px; border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        /* =============================================
            PROGRESS BARS
         ============================================= */
         .prog-row    { margin-bottom: 22px; }
@@ -1633,6 +1717,107 @@ function renderMilestones() {
 }
 
 
+function renderInsights() {
+    const insights = [
+        {
+            cls: "prapare", icon: "🏠", name: "PRAPARE — SDOH Screening",
+            avgNum: "2.8", avgMax: "/ 12", avgLabel: "Avg # of Needs", avgFillPct: (2.8/12*100).toFixed(1), fillCls: "fill-green",
+            calloutCls: "green",
+            callout: "<em>91%</em> of members who completed PRAPARE identified at least one social need",
+            rowsLabel: "Top SDOH needs identified (% of screened members)",
+            rows: [
+                { label: "Income",               pct: 88, fillCls: "fill-green" },
+                { label: "Food",                 pct: 72, fillCls: "fill-green" },
+                { label: "Healthy Days",         pct: 42, fillCls: "fill-green" },
+                { label: "Access to Care",       pct: 25, fillCls: "fill-green" },
+                { label: "Economic Stability",   pct: 21, fillCls: "fill-green" },
+                { label: "Medication Adherence", pct: 20, fillCls: "fill-green" }
+            ]
+        },
+        {
+            cls: "phq4", icon: "🧠", name: "PHQ-4 — Mental Health",
+            avgNum: "2.2", avgMax: "/ 12", avgFillPct: (2.2/12*100).toFixed(1), fillCls: "fill-purple",
+            calloutCls: "purple",
+            callout: "<em>32.5%</em> of members scored ≥3 — mild anxiety or depression or higher",
+            rubricLabel: "PHQ-4 Scoring Scale (0 – 12)",
+            rubric: [
+                { range: "0 – 2",  level: "Normal",   dot: "#49a601", pct: "67.5%", isAvg: true  },
+                { range: "3 – 5",  level: "Mild",     dot: "#f0a500", pct: "18.0%", isAvg: false },
+                { range: "6 – 8",  level: "Moderate", dot: "#d6661a", pct: "7.9%",  isAvg: false },
+                { range: "9 – 12", level: "Severe",   dot: "#c0392b", pct: "6.5%",  isAvg: false }
+            ]
+        },
+        {
+            cls: "ucla3", icon: "🤝", name: "UCLA-3 — Loneliness",
+            avgNum: "4.2", avgMax: "/ 9", avgFillPct: (4.2/9*100).toFixed(1), fillCls: "fill-teal",
+            calloutCls: "teal",
+            callout: "<em>21.8%</em> of members scored ≥6 — moderate to high loneliness",
+            rubricLabel: "UCLA-3 Scoring Scale (3 – 9)",
+            rubric: [
+                { range: "3 – 5", level: "Not Lonely", dot: "#49a601", pct: "78.2%", isAvg: true  },
+                { range: "6 – 9", level: "Lonely",     dot: "#c0392b", pct: "21.8%", isAvg: false }
+            ]
+        },
+        {
+            cls: "hos", icon: "📊", name: "Medicare Well-Being",
+            avgNum: "2.1", avgMax: "/ 10", avgLabel: "Avg # of Needs", avgFillPct: (2.1/10*100).toFixed(1), fillCls: "fill-blue",
+            calloutCls: "blue",
+            callout: "<em>959 assessments</em> completed — avg 2.1 of 10 needs identified; 62% of members flag two or fewer concerns",
+            rubricLabel: "Needs Identified (0 – 10)",
+            rubric: [
+                { range: "0 – 2",  level: "Low need",  dot: "#49a601", pct: "62.5%", isAvg: true  },
+                { range: "3 – 5",  level: "Moderate",  dot: "#f0a500", pct: "24.4%", isAvg: false },
+                { range: "6 – 10", level: "Elevated",  dot: "#c0392b", pct: "13.1%", isAvg: false }
+            ]
+        }
+    ];
+
+    return insights.map(c => `
+        <div class="insight-card ${c.cls}">
+            <div class="insight-hdr">
+                <div class="insight-icon">${c.icon}</div>
+                <div class="insight-name">${c.name}</div>
+            </div>
+            <div class="insight-avg">
+                <div class="insight-avg-num">${c.avgNum}<span style="font-size:14px;color:#8a9baa;font-weight:400;"> ${c.avgMax}</span></div>
+                <div class="insight-avg-meta">
+                    <div class="insight-avg-label">${c.avgLabel || 'Avg Score'}</div>
+                    <div class="insight-avg-track">
+                        <div class="insight-avg-fill ${c.fillCls}" style="width:${c.avgFillPct}%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-callout ${c.calloutCls}">${c.callout}</div>
+            ${c.rubric ? `
+            <div class="insight-rows-lbl">${c.rubricLabel}</div>
+            ${c.rubric.map(r => `
+                <div class="rubric-row${r.isAvg ? ' is-avg' : ''}">
+                    <div class="rubric-dot" style="background:${r.dot};"></div>
+                    <div class="rubric-range">${r.range}</div>
+                    <div class="rubric-level">${r.level}</div>
+                    <div class="rubric-pct">${r.pct}</div>
+                    ${r.isAvg ? `<span class="rubric-avg-tag">← Avg ${c.avgNum}</span>` : ''}
+                </div>
+            `).join('')}
+            ` : c.rows ? `
+            <div class="insight-rows-lbl">${c.rowsLabel}</div>
+            ${c.rows.map(r => `
+                <div class="insight-row">
+                    <div class="insight-row-top">
+                        <div class="insight-row-label">${r.label}</div>
+                        <div class="insight-row-pct">${r.pct}%</div>
+                    </div>
+                    <div class="insight-row-track">
+                        <div class="insight-row-fill ${r.fillCls}" style="width:${r.pct}%"></div>
+                    </div>
+                </div>
+            `).join('')}
+            ` : ''}
+        </div>
+    `).join('');
+}
+
+
 function renderPhaseSections() {
     if (!D.journey || !D.journey.length) {
         document.getElementById('phase-sections').innerHTML =
@@ -1681,6 +1866,12 @@ function renderPhaseSections() {
                     </ul>
                 </div>
             `).join('')}</div>
+            <div class="section-head" style="margin-top:40px;margin-bottom:20px;">
+                <span class="section-eyebrow eyebrow-3">Assessment Insights</span>
+                <div class="section-title" style="font-size:18px;">What the Screenings Are Telling Us</div>
+                <div class="section-sub">Key findings from PRAPARE, PHQ-4, UCLA-3, and Medicare Well-Being — the specific barriers standing between these members and care.</div>
+            </div>
+            <div class="insight-grid">${renderInsights()}</div>
         ` : '';
         const statsHTML = phase.stats ? `
             <div class="kpi-grid" style="margin-bottom:${milestonesHTML || screeningsHTML ? '40px' : '0'};">
