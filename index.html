@@ -762,6 +762,9 @@
         .change-card.green  { border-left-color: var(--green); }
         .change-card.blue   { border-left-color: var(--blue); }
         .change-card.purple { border-left-color: var(--purple); }
+        .change-card.orange { border-left-color: var(--orange); }
+        .change-card.orange .chg-delta:not(.new-badge) { background: rgba(214,102,26,0.12); color: var(--orange); }
+        .change-card.blue   .chg-delta:not(.new-badge) { background: rgba(0,118,191,0.12);  color: var(--blue); }
         .chg-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #8a9baa; margin-bottom: 14px; }
         .chg-comparison { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
         .chg-before { font-family: 'Roboto Slab', serif; font-size: 18px; font-weight: 400; color: #b0bec8; text-decoration: line-through; }
@@ -1071,9 +1074,9 @@
 ============================================= */
 const D = {
     program: {
-        reportMonth:        "July 2026",
-        dataAsOf:           "July 27, 2026",
-        programMonth:       "3 of 8",
+        reportMonth:        "August 2026",
+        dataAsOf:           "September 1, 2026",
+        programMonth:       "4 of 8",
         sowEffectiveDate:   "March 31, 2026",
         sowTerm:            "March 31, 2026 – March 31, 2028 (Master Agreement · auto-renews)",
         workOrderTerm:      "March 31, 2026 – May 3, 2027 (Work Order 1 · Program deliveries end Dec 31, 2026)",
@@ -1091,48 +1094,65 @@ const D = {
         markets:            ["44 States"]
     },
 
+    // Member counts by state, derived from member ZIP in the Weekly Activity Report (8/31/2026).
+    // Sums to 1,115 enrolled across 35 distinct states/territories (34 states + DC).
+    // Cross-checked against plan GroupName assignment — 13 members have a mailing ZIP in a
+    // different state than their plan-state group, which is expected and does not change the count.
     mapData: {
         // West
         WA: 14, OR: 3,  CA: 33, ID: 1,  NV: 13, MT: 0,  WY: 0,  UT: 0,  AZ: 4,
         // Mountain / Plains
-        CO: 14, NM: 0,  NE: 0,  KS: 2,  OK: 2,  TX: 21, ND: 0,  SD: 0,
+        CO: 14, NM: 0,  NE: 0,  KS: 1,  OK: 2,  TX: 21, ND: 0,  SD: 0,
         // Midwest
-        MN: 0,  IA: 0,  WI: 15, MI: 41, IL: 47, IN: 12, OH: 45, MO: 3,
+        MN: 0,  IA: 0,  WI: 15, MI: 42, IL: 46, IN: 12, OH: 46, MO: 3,
         // South
-        AR: 0,  LA: 27, MS: 48, TN: 5,  AL: 24, GA: 46, FL: 58,
+        AR: 0,  LA: 28, MS: 48, TN: 5,  AL: 24, GA: 47, FL: 59,
         // Appalachia & Mid-Atlantic
-        KY: 12, WV: 0,  VA: 19, NC: 90, SC: 36, MD: 13, DE: 3,
+        KY: 12, WV: 0,  VA: 21, NC: 91, SC: 38, MD: 12, DE: 3,  DC: 1,
         // Northeast
-        NY: 160, PA: 141, NJ: 57, CT: 53, RI: 5,  MA: 38, VT: 0,  NH: 0,  ME: 0,
+        NY: 160, PA: 142, NJ: 58, CT: 53, RI: 5,  MA: 38, VT: 0,  NH: 0,  ME: 0,
         // Non-contiguous
         AK: 0,  HI: 0
     },
 
     metrics: {
-        membersEnrolled:              1106,
-        enrollmentRate:               0.210,    // 1,106 / 5,255 eligible
-        pctToEnrollmentTarget:        1.052,    // 1,106 / 1,051 target — target exceeded
-        statesWithEnrolledMembers:    35,
-        conversionRate:               0.17,     // per Pyx Activate dashboard
-        onboardingFromSuccessfulOutreach: 0.326,
-        membersOutreached:            5660,
-        onboardsLast30Days:           185,
-        appEnrollmentPct:             0.26,
-        careTeamEngagement:           1087,
-        totalEngagementCalls:         3600,
-        avgCallsPerMember:            3.3,
-        avgActivityPerPerson:         5,
-        maxActivityPerPerson:         354,
-        positivePsychInterventions:   30,
+        // Sourced from Weekly Activity Report (8/31/2026), Monthly Screening Report (9/1/2026),
+        // and Appointment Report (9/1/2026) unless noted.
+        membersEnrolled:              1115,     // distinct UserId in Weekly Activity Report
+        enrollmentRate:               0.212,    // 1,115 / 5,255 contractual eligible
+        pctToEnrollmentTarget:        1.061,    // 1,115 / 1,051 target — target exceeded
+        statesWithEnrolledMembers:    35,       // 34 states + DC · ZIP-derived, matches plan-state assignment
+        newEnrollmentsAugust:         12,       // first encounters dated in August 2026 — enrollment has plateaued
+        conversionRate:               0.17,     // STALE (July) — no outreach file this cycle
+        onboardingFromSuccessfulOutreach: 0.326,// STALE (July) — no outreach file this cycle
+        membersOutreached:            5660,     // STALE (July) — no outreach file this cycle
+        onboardsLast30Days:           12,       // Aug 2026 first encounters
+        appEnrollmentPct:             0.26,     // STALE (July) — app registration not in these files
+        careTeamEngagement:           1098,     // members with >=1 engagement call (Tableau, client-supplied)
+        totalEngagementCalls:         4907,     // Tableau, client-supplied
+        avgCallsPerMember:            4.5,      // 4,907 / 1,098
+        avgActivityPerPerson:         7.5,      // 8,314 platform activities / 1,115 members
+        maxActivityPerPerson:         357,      // single-member outlier — 338 of these are coloring-book opens
+        membersWithNoActivity:        23,       // enrolled but zero recorded platform activity
+        positivePsychInterventions:   30,       // STALE (July)
         avgChargePerMember:           70,
-        careBarrierAssessments:       null,
-        careBarrierMembers:           null,
-        hedisGapsClosed:              null,
-        awvAttestations:              null,
-        sdohNeedPct:                  0.91,
-        avgSdohNeedsPerMember:        2.8,
-        phq4Avg:                      2.2,
-        ucla3Avg:                     4.2,
+        careBarrierAssessments:       358,      // Digital Navigator problem cards raised
+        careBarrierMembers:           152,      // distinct members with >=1 problem card
+        resourceReferrals:            190,      // resource activities delivered
+        resourceReferralMembers:      91,
+        hedisGapsClosed:              null,     // attestation != confirmed closure — awaiting Aetna claims confirmation
+        awvAttestations:              82,       // Annual Physical / Wellness Exam · 49 attended + 36 scheduled
+        membersWithAppointment:       533,      // 47.8% of enrolled have >=1 recorded appointment
+        appointmentsTotal:            974,
+        appointmentsAttended:         694,
+        sdohNeedPct:                  0.908,    // 959 "SDOH Need Identified" of 1,056 PRAPARE screens
+        avgSdohNeedsPerMember:        2.8,      // STALE (July) — awaiting Tableau SDOH domain view
+        phq4Avg:                      2.1,      // 2.09 exact across 1,558 PHQ-4 instances
+        ucla3Avg:                     4.1,      // 4.13 exact across 1,566 UCLA-3 instances
+        medicareWellBeingAvg:         2.4,      // 2.39 exact across 1,093 assessments
+        lonelyPct:                    0.209,    // UCLA-3 score >=6 · 328 of 1,566
+        psychDistressModSeverePct:    0.135,    // PHQ-4 score >=6 · 210 of 1,558
+        psychDistressAnyPct:          0.311,    // PHQ-4 score >=3 · 484 of 1,558
         sdohNeeds: [
             { label: "Income",               pct: 0.88 },
             { label: "Food",                 pct: 0.72 },
@@ -1150,19 +1170,19 @@ const D = {
     },
 
     kpis: [
-        { label: "States Opted In",          val: 35,    ctx: "out of 44 from eligibility file", color: "kpi-green", good: true },
+        { label: "States Opted In",          val: 35,    ctx: "out of 44 from eligibility file · 34 states + DC", color: "kpi-green", good: true },
         { label: "Program Scope",            val: 5255,    ctx: "Total CVS/Aetna Medicare eligible population" },
         { label: "Activation Target",        val: "1,051", ctx: "20% engagement goal", color: "kpi-green", good: true },
-        { label: "Members Enrolled",         val: 1106,    ctx: "105.2% to target — activation goal exceeded · 35 states have enrolled members", progress: 100, good: true },
-        { label: "Enrollment Rate",          val: "21.0%", ctx: "Target: 20.0% · target exceeded (+1.0 pt)", good: true },
-        { label: "A1c Milestones (Box 7)",   val: 375,     ctx: "A1c measurement attestations · 33.9% of 1,106 engaged · targets GSD", color: "blue", good: true },
-        { label: "Statin Milestones (Box 8)", val: 55,     ctx: "Mail-order pharmacy enrollments · 5.0% of 1,106 engaged · targets PDC-Statin", color: "blue", good: true },
-        { label: "BP Milestones (Box 9)",    val: 74,      ctx: "BP reading attestations · 6.7% of 1,106 engaged · targets CBP", color: "blue", good: true }
+        { label: "Members Enrolled",         val: 1115,    ctx: "106.1% to target — activation goal exceeded · 35 states have enrolled members", progress: 100, good: true },
+        { label: "Enrollment Rate",          val: "21.2%", ctx: "Target: 20.0% · target exceeded (+1.2 pts)", good: true },
+        { label: "A1c Milestones (Box 7)",   val: 522,     color: "blue", good: true },
+        { label: "Statin Milestones (Box 8)", val: 79,     color: "blue", good: true },
+        { label: "BP Milestones (Box 9)",    val: 124,     color: "blue", good: true }
     ],
 
     timeline: {
         totalMonths: 8,
-        currentMonth: 3,
+        currentMonth: 4,
         ticks: [
             ["May",  0],
             ["Jun",  12.5],
@@ -1175,7 +1195,7 @@ const D = {
         ],
         rows: [
             { label: "Launch & Operational Readiness", color: "bar-gray",  left: 0,    width: 10,   text: "Complete ✓" },
-            { label: "Reach & Response",               color: "bar-green", left: 0,    width: 37.5, text: "Reach & Response (May–Jul)" },
+            { label: "Reach & Response",               color: "bar-green", left: 0,    width: 50,   text: "Reach & Response (May–Aug)" },
             { label: "Scheduled Boxes 1–6",     color: "bar-teal",  left: 0,    width: 100,  text: "6 Scheduled Food Boxes" },
             { label: "A1C Milestone (Box 7)",   color: "bar-blue",  left: 37.5, width: 62.5, text: "A1C Gap Closure" },
             { label: "BP Milestone (Box 8)",    color: "bar-blue",  left: 37.5, width: 62.5, text: "BP Gap Closure" },
@@ -1186,22 +1206,45 @@ const D = {
     },
 
     milestones: [
-        { num: 1, label: "Welcome Box",        desc: "Introductory food box — first touchpoint in the Pyx member journey", trigger: "Member enrollment confirmation", target: 1106, actual: 1106, status: "done" },
-        { num: 2, label: "Month 2 Box",        desc: "Second scheduled food box continuing the member engagement journey", trigger: "~30 days post-enrollment", target: 1106, actual: 1106, status: "done" },
-        { num: 3, label: "Month 3 Box",        desc: "Third scheduled box — midpoint of the first half of the journey", trigger: "~60 days post-enrollment", target: 1106, actual: 1106, status: "done" },
-        { num: 4, label: "Month 4 Box",        desc: "Fourth scheduled food box building sustained engagement", trigger: "~90 days post-enrollment", target: 1106, actual: null, status: "pending" },
-        { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close", trigger: "~120 days post-enrollment", target: 1106, actual: null, status: "pending" },
-        { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1106, actual: null, status: "pending" },
-        { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when member attests to completing an A1c measurement — targets GSD (Glycemic Status) HEDIS measure", trigger: "Member self-attest: A1c measurement completed", target: 1106, actual: 375, status: "active" },
-        { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when member attests to taking steps to support statin adherence and enrolling in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure", trigger: "Member self-attest: statin adherence steps taken + mail-order pharmacy enrollment", target: 1106, actual: 55, status: "active" },
-        { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when member attests to a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure", trigger: "Member self-attest: BP reading at outpatient visit aligning with CBP measure criteria", target: 1106, actual: 74, status: "active" }
+        { num: 1, label: "Welcome Box",        desc: "Introductory food box — first touchpoint in the Pyx member journey", trigger: "Member enrollment confirmation", target: 1115, actual: 1115, status: "done" },
+        { num: 2, label: "Month 2 Box",        desc: "Second scheduled food box continuing the member engagement journey", trigger: "~30 days post-enrollment", target: 1115, actual: 1115, status: "done" },
+        { num: 3, label: "Month 3 Box",        desc: "Third scheduled box — midpoint of the first half of the journey", trigger: "~60 days post-enrollment", target: 1115, actual: 1115, status: "done" },
+        { num: 4, label: "Month 4 Box",        desc: "Fourth scheduled food box building sustained engagement. 955 members — the May and June enrollment cohorts — have passed the ~90-day mark and reached Box 4.", trigger: "~90 days post-enrollment", target: 1115, actual: 955, status: "active" },
+        { num: 5, label: "Month 5 Box",        desc: "Fifth scheduled box — final stretch before program close. The 691-member May cohort passes the ~120-day mark in September.", trigger: "~120 days post-enrollment", target: 1115, actual: null, status: "pending" },
+        { num: 6, label: "Month 6 Box",        desc: "Final scheduled box — completes the 6-box journey (must ship by Dec 31)", trigger: "~150 days post-enrollment · must complete by Dec 31, 2026", target: 1115, actual: null, status: "pending" },
+        { num: 7, label: "A1c Measurement Support",  desc: "Milestone box earned when a member completes an A1c measurement — targets GSD (Glycemic Status) HEDIS measure. 522 members have an A1c appointment on record; 435 have already attended one.", trigger: "Member-reported A1c appointment · attended or scheduled", target: 1115, actual: 522, status: "active" },
+        { num: 8, label: "Statin Adherence",          desc: "Milestone box earned when a member takes steps to support statin adherence and enrolls in CVS mail-order pharmacy — targets PDC-Statin HEDIS measure. 79 members have a mail-order pharmacy or statin therapy review appointment; 67 have attended.", trigger: "Member-reported mail-order pharmacy enrollment or statin therapy review · attended or scheduled", target: 1115, actual: 79, status: "active" },
+        { num: 9, label: "Blood Pressure Adherence",  desc: "Milestone box earned when a member has a blood pressure reading at an outpatient visit — targets CBP (Controlling Blood Pressure) HEDIS measure. 124 members have a BP provider visit on record; 98 have attended.", trigger: "Member-reported BP check at a provider visit · attended or scheduled", target: 1115, actual: 124, status: "active" }
     ],
 
+    // Appointment activity from the Appointment Report (9/1/2026). 533 of 1,115 enrolled members
+    // (47.8%) have at least one recorded appointment; 974 appointments total, 694 attended.
+    appointments: {
+        membersWithAny:   533,
+        totalAppts:       974,
+        attendedAppts:    694,
+        scheduledAppts:   276,
+        reasons: [
+            { label: "Diabetes Maintenance (A1c)",      members: 522, attended: 435, scheduled: 120, box: "Box 7" },
+            { label: "Blood Pressure Check — Provider", members: 124, attended: 98,  scheduled: 27,  box: "Box 9" },
+            { label: "Annual Physical / Wellness Exam", members: 82,  attended: 49,  scheduled: 36,  box: "AWV"   },
+            { label: "Mail-Order Pharmacy / Statin",    members: 79,  attended: 67,  scheduled: 11,  box: "Box 8" },
+            { label: "Blood Glucose Check",             members: 35,  attended: 26,  scheduled: 9,   box: "—"     }
+        ],
+        topProviderTypes: [
+            { label: "Family Doctor",                 appts: 343 },
+            { label: "PCP — Physician Assistant",     appts: 206 },
+            { label: "Diabetes & Hormone Specialist", appts: 158 },
+            { label: "PCP — Nurse Practitioner",      appts: 68  },
+            { label: "Heart Doctor",                  appts: 25  }
+        ]
+    },
+
     screenings: [
-        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 1041, desc: "Members screened for social determinants of health like food, housing, transportation, economic stability.", bullets: [] },
-        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 1331, desc: "4-question anxiety and depression screen administered at opt-in.", bullets: [] },
-        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 1338, desc: "3-item loneliness assessment: a key driver of member experience and health perception scores.", bullets: [] },
-        { icon: "📊", name: "MedicareWellBeing",        actual: 959, desc: "Medicare-specific wellbeing assessment capturing functional health and self-rated health status — relevant to Medicare Advantage quality metrics.", bullets: [] }
+        { icon: "🏠", name: "PRAPARE (SDOH)",         actual: 1056, desc: "Members screened for social determinants of health like food, housing, transportation, economic stability. 1,052 distinct members screened — near-universal coverage of the enrolled cohort.", bullets: [] },
+        { icon: "🧠", name: "PHQ-4 (Mental Health)",   actual: 1556, desc: "4-question anxiety and depression screen administered at opt-in and on re-screen. 1,031 distinct members; 31.1% score in the mild-or-higher range.", bullets: [] },
+        { icon: "🤝", name: "UCLA-3 (Loneliness)",     actual: 1563, desc: "3-item loneliness assessment: a key driver of member experience and health perception scores. 1,037 distinct members; 20.9% screen as lonely.", bullets: [] },
+        { icon: "📊", name: "MedicareWellBeing",       actual: 1094, desc: "Medicare-specific wellbeing assessment capturing functional health and self-rated health status — relevant to Medicare Advantage quality metrics. 920 distinct members screened.", bullets: [] }
     ],
 
     sla: [
@@ -1217,7 +1260,7 @@ const D = {
             target: 70,
             actual: null,
             status: "active",
-            desc: "$70/member/month — billed for each Engaged Member receiving one or more Engagement Services. Target: 1,051 engaged members."
+            desc: "$70/member/month — billed for each Engaged Member receiving one or more Engagement Services. Target: 1,051 engaged members · 1,115 enrolled and 1,098 engaged as of September 1, 2026."
         },
         {
             name: "Monthly Reporting",
@@ -1277,21 +1320,21 @@ const D = {
             clientGoal: "A1C Gap Closure",
             statement: "Close open HbA1c Control HEDIS gaps for enrolled diabetic members before December 31, 2026",
             action: "Engagement coaching, care barrier navigation, and AWV scheduling targeting A1C-related care gaps — supported by Box 7 milestone reward",
-            metric: "375 A1c measurement attestations confirmed (Box 7) · 33.9% of 1,106 engaged",
+            metric: "522 members with an A1c appointment (Box 7) · 435 attended · 46.8% of 1,115 enrolled",
             metricPending: false
         },
         {
             clientGoal: "Statin Adherence + Mail-Order Pharmacy",
             statement: "Improve PDC-Statin medication adherence scores by coaching members on statin adherence and enrolling them in CVS mail-order pharmacy",
             action: "Pharmacy navigation support, statin adherence coaching, and CVS mail-order enrollment assistance — supported by Box 8 milestone reward",
-            metric: "55 mail-order pharmacy enrollments confirmed (Box 8) · 5.0% of 1,106 engaged",
+            metric: "79 members with mail-order pharmacy / statin review (Box 8) · 67 attended · 7.1% of 1,115 enrolled",
             metricPending: false
         },
         {
             clientGoal: "BP / CBP Improvement",
             statement: "Improve Blood Pressure Control (CBP) HEDIS measure outcomes by driving outpatient BP readings for enrolled hypertensive members",
             action: "Targeted outreach for BP monitoring and outpatient visit completion — member attests to BP reading at provider visit, earning Box 9",
-            metric: "74 BP reading attestations confirmed (Box 9) · 6.7% of 1,106 engaged",
+            metric: "124 members with a BP provider visit (Box 9) · 98 attended · 11.1% of 1,115 enrolled",
             metricPending: false
         },
         {
@@ -1304,8 +1347,8 @@ const D = {
         {
             clientGoal: "Complete Full Journey by Dec 31",
             statement: "Ensure all enrolled members complete the full 6-box journey before program close on December 31, 2026",
-            action: "With 1,106 members (105% of target — activation goal exceeded) enrolled by late July, the full cohort is positioned to complete all 6 scheduled boxes on time. Members enrolling now get a compressed journey — monitor late-enrollee box pacing.",
-            metric: "Box 6 delivery rate by December 31, 2026",
+            action: "With 1,115 members (106% of target) enrolled and the cohort effectively closed — only 12 new members in August — the roster is now stable and fully known. 955 members from the May and June cohorts have passed the ~90-day mark and are Box 4 eligible; the 691-member May cohort reaches Box 5 in September. Shipment counts were not in the September 1 pull.",
+            metric: "Box 6 delivery rate by December 31, 2026 · shipment data pending",
             metricPending: true
         }
     ],
@@ -1332,37 +1375,51 @@ const D = {
         {
             type: "win",
             label: "Win",
-            title: "1,106 Members Enrolled — Activation Target Exceeded",
-            desc: "1,106 members enrolled as of July 27 — 105.2% of the 1,051 activation target, up from 736 (70%) at the June report. The 20% activation goal has now been surpassed. Active in 35 of 44 eligible states. 185 new enrollments in the last 30 days.",
-            action: "Activation target met — shift the primary focus to the box journey and milestone attestations. Members enrolling now will have a compressed box journey before the December 31 delivery deadline; monitor late-enrollee pacing."
+            title: "HEDIS Milestone Activity Accelerated — 522 Members with an A1c Appointment",
+            desc: "The strongest movement this cycle came from milestone activity, not enrollment. 522 members now have an A1c appointment on record (435 already attended), up from 375 in July. BP provider visits reached 124 members (98 attended, up from 74) and mail-order pharmacy / statin review reached 79 (67 attended, up from 55). 533 of 1,115 enrolled members — 47.8% — have at least one recorded appointment, 974 appointments in total with 694 attended.",
+            action: "Lead the client session with milestone velocity. This is the first cycle where GSD, CBP, and PDC-Statin activity can be shown with attended-visit evidence rather than projections — the strongest available proof the gap-closure cascade is working."
         },
         {
             type: "win",
             label: "Win",
-            title: "Engagement Scaled Sharply — 1,087 Members, 3,600 Calls",
-            desc: "1,087 distinct members have engaged with the care team (≥1 call), up from 608 in June. 3,600 total engagement calls completed. Screening volume climbed across the board: PRAPARE 1,041, PHQ-4 1,331, UCLA-3 1,338, MedicareWellBeing 959.",
-            action: "Use the 3,600-call volume across 1,087 engaged members as proof of active, high-touch care management in client conversations."
+            title: "Care Team Engagement Deepened — 1,098 Members, 4,907 Calls",
+            desc: "1,098 distinct members have engaged with the care team, up from 1,087 in July, across 4,907 total engagement calls — up from 3,600, an increase of 1,307 calls. Average calls per engaged member rose from 3.3 to 4.5. Screening volume climbed across all four instruments: PRAPARE 1,056, PHQ-4 1,556, UCLA-3 1,563, MedicareWellBeing 1,094. Members average 7.5 recorded platform activities each, up from 5.",
+            action: "With enrollment flat, engagement depth is the growth story. Use the 4,907-call volume and the shift from 3.3 to 4.5 calls per member as proof the team moved from acquisition to sustained care management."
         },
         {
             type: "win",
             label: "Win",
             title: "Work Order 1 Executed — National Program Fully Live",
-            desc: "Work Order 1 signed April 10, 2026 by Anthony Marini (CVS AVP Enterprise Procurement) and Cindy Jordan (Pyx Health CEO). 44 states active. Program anchored on GSD (A1c), PDC-Statin (mail-order pharmacy), and CBP (Blood Pressure) HEDIS gap closure. Ref: CNRCT-26018.",
+            desc: "Work Order 1 signed April 10, 2026 by Anthony Marini (CVS AVP Enterprise Procurement) and Cindy Jordan (Pyx Health CEO). 44 states active; members now enrolled in 35 of them (34 states plus the District of Columbia). Program anchored on GSD (A1c), PDC-Statin (mail-order pharmacy), and CBP (Blood Pressure) HEDIS gap closure. Ref: CNRCT-26018.",
             action: "Use as credibility signal in executive communications."
         },
         {
             type: "watch",
             label: "Watch",
-            title: "Eligibility File Refreshed to 3,882 — Denominator to Reconcile",
-            desc: "The most recent eligibility file (received 7/1/2026) reports 3,882 members — down from the 5,255 the program scoped against. Against 3,882, the 1,106 enrolled would represent a 28.5% activation rate. The dashboard holds the contractual 5,255 eligible / 1,051 target (20%) for consistency and shows 21.0% against that base.",
-            action: "Confirm with Aetna/CVS which population is authoritative for reporting. If the 3,882 file supersedes 5,255, revisit the activation target and enrollment-rate denominator."
+            title: "Enrollment Has Plateaued — 12 New Members in August",
+            desc: "Only 12 members had a first encounter in August, down from 148 in July, 264 in June, and 691 in May. Net enrollment moved just +9 (1,106 to 1,115) because three members also left the roster. The 1,051 activation target is exceeded, so this does not threaten the contractual commitment — but the enrolled cohort should now be treated as closed, and no further activation growth should be assumed in the ROI model.",
+            action: "Confirm with Mel whether outreach is intentionally wound down now that the target is met, or whether campaign capacity dropped. Either way, reforecast the remaining program on a fixed 1,115-member cohort and redirect capacity to milestone attainment."
         },
         {
             type: "watch",
             label: "Watch",
-            title: "Conversion Rate Down as Outreach Pool Widened",
-            desc: "Conversion rate is 17%, down from 25.1% in June, as unique members outreached grew from 2,406 to 5,660. Onboarding from successful outreach is 32.6%. The decline reflects a much larger, harder-to-reach outreach pool rather than a drop in enrollment volume — net enrollments still rose +370.",
-            action: "Confirm SMS/email campaign performance and Mytonomy direct-link status with Mel; verify remaining eligible-member phone data quality (3% missing, 1% bad numbers)."
+            title: "Medicare Well-Being Needs Rose to 42.4% Moderate-or-Elevated",
+            desc: "463 of 1,093 Medicare Well-Being assessments (42.4%) identified three or more concerns, up from 37.5% at the July report, and the average number of needs rose from 2.1 to 2.4. PHQ-4 shows 13.5% of screens in the moderate-to-severe range and UCLA-3 shows 20.9% screening as lonely. Headline averages improved slightly (PHQ-4 2.2 to 2.1, UCLA-3 4.2 to 4.1) because the screened pool broadened, which masks the rising acuity in the tail.",
+            action: "Frame this as case-finding working rather than deterioration, but flag the acuity tail to Aetna — the moderate-and-elevated group is where escalation protocol volume and clinical risk will concentrate through Q4."
+        },
+        {
+            type: "watch",
+            label: "Watch",
+            title: "Eligibility File Denominator Still Unreconciled",
+            desc: "The 7/1/2026 eligibility file reported 3,882 members against the 5,255 the program scoped to. No refreshed eligibility file was included in the September 1 pull, so this remains open a second cycle. Against 3,882 the 1,115 enrolled would represent a 28.7% activation rate; the dashboard holds the contractual 5,255 / 1,051 (20%) basis and shows 21.2%.",
+            action: "Escalate for a written answer on which population is authoritative for reporting. This affects the headline activation rate in every client-facing artifact and should not carry into a third reporting cycle unresolved."
+        },
+        {
+            type: "watch",
+            label: "Watch",
+            title: "Outreach and Conversion Metrics Not Refreshed This Cycle",
+            desc: "Members outreached (5,660), conversion rate (17%), onboarding from successful outreach (32.6%), and app registration (26%) all still show July values — the September 1 pull contained the activity, screening, and appointment reports but no outreach or Activate export. These four figures are marked stale in the data layer.",
+            action: "Request the outreach and Activate exports so conversion can be recomputed against the August enrollment plateau. Without them there is no way to tell whether the slowdown is reduced outreach volume or falling conversion."
         }
     ],
 
@@ -1372,24 +1429,24 @@ const D = {
             timing:   "Pre-launch · Completed April 2026",
             state:    "done",
             wondering: "Can Pyx Health operationalize a national HEDIS pilot across 44 states under one unified program — and generate meaningful enrollment in the first months?",
-            answer:   "Yes. Work Order 1 executed April 10, 2026. Program launched May 1, 2026 — 1,106 members enrolled across 35 states through Month 3, exceeding the activation target.",
+            answer:   "Yes. Work Order 1 executed April 10, 2026. Program launched May 1, 2026 — 1,115 members enrolled across 35 states through Month 4, exceeding the activation target.",
             stats: [
                 { label: "Go-Live Date",           val: "May 1, 2026",    ctx: "On schedule",                                color: "kpi-green" },
-                { label: "Members Enrolled",       val: 1106,             ctx: "105.2% to target",                           color: "kpi-green" },
-                { label: "States Active",          val: 35,               ctx: "35 of 44 eligible states have enrollees",    color: "" }
+                { label: "Members Enrolled",       val: 1115,             ctx: "106.1% to target",                           color: "kpi-green" },
+                { label: "States Active",          val: 35,               ctx: "34 states + DC of 44 eligible",              color: "" }
             ]
         },
         {
             name:     "Reach & Response",
-            timing:   "Active · May – July 2026",
-            state:    "here",
+            timing:   "Complete · May – August 2026",
+            state:    "done",
             wondering: "Will enough members enroll to reach the 1,051 activation target — and can we sustain enrollment velocity to hit the 20% goal?",
-            answer:   "1,106 members enrolled through July 27 — 105.2% of the 1,051 target, surpassing the 20% activation goal. Outreach has reached 5,660 unique members with a 17% conversion rate (32.6% onboarding from successful outreach). 185 new enrollments occurred in the last 30 days.",
+            answer:   "Yes, and this phase is now effectively closed. 1,115 members enrolled through September 1 — 106.1% of the 1,051 target, surpassing the 20% activation goal. Enrollment velocity has flattened: 691 first encounters in May, 264 in June, 148 in July, and 12 in August. The cohort should be treated as fixed at 1,115 for the remainder of the program.",
             stats: [
-                { label: "Enrolled to Date",       val: 1106,             ctx: "105.2% to 1,051 target",                     color: "kpi-green" },
-                { label: "States with Enrollees",  val: 35,               ctx: "35 of 44 eligible states active",            color: "" },
-                { label: "Members Outreached",     val: 5660,             ctx: "Unique members contacted for enrollment",    color: "" },
-                { label: "Conversion Rate",        val: "17%",            ctx: "Of outreach attempts resulting in enrollment", color: "" }
+                { label: "Enrolled to Date",       val: 1115,             ctx: "106.1% to 1,051 target",                     color: "kpi-green" },
+                { label: "States with Enrollees",  val: 35,               ctx: "34 states + DC of 44 eligible",              color: "" },
+                { label: "New Members — August",   val: 12,               ctx: "Down from 148 in July · cohort now closed",  color: "" },
+                { label: "Members Outreached",     val: 5660,             ctx: "July figure · outreach export not refreshed", color: "" }
             ]
         },
         {
@@ -1397,88 +1454,116 @@ const D = {
             timing:   "Active · May – December 2026",
             state:    "here",
             wondering: "Will the food box journey sustain engagement long enough to close A1C, BP, and pharmacy HEDIS gaps before December 31?",
-            answer:   "Engagement is scaling: 1,087 members have engaged the care team across 3,600 calls, and 91% of the 1,041 PRAPARE-screened members show ≥1 SDOH need. Six scheduled boxes ship throughout the program to all enrolled members; three milestone boxes are earned by member self-attestation — Box 7 (A1c measurement completed), Box 8 (statin adherence + mail-order pharmacy enrolled), and Box 9 (BP reading at outpatient visit for CBP). Milestone attestation tracking is active via the Pyx platform; outcome data begins flowing in Month 4.",
+            answer:   "Yes — engagement deepened even as enrollment flattened. 1,098 members have engaged the care team across 4,907 calls (4.5 per member, up from 3.3), and 90.8% of the 1,056 PRAPARE screens show ≥1 SDOH need. 358 care-barrier problem cards have been raised across 152 members, with 190 resource referrals delivered to 91 members. Six scheduled boxes ship throughout the program; three milestone boxes are earned through A1c, statin/mail-order pharmacy, and BP provider-visit activity — all three are now producing measurable appointment volume.",
             stats: [
-                { label: "Members Engaged",        val: 1087,             ctx: "Distinct members with ≥1 care-team call",    color: "kpi-green" },
-                { label: "Engagement Calls",       val: 3600,             ctx: "Total care-team calls to date",              color: "" },
-                { label: "SDOH Need Rate",         val: "91%",            ctx: "Of screened members · avg 2.8 needs each",   color: "" }
+                { label: "Members Engaged",        val: 1098,             ctx: "Distinct members with ≥1 care-team call",    color: "kpi-green" },
+                { label: "Engagement Calls",       val: 4907,             ctx: "Total care-team calls to date · 4.5 per member", color: "" },
+                { label: "SDOH Need Rate",         val: "90.8%",          ctx: "959 of 1,056 PRAPARE screens",              color: "" },
+                { label: "Care Barriers Raised",   val: 358,              ctx: "Problem cards across 152 members",          color: "" }
             ]
         },
         {
             name:     "Activation/Behavior Change",
-            timing:   "Upcoming · August – December 2026",
-            state:    "upcoming",
+            timing:   "Active · August – December 2026",
+            state:    "here",
             wondering: "Will the 1.2:1 ROI threshold be achieved — and will A1C, BP, and medication adherence HEDIS gaps close at scale across 44 states?",
-            answer:   "Outcome tracking begins August 2026. Member attestations for A1c measurement, statin adherence + mail-order pharmacy, and BP outpatient readings determine milestone box eligibility. Final deliveries must complete by December 31, 2026 (Work Order Ultimate End Date: May 3, 2027). With 1,106 members engaged — exceeding the 1,051 activation target — projected CMS reimbursement rises to ~$1,143,604, a 1.43:1 ROI.",
-            stats: null
+            answer:   "Outcome tracking is now live and producing real volume. 522 members have an A1c appointment on record (435 attended), 124 have a BP provider visit (98 attended), and 79 have a mail-order pharmacy or statin therapy review (67 attended). 82 members have an annual wellness exam recorded. Nearly half the cohort — 533 of 1,115 — has at least one appointment, and appointments are concentrated with primary care and diabetes specialists, which is exactly where GSD and CBP close. Final deliveries must complete by December 31, 2026 (Work Order Ultimate End Date: May 3, 2027). At 1,115 engaged members, projected CMS reimbursement is ~$1,152,910, a 1.44:1 ROI.",
+            stats: [
+                { label: "A1c Appointments",       val: 522,              ctx: "435 attended · targets GSD",                color: "kpi-green" },
+                { label: "BP Provider Visits",     val: 124,              ctx: "98 attended · targets CBP",                 color: "" },
+                { label: "Pharmacy / Statin",      val: 79,               ctx: "67 attended · targets PDC-Statin",          color: "" },
+                { label: "Members w/ Appointment", val: 533,              ctx: "47.8% of 1,115 enrolled",                   color: "" }
+            ]
         }
     ],
 
     updates: [
         {
-            eyebrow: "Enrollment · Month over Month",
-            title: "Enrollment Growth",
-            sub: "Changes since the June 9, 2026 report. Data as of July 27, 2026.",
+            eyebrow: "HEDIS Milestones · Month over Month",
+            title: "Milestone Activity — The Headline This Cycle",
+            sub: "Changes since the July 27, 2026 report. Data as of September 1, 2026. Counts are distinct members with an appointment on record, attended or scheduled.",
             changes: [
-                { label: "Total Members Enrolled",        before: "736",    after: "1,106",  delta: "+370 members · target exceeded", color: "green" },
-                { label: "Enrollment Rate",               before: "14.0%",  after: "21.0%",  delta: "+7.0 pts",     color: "green" },
-                { label: "% to Activation Target",        before: "70.0%",  after: "105.2%", delta: "+35 pts · goal surpassed", color: "green" },
-                { label: "Members Outreached to Date",    before: "2,406",  after: "5,660",  delta: "+3,254 (outreach pool more than doubled)", color: "green" },
-                { label: "Enrollments — Last 30 Days",    before: "682",    after: "185",    delta: "−497 (surge tapering post-target)", color: "blue" },
-                { label: "Conversion Rate",               before: "25.1%",  after: "17%",    delta: "−8.1 pts (larger, harder-to-reach pool)", color: "blue" }
+                { label: "A1c Appointments (Box 7 · GSD)",       before: "375", after: "522", delta: "+147 members · 435 attended", color: "green" },
+                { label: "BP Provider Visits (Box 9 · CBP)",     before: "74",  after: "124", delta: "+50 members · 98 attended",   color: "green" },
+                { label: "Pharmacy / Statin (Box 8 · PDC)",      before: "55",  after: "79",  delta: "+24 members · 67 attended",   color: "green" },
+                { label: "Annual Wellness Exams",                after: "82",   delta: "Newly tracked · 49 attended", isNew: true, color: "green" },
+                { label: "Members with ≥1 Appointment",          after: "533",  delta: "Newly tracked · 47.8% of cohort", isNew: true, color: "green" },
+                { label: "Total Appointments Recorded",          after: "974",  delta: "Newly tracked · 694 attended", isNew: true, color: "green" }
+            ]
+        },
+        {
+            eyebrow: "Enrollment · Month over Month",
+            title: "Enrollment Plateau",
+            sub: "The activation target remains exceeded, but new enrollment has effectively stopped. Treat the cohort as closed at 1,115.",
+            changes: [
+                { label: "Total Members Enrolled",        before: "1,106",  after: "1,115",  delta: "+9 members · target still exceeded", color: "green" },
+                { label: "Enrollment Rate",               before: "21.0%",  after: "21.2%",  delta: "+0.2 pts",     color: "green" },
+                { label: "% to Activation Target",        before: "105.2%", after: "106.1%", delta: "+0.9 pts",     color: "green" },
+                { label: "New Members — Last 30 Days",    before: "185",    after: "12",     delta: "−173 · enrollment plateaued", color: "orange" },
+                { label: "States with Enrolled Members",  before: "35",     after: "35",     delta: "No change · DC now represented", color: "" },
+                { label: "Members Outreached to Date",    before: "5,660",  after: "5,660",  delta: "Not refreshed — outreach export missing", color: "blue" }
             ]
         },
         {
             eyebrow: "Screenings & Assessments",
             title: "Screening Volume",
-            sub: "All four assessments continued to climb as engagement deepened across the growing cohort.",
+            sub: "All four assessments climbed again, driven by re-screening rather than new enrollment — the cohort grew by only 9 members.",
             changes: [
-                { label: "PRAPARE (SDOH)",        before: "688",  after: "1,041", delta: "+353 completed", color: "green" },
-                { label: "PHQ-4 (Mental Health)", before: "746",  after: "1,331", delta: "+585 completed", color: "green" },
-                { label: "UCLA-3 (Loneliness)",   before: "746",  after: "1,338", delta: "+592 completed", color: "green" },
-                { label: "MedicareWellBeing",     before: "579",  after: "959",   delta: "+380 completed", color: "green" }
+                { label: "PRAPARE (SDOH)",        before: "1,041", after: "1,056", delta: "+15 completed",  color: "green" },
+                { label: "PHQ-4 (Mental Health)", before: "1,331", after: "1,556", delta: "+225 completed", color: "green" },
+                { label: "UCLA-3 (Loneliness)",   before: "1,338", after: "1,563", delta: "+225 completed", color: "green" },
+                { label: "MedicareWellBeing",     before: "959",   after: "1,094", delta: "+135 completed", color: "green" }
             ]
         },
         {
             eyebrow: "Health Assessment Scores",
             title: "Average Score Shifts",
-            sub: "Scores remain stable in healthy ranges; average SDOH needs per member declined as the screened pool broadened.",
+            sub: "Headline averages improved slightly, but the acuity tail widened — the moderate-and-elevated groups grew on both Medicare Well-Being and PHQ-4.",
             changes: [
-                { label: "UCLA-3 Avg (Loneliness)",    before: "4.3", after: "4.2", delta: "−0.1 (not lonely range)", color: "green" },
-                { label: "PHQ-4 Avg (Mental Health)",  before: "2.3", after: "2.2", delta: "−0.1 (normal range)", color: "green" },
-                { label: "SDOH Need Rate",             before: "91%", after: "91%", delta: "No change",               color: "" },
-                { label: "Avg SDOH Needs / Member",    before: "3.6", after: "2.8", delta: "−0.8 (broader screened pool)", color: "blue" }
+                { label: "UCLA-3 Avg (Loneliness)",        before: "4.2",   after: "4.1",   delta: "−0.1 (not lonely range)", color: "green" },
+                { label: "PHQ-4 Avg (Mental Health)",      before: "2.2",   after: "2.1",   delta: "−0.1 (normal range)", color: "green" },
+                { label: "Medicare Well-Being Avg Needs",  before: "2.1",   after: "2.4",   delta: "+0.3 needs per assessment", color: "orange" },
+                { label: "MWB Moderate or Elevated",       before: "37.5%", after: "42.4%", delta: "+4.9 pts · 463 of 1,093 screens", color: "orange" },
+                { label: "PHQ-4 Moderate or Severe",       after: "13.5%",  delta: "Newly reported · 210 of 1,558", isNew: true, color: "" },
+                { label: "UCLA-3 Screening as Lonely",     after: "20.9%",  delta: "Newly reported · 328 of 1,566", isNew: true, color: "" },
+                { label: "SDOH Need Rate",                 before: "91%",   after: "90.8%", delta: "Effectively flat · 959 of 1,056", color: "" }
             ]
         },
         {
             eyebrow: "SDoH Needs Profile",
-            title: "Top Needs — Updated",
-            sub: "Income and Food remain the dominant needs; the resource-type breakdown refreshed with the latest PRAPARE data.",
+            title: "Top Needs — Refresh Pending",
+            sub: "The SDoH domain rollup comes from a Tableau view that was not included in the September 1 pull. Values below still reflect the July data and are held for comparability.",
             changes: [
-                { label: "Income (#1 need)",              before: "89%", after: "88%", delta: "−1 pt · still #1",   color: "" },
-                { label: "Food (#2 need)",                before: "65%", after: "72%", delta: "+7 pts · now #2",    color: "green" },
-                { label: "Healthy Days (#3 need)",        after: "42%",  delta: "New #3 need", isNew: true, color: "green" },
-                { label: "Access to Care",                after: "25%",  delta: "New in profile", isNew: true, color: "" }
+                { label: "Income (#1 need)",              before: "88%", after: "88%", delta: "Held — July pull", color: "blue" },
+                { label: "Food (#2 need)",                before: "72%", after: "72%", delta: "Held — July pull", color: "blue" },
+                { label: "Healthy Days (#3 need)",        before: "42%", after: "42%", delta: "Held — July pull", color: "blue" },
+                { label: "Avg SDOH Needs / Member",       before: "2.8", after: "2.8", delta: "Held — July pull", color: "blue" }
             ]
         },
         {
             eyebrow: "Engagement Activity",
             title: "Care Team Engagement",
-            sub: "Engagement scaled sharply as the care team ramped high-touch outreach across the enrolled cohort.",
+            sub: "With acquisition complete, the team shifted to depth — more calls per member across a nearly identical cohort.",
             changes: [
-                { label: "Care Team Engagement (Members)", before: "608",   after: "1,087",  delta: "+479 members",  color: "green" },
-                { label: "Total Engagement Calls",         before: "1,134", after: "3,600",  delta: "+2,466 calls", color: "green" },
-                { label: "Max Activity per Person",        after: "354",    delta: "New metric", isNew: true, color: "" }
+                { label: "Care Team Engagement (Members)", before: "1,087", after: "1,098",  delta: "+11 members",  color: "green" },
+                { label: "Total Engagement Calls",         before: "3,600", after: "4,907",  delta: "+1,307 calls", color: "green" },
+                { label: "Avg Calls per Engaged Member",   before: "3.3",   after: "4.5",    delta: "+1.2 calls per member", color: "green" },
+                { label: "Avg Platform Activities / Member", before: "5",   after: "7.5",    delta: "+2.5 activities", color: "green" },
+                { label: "Care Barrier Problem Cards",     after: "358",    delta: "Newly tracked · across 152 members", isNew: true, color: "green" },
+                { label: "Resource Referrals Delivered",   after: "190",    delta: "Newly tracked · to 91 members", isNew: true, color: "green" },
+                { label: "Enrolled with Zero Activity",    after: "23",     delta: "Newly tracked · 2.1% of cohort", isNew: true, color: "blue" }
             ]
         },
         {
             eyebrow: "Operational Updates",
             title: "Program Notes Since Last Report",
-            sub: "Context and action items carried forward from the June report.",
+            sub: "Open items carried forward from the July report, plus new data-source gaps to close before the next cycle.",
             changes: [
-                { label: "Eligibility File (7/1/2026)",  before: "5,255", after: "3,882", delta: "Refreshed — denominator to reconcile", color: "blue" },
-                { label: "Missing / Bad Phone #",        after: "3% / 1%", delta: "New data-quality metric", isNew: true, color: "" },
-                { label: "SMS & Email Campaign",         after: "Live since early June",   delta: "Confirm performance", color: "green" }
+                { label: "Eligibility File Reconciliation", before: "3,882 (7/1)", after: "Still open", delta: "Second cycle unresolved — escalate", color: "orange" },
+                { label: "Outreach / Conversion Export",    after: "Not provided", delta: "Blocks conversion recompute", color: "blue" },
+                { label: "Food Box Shipment Counts",        after: "Not provided", delta: "Boxes 4–6 cannot be verified", color: "blue" },
+                { label: "August Billing Figure",           after: "Pending",      delta: "Revenue to date still at $38,080", color: "blue" },
+                { label: "Box 4 Eligible Cohort",           after: "955 members",  delta: "May + June cohorts past ~90 days", isNew: true, color: "green" }
             ]
         }
     ],
@@ -1495,10 +1580,11 @@ const D = {
         clientContact: "Melissa Arthur, PMP · Project Manager, Healthcare Quality Management · melissa.piechowiak@cvshealth.com",
         billing:       "APCustomerCare@AETNA.com",
         agenda: [
-            "Review enrollment velocity vs. 1,051 member target",
-            "Confirm call script approval and distribution timeline",
-            "Review Welcome Box shipment status and first delivery logistics",
-            "Confirm member attestation workflow in Pyx platform for milestone boxes"
+            "Milestone momentum: 522 A1c, 124 BP, 79 pharmacy/statin — and what Aetna needs to convert attestations into confirmed HEDIS closure",
+            "Enrollment plateau: confirm whether outreach is intentionally wound down now that the 1,051 target is exceeded",
+            "Eligibility denominator: written confirmation of 5,255 vs. 3,882 — second cycle open, blocking every client-facing activation rate",
+            "Box 4–6 pacing: 955 members are Box 4 eligible; confirm shipment counts and the December 31 delivery plan",
+            "Data gaps for next cycle: outreach/Activate export, food box shipment counts, SDoH domain Tableau view, August billing figure"
         ]
     }
 };
@@ -1657,7 +1743,7 @@ function renderKPIs() {
             <div class="kpi-val ${c.val === null ? 'pending' : ''}">
                 ${c.val !== null ? (typeof c.val === 'number' ? c.val.toLocaleString() : c.val) : 'Pending'}
             </div>
-            <div class="kpi-ctx ${c.good ? 'good' : ''}">${c.ctx}</div>
+            ${c.ctx ? `<div class="kpi-ctx ${c.good ? 'good' : ''}">${c.ctx}</div>` : ''}
             ${c.progress !== undefined && c.progress !== null ? `
                 <div class="ms-prog-track" style="margin-top:10px;">
                     <div class="ms-prog-fill blue" style="width:${c.progress}%"></div>
@@ -1708,8 +1794,8 @@ function renderInsights() {
             cls: "prapare", icon: "🏠", name: "PRAPARE — SDOH Screening",
             avgNum: "2.8", avgMax: "/ 12", avgLabel: "Avg # of Needs", avgFillPct: (2.8/12*100).toFixed(1), fillCls: "fill-green",
             calloutCls: "green",
-            callout: "<em>91%</em> of members who completed PRAPARE identified at least one social need",
-            rowsLabel: "Top SDOH needs identified (% of screened members)",
+            callout: "<em>90.8%</em> of members who completed PRAPARE identified at least one social need — 959 of 1,056 screens",
+            rowsLabel: "Top SDOH needs identified (% of screened members) · July Tableau pull, refresh pending",
             rows: [
                 { label: "Income",               pct: 88, fillCls: "fill-green" },
                 { label: "Food",                 pct: 72, fillCls: "fill-green" },
@@ -1721,38 +1807,38 @@ function renderInsights() {
         },
         {
             cls: "phq4", icon: "🧠", name: "PHQ-4 — Mental Health",
-            avgNum: "2.2", avgMax: "/ 12", avgFillPct: (2.2/12*100).toFixed(1), fillCls: "fill-purple",
+            avgNum: "2.1", avgMax: "/ 12", avgFillPct: (2.1/12*100).toFixed(1), fillCls: "fill-purple",
             calloutCls: "purple",
-            callout: "<em>32.5%</em> of members scored ≥3 — mild anxiety or depression or higher",
-            rubricLabel: "PHQ-4 Scoring Scale (0 – 12)",
+            callout: "<em>31.1%</em> of screens scored ≥3 — mild anxiety or depression or higher · <em>13.5%</em> scored ≥6, in the moderate-to-severe range",
+            rubricLabel: "PHQ-4 Scoring Scale (0 – 12) · 1,558 completed screens",
             rubric: [
-                { range: "0 – 2",  level: "Normal",   dot: "#49a601", pct: "67.5%", isAvg: true  },
-                { range: "3 – 5",  level: "Mild",     dot: "#f0a500", pct: "18.0%", isAvg: false },
-                { range: "6 – 8",  level: "Moderate", dot: "#d6661a", pct: "7.9%",  isAvg: false },
-                { range: "9 – 12", level: "Severe",   dot: "#c0392b", pct: "6.5%",  isAvg: false }
+                { range: "0 – 2",  level: "Normal",   dot: "#49a601", pct: "68.9%", isAvg: true  },
+                { range: "3 – 5",  level: "Mild",     dot: "#f0a500", pct: "17.7%", isAvg: false },
+                { range: "6 – 8",  level: "Moderate", dot: "#d6661a", pct: "7.6%",  isAvg: false },
+                { range: "9 – 12", level: "Severe",   dot: "#c0392b", pct: "5.7%",  isAvg: false }
             ]
         },
         {
             cls: "ucla3", icon: "🤝", name: "UCLA-3 — Loneliness",
-            avgNum: "4.2", avgMax: "/ 9", avgFillPct: (4.2/9*100).toFixed(1), fillCls: "fill-teal",
+            avgNum: "4.1", avgMax: "/ 9", avgFillPct: (4.1/9*100).toFixed(1), fillCls: "fill-teal",
             calloutCls: "teal",
-            callout: "<em>21.8%</em> of members scored ≥6 — moderate to high loneliness",
-            rubricLabel: "UCLA-3 Scoring Scale (3 – 9)",
+            callout: "<em>20.9%</em> of screens scored ≥6 — moderate to high loneliness (328 of 1,566)",
+            rubricLabel: "UCLA-3 Scoring Scale (3 – 9) · 1,566 completed screens",
             rubric: [
-                { range: "3 – 5", level: "Not Lonely", dot: "#49a601", pct: "78.2%", isAvg: true  },
-                { range: "6 – 9", level: "Lonely",     dot: "#c0392b", pct: "21.8%", isAvg: false }
+                { range: "3 – 5", level: "Not Lonely", dot: "#49a601", pct: "79.1%", isAvg: true  },
+                { range: "6 – 9", level: "Lonely",     dot: "#c0392b", pct: "20.9%", isAvg: false }
             ]
         },
         {
             cls: "hos", icon: "📊", name: "Medicare Well-Being",
-            avgNum: "2.1", avgMax: "/ 10", avgLabel: "Avg # of Needs", avgFillPct: (2.1/10*100).toFixed(1), fillCls: "fill-blue",
+            avgNum: "2.4", avgMax: "/ 10", avgLabel: "Avg # of Needs", avgFillPct: (2.4/10*100).toFixed(1), fillCls: "fill-blue",
             calloutCls: "blue",
-            callout: "<em>347 members (37.5%)</em> screened with moderate or elevated needs — 3 or more concerns identified across 959 completed assessments",
-            rubricLabel: "Needs Identified (0 – 10)",
+            callout: "<em>463 screens (42.4%)</em> identified moderate or elevated needs — 3 or more concerns across 1,093 completed assessments, up from 37.5% at the July report",
+            rubricLabel: "Needs Identified (0 – 10) · 1,093 completed assessments",
             rubric: [
-                { range: "0 – 2",  level: "Low need",  dot: "#49a601", pct: "62.5%", isAvg: true  },
-                { range: "3 – 5",  level: "Moderate",  dot: "#f0a500", pct: "24.4%", isAvg: false },
-                { range: "6 – 10", level: "Elevated",  dot: "#c0392b", pct: "13.1%", isAvg: false }
+                { range: "0 – 2",  level: "Low need",  dot: "#49a601", pct: "57.6%", isAvg: true  },
+                { range: "3 – 5",  level: "Moderate",  dot: "#f0a500", pct: "29.5%", isAvg: false },
+                { range: "6 – 10", level: "Elevated",  dot: "#c0392b", pct: "12.9%", isAvg: false }
             ]
         }
     ];
@@ -1832,13 +1918,13 @@ function renderPhaseSections() {
             <div class="kpi-grid" style="margin-bottom:32px;">
                 <div class="kpi">
                     <div class="kpi-lbl">SDOH Need Rate</div>
-                    <div class="kpi-val">91%</div>
-                    <div class="kpi-ctx">of screened members have ≥1 SDOH need</div>
+                    <div class="kpi-val">90.8%</div>
+                    <div class="kpi-ctx">959 of 1,056 PRAPARE screens have ≥1 SDOH need</div>
                 </div>
                 <div class="kpi">
                     <div class="kpi-lbl">Avg SDOH Needs</div>
                     <div class="kpi-val">2.8</div>
-                    <div class="kpi-ctx">needs per member · top: Income (88%)</div>
+                    <div class="kpi-ctx">needs per member · top: Income (88%) · July pull</div>
                 </div>
             </div>
             <div class="screening-grid">${D.screenings.map(s => `
@@ -2139,7 +2225,7 @@ function renderMap() {
         ['',   '',   '',   '',   '',   '',   '',   'VT', 'NH', '',   ''   ],
         ['WA', 'MT', 'ND', 'MN', 'WI', 'MI', '',   'NY', 'MA', '',   ''   ],
         ['OR', 'ID', 'SD', 'IA', 'IL', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI' ],
-        ['CA', 'NV', 'WY', 'NE', 'MO', 'KY', 'WV', 'VA', 'MD', 'DE', ''   ],
+        ['CA', 'NV', 'WY', 'NE', 'MO', 'KY', 'WV', 'VA', 'MD', 'DE', 'DC' ],
         ['',   '',   'CO', 'KS', 'AR', 'TN', 'NC', 'SC', '',   '',   ''   ],
         ['',   'AZ', 'NM', 'OK', 'LA', 'MS', 'AL', 'GA', '',   '',   ''   ],
         ['HI', '',   '',   'TX', '',   '',   '',   'FL', '',   '',   ''   ]

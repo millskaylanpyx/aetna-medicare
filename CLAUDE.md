@@ -39,8 +39,34 @@ CLAUDE.md     — this file
 
 ## How to update the dashboard
 
+### Source files and how they map to the dashboard
+The monthly Tableau/platform exports land in `~/Downloads` as three CSVs:
+
+| File | Drives |
+|---|---|
+| `Pyx_Aetna_Medicare_Weekly_Activity_Report_<date>.csv` | `membersEnrolled` (distinct `UserId`), `mapData` (member `Zip` → state), screening counts (`ActivityCategory = BH Screening` rows by `ActivityName`), `careBarrier*`, `resourceReferral*`, enrollment cohorts (`FirstEncounter`) |
+| `Pyx_Aetna_Medicare_Monthly_Screening_Report_<date>.csv` | `phq4Avg`, `ucla3Avg`, `medicareWellBeingAvg`, insight-card score distributions (one `Total_Score` per distinct `ScreeningId`), PRAPARE answer detail |
+| `Pyx_Aetna_Medicare_Appointment_Report_<date>.csv` | Milestone boxes 7/8/9 and `awvAttestations`. `AppointmentReason` is **semicolon-delimited multi-select** — split it before counting |
+
+Parse these with PowerShell `Import-Csv` (handles the quoted commas in `ScreeningQuestion`).
+
+**Milestone box mapping** — count *distinct members*, attended + scheduled:
+- Box 7 (GSD) ← `Diabetes Maintenance (A1c)`
+- Box 8 (PDC-Statin) ← `Mail Order Pharmacy Enrollment` or `Statin Therapy Review`
+- Box 9 (CBP) ← `Blood pressure check - Provider Visit`
+- AWV ← `Annual Physical / Wellness Exam`
+
+Attended and scheduled counts **overlap** (a member can have both) — never present them as addends.
+
+**Not in these three files** (request separately): outreach volume / conversion rate / app registration, food box shipment counts, the SDoH domain rollup (Income / Food / Healthy Days / …), and billing actuals. Fields sourced elsewhere are marked `// STALE` in `D.metrics`.
+
+### ⚠ Encoding
+`index.html` is **UTF-8 without BOM** and contains emoji and typographic characters (— · ≥ −). Do **not** round-trip it through PowerShell `Get-Content`/`Set-Content` — PS 5.1 reads it as ANSI and writes UTF-8, which mangles every special character and adds a BOM. Use the Edit tool, or explicit `[System.IO.File]::ReadAllText($f, (New-Object System.Text.UTF8Encoding($false)))`.
+
 ### Monthly update checklist
 All data lives in the `const D = { ... }` object near the bottom of `index.html`.
+
+Also remember: `renderInsights()` holds the four screening insight cards (PRAPARE / PHQ-4 / UCLA-3 / Medicare Well-Being) **hardcoded outside `D`** — score averages and rubric percentages must be edited there. The SDOH need-rate and avg-needs KPI tiles above the screening grid are likewise inline in the `screeningsHTML` template.
 
 Core fields to update each month:
 - `D.program.reportMonth` — e.g. "June 2026"
