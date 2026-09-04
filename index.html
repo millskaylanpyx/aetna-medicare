@@ -1355,7 +1355,7 @@ const D = {
 
     revenue: {
         contractMax:       800337,
-        revenueToDate:     38080,   // TODO: awaiting updated July billing figure
+        revenueToDate:     171780,  // per internal dashboard, as of September 1, 2026
         platformFee:       40000,
         platformFeePerWO:  40000,
         engagementFee:     70,
@@ -1562,7 +1562,7 @@ const D = {
                 { label: "Eligibility File Reconciliation", before: "3,882 (7/1)", after: "Still open", delta: "Second cycle unresolved — escalate", color: "orange" },
                 { label: "Outreach / Conversion Export",    after: "Not provided", delta: "Blocks conversion recompute", color: "blue" },
                 { label: "Food Box Shipment Counts",        after: "Not provided", delta: "Boxes 4–6 cannot be verified", color: "blue" },
-                { label: "August Billing Figure",           after: "Pending",      delta: "Revenue to date still at $38,080", color: "blue" },
+                { label: "Revenue to Date",                 before: "$38,080", after: "$171,780", delta: "+$133,700 · 21.5% of the $800,337 ceiling", color: "green" },
                 { label: "Box 4 Eligible Cohort",           after: "955 members",  delta: "May + June cohorts past ~90 days", isNew: true, color: "green" }
             ]
         }
@@ -1584,7 +1584,7 @@ const D = {
             "Enrollment plateau: confirm whether outreach is intentionally wound down now that the 1,051 target is exceeded",
             "Eligibility denominator: written confirmation of 5,255 vs. 3,882 — second cycle open, blocking every client-facing activation rate",
             "Box 4–6 pacing: 955 members are Box 4 eligible; confirm shipment counts and the December 31 delivery plan",
-            "Data gaps for next cycle: outreach/Activate export, food box shipment counts, SDoH domain Tableau view, August billing figure"
+            "Data gaps for next cycle: outreach/Activate export, food box shipment counts, SDoH domain Tableau view"
         ]
     }
 };
