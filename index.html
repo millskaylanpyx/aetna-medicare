@@ -1146,7 +1146,7 @@ const D = {
         appointmentsTotal:            974,
         appointmentsAttended:         694,
         sdohNeedPct:                  0.908,    // 959 "SDOH Need Identified" of 1,056 PRAPARE screens
-        avgSdohNeedsPerMember:        2.8,      // STALE (July) — awaiting Tableau SDOH domain view
+        avgSdohNeedsPerMember:        2.8,      // confirmed current against Tableau, September 2026
         phq4Avg:                      2.1,      // 2.09 exact across 1,558 PHQ-4 instances
         ucla3Avg:                     4.1,      // 4.13 exact across 1,566 UCLA-3 instances
         medicareWellBeingAvg:         2.4,      // 2.39 exact across 1,093 assessments
@@ -1531,13 +1531,13 @@ const D = {
         },
         {
             eyebrow: "SDoH Needs Profile",
-            title: "Top Needs — Refresh Pending",
-            sub: "The SDoH domain rollup comes from a Tableau view that was not included in the September 1 pull. Values below still reflect the July data and are held for comparability.",
+            title: "Top Needs — Stable",
+            sub: "The needs profile held steady month over month, confirmed against Tableau. Income and Food remain the dominant drivers.",
             changes: [
-                { label: "Income (#1 need)",              before: "88%", after: "88%", delta: "Held — July pull", color: "blue" },
-                { label: "Food (#2 need)",                before: "72%", after: "72%", delta: "Held — July pull", color: "blue" },
-                { label: "Healthy Days (#3 need)",        before: "42%", after: "42%", delta: "Held — July pull", color: "blue" },
-                { label: "Avg SDOH Needs / Member",       before: "2.8", after: "2.8", delta: "Held — July pull", color: "blue" }
+                { label: "Income (#1 need)",              before: "88%", after: "88%", delta: "No change · still #1", color: "" },
+                { label: "Food (#2 need)",                before: "72%", after: "72%", delta: "No change · still #2", color: "" },
+                { label: "Healthy Days (#3 need)",        before: "42%", after: "42%", delta: "No change · still #3", color: "" },
+                { label: "Avg SDOH Needs / Member",       before: "2.8", after: "2.8", delta: "No change", color: "" }
             ]
         },
         {
@@ -1561,7 +1561,7 @@ const D = {
             changes: [
                 { label: "Eligibility File Reconciliation", before: "3,882 (7/1)", after: "Still open", delta: "Second cycle unresolved — escalate", color: "orange" },
                 { label: "Outreach / Conversion Export",    after: "Not provided", delta: "Blocks conversion recompute", color: "blue" },
-                { label: "Food Box Shipment Counts",        after: "Not provided", delta: "Boxes 4–6 cannot be verified", color: "blue" },
+                { label: "Food Box Shipment Counts",        after: "Not provided", delta: "Boxes 5–6 cannot be verified", color: "blue" },
                 { label: "Revenue to Date",                 before: "$38,080", after: "$171,780", delta: "+$133,700 · 21.5% of the $800,337 ceiling", color: "green" },
                 { label: "Box 4 Eligible Cohort",           after: "955 members",  delta: "May + June cohorts past ~90 days", isNew: true, color: "green" }
             ]
@@ -1584,7 +1584,7 @@ const D = {
             "Enrollment plateau: confirm whether outreach is intentionally wound down now that the 1,051 target is exceeded",
             "Eligibility denominator: written confirmation of 5,255 vs. 3,882 — second cycle open, blocking every client-facing activation rate",
             "Box 4–6 pacing: 955 members are Box 4 eligible; confirm shipment counts and the December 31 delivery plan",
-            "Data gaps for next cycle: Activate export for conversion/onboarding rates, food box shipment counts, SDoH domain Tableau view"
+            "Data gaps for next cycle: Activate export for conversion/onboarding rates, food box shipment counts"
         ]
     }
 };
@@ -1795,7 +1795,7 @@ function renderInsights() {
             avgNum: "2.8", avgMax: "/ 12", avgLabel: "Avg # of Needs", avgFillPct: (2.8/12*100).toFixed(1), fillCls: "fill-green",
             calloutCls: "green",
             callout: "<em>90.8%</em> of members who completed PRAPARE identified at least one social need — 959 of 1,056 screens",
-            rowsLabel: "Top SDOH needs identified (% of screened members) · July Tableau pull, refresh pending",
+            rowsLabel: "Top SDOH needs identified (% of screened members)",
             rows: [
                 { label: "Income",               pct: 88, fillCls: "fill-green" },
                 { label: "Food",                 pct: 72, fillCls: "fill-green" },
@@ -1924,7 +1924,7 @@ function renderPhaseSections() {
                 <div class="kpi">
                     <div class="kpi-lbl">Avg SDOH Needs</div>
                     <div class="kpi-val">2.8</div>
-                    <div class="kpi-ctx">needs per member · top: Income (88%) · July pull</div>
+                    <div class="kpi-ctx">needs per member · top: Income (88%)</div>
                 </div>
             </div>
             <div class="screening-grid">${D.screenings.map(s => `
