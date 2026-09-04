@@ -1125,7 +1125,7 @@ const D = {
         newEnrollmentsAugust:         12,       // first encounters dated in August 2026 — enrollment has plateaued
         conversionRate:               0.17,     // STALE (July) — no outreach file this cycle
         onboardingFromSuccessfulOutreach: 0.326,// STALE (July) — no outreach file this cycle
-        membersOutreached:            5660,     // STALE (July) — no outreach file this cycle
+        membersOutreached:            5795,     // per internal dashboard, as of September 1, 2026
         onboardsLast30Days:           12,       // Aug 2026 first encounters
         appEnrollmentPct:             0.26,     // STALE (July) — app registration not in these files
         careTeamEngagement:           1098,     // members with >=1 engagement call (Tableau, client-supplied)
@@ -1417,9 +1417,9 @@ const D = {
         {
             type: "watch",
             label: "Watch",
-            title: "Outreach and Conversion Metrics Not Refreshed This Cycle",
-            desc: "Members outreached (5,660), conversion rate (17%), onboarding from successful outreach (32.6%), and app registration (26%) all still show July values — the September 1 pull contained the activity, screening, and appointment reports but no outreach or Activate export. These four figures are marked stale in the data layer.",
-            action: "Request the outreach and Activate exports so conversion can be recomputed against the August enrollment plateau. Without them there is no way to tell whether the slowdown is reduced outreach volume or falling conversion."
+            title: "Outreach Volume Confirms the Plateau Is Not an Outreach Problem",
+            desc: "Members outreached reached 5,795, up just 135 from 5,660 in July — and those 135 contacts produced 12 first encounters. Outreach volume has slowed to roughly a tenth of its earlier pace, which accounts for the enrollment plateau far more than any drop in member receptivity. Conversion rate (17%), onboarding from successful outreach (32.6%), and app registration (26%) still show July values and remain marked stale in the data layer.",
+            action: "Confirm with Mel whether outreach was deliberately throttled once the 1,051 target was cleared. Request the Activate export so conversion and onboarding rates can be recomputed on the August cohort."
         }
     ],
 
@@ -1445,8 +1445,8 @@ const D = {
             stats: [
                 { label: "Enrolled to Date",       val: 1115,             ctx: "106.1% to 1,051 target",                     color: "kpi-green" },
                 { label: "States with Enrollees",  val: 35,               ctx: "34 states + DC of 44 eligible",              color: "" },
-                { label: "New Members — August",   val: 12,               ctx: "Down from 148 in July · cohort now closed",  color: "" },
-                { label: "Members Outreached",     val: 5660,             ctx: "July figure · outreach export not refreshed", color: "" }
+                { label: "New Members — August",   val: 12,               color: "" },
+                { label: "Members Outreached",     val: 5795,             color: "" }
             ]
         },
         {
@@ -1501,7 +1501,7 @@ const D = {
                 { label: "% to Activation Target",        before: "105.2%", after: "106.1%", delta: "+0.9 pts",     color: "green" },
                 { label: "New Members — Last 30 Days",    before: "185",    after: "12",     delta: "−173 · enrollment plateaued", color: "orange" },
                 { label: "States with Enrolled Members",  before: "35",     after: "35",     delta: "No change · DC now represented", color: "" },
-                { label: "Members Outreached to Date",    before: "5,660",  after: "5,660",  delta: "Not refreshed — outreach export missing", color: "blue" }
+                { label: "Members Outreached to Date",    before: "5,660",  after: "5,795",  delta: "+135 contacted · 12 enrolled from them", color: "blue" }
             ]
         },
         {
@@ -1584,7 +1584,7 @@ const D = {
             "Enrollment plateau: confirm whether outreach is intentionally wound down now that the 1,051 target is exceeded",
             "Eligibility denominator: written confirmation of 5,255 vs. 3,882 — second cycle open, blocking every client-facing activation rate",
             "Box 4–6 pacing: 955 members are Box 4 eligible; confirm shipment counts and the December 31 delivery plan",
-            "Data gaps for next cycle: outreach/Activate export, food box shipment counts, SDoH domain Tableau view"
+            "Data gaps for next cycle: Activate export for conversion/onboarding rates, food box shipment counts, SDoH domain Tableau view"
         ]
     }
 };
@@ -1951,7 +1951,7 @@ function renderPhaseSections() {
                     <div class="kpi ${s.color || ''}">
                         <div class="kpi-lbl">${s.label}</div>
                         <div class="kpi-val ${s.val === null ? 'pending' : ''}">${s.val !== null ? (typeof s.val === 'number' ? s.val.toLocaleString() : s.val) : 'Pending'}</div>
-                        <div class="kpi-ctx">${s.ctx}</div>
+                        ${s.ctx ? `<div class="kpi-ctx">${s.ctx}</div>` : ''}
                     </div>
                 `).join('')}
             </div>` : '';
